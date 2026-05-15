@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>nisslar — CMS Panel</title>
+<link rel="icon" type="image/png" href="/assets/favicon.png"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  .tab-active { border-bottom: 2px solid #C2A05A; color: #F4EFE4; }
+  .tab-inactive { color: #8B847A; }
+  .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
+  input, textarea, select { background: #1C1813; border: 1px solid #2A2620; color: #F4EFE4; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #C2A05A; }
+  .toast { animation: slideIn .3s ease; }
+  @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+</style>
+</head>
+<body class="bg-[#16130F] text-[#F4EFE4] min-h-screen">
+
+<!-- Login Screen -->
+<div id="login-screen" class="min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-sm p-8">
+    <div class="text-center mb-8">
+      <img src="/assets/favicon.png" alt="" class="h-12 w-12 rounded-md mx-auto mb-4"/>
+      <h1 class="text-2xl font-semibold tracking-tight">nisslar CMS</h1>
+      <p class="text-sm text-[#8B847A] mt-2">Yönetim paneline giriş yapın</p>
+    </div>
+    <form id="login-form" class="space-y-4">
+      <input type="password" id="login-password" placeholder="Şifre" class="w-full px-4 py-3 rounded-lg text-sm" autocomplete="current-password"/>
+      <button type="submit" class="w-full bg-[#C2A05A] text-[#16130F] py-3 rounded-lg font-semibold text-sm hover:bg-[#D4B776] transition">Giriş</button>
+      <p id="login-error" class="text-red-400 text-xs text-center hidden">Geçersiz şifre</p>
+    </form>
+  </div>
+</div>
+
+<!-- CMS Panel -->
+<div id="cms-panel" class="hidden">
+  <!-- Top bar -->
+  <header class="sticky top-0 z-40 bg-[#16130F]/90 backdrop-blur border-b border-[#2A2620]">
+    <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <img src="/assets/favicon.png" alt="" class="h-8 w-8 rounded-md"/>
+        <span class="font-semibold tracking-tight">nisslar CMS</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/" target="_blank" class="text-xs text-[#8B847A] hover:text-[#F4EFE4] transition">Siteyi Gör ↗</a>
+        <button id="logout-btn" class="text-xs text-[#8B847A] hover:text-red-400 transition">Çıkış</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Tabs -->
+  <nav class="border-b border-[#2A2620]">
+    <div class="max-w-6xl mx-auto px-6 flex gap-8">
+      <button class="tab py-4 text-sm font-medium tab-active" data-tab="cars">Araçlar</button>
+      <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="content">İçerik</button>
+      <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="faq">SSS</button>
+    </div>
+  </nav>
+
+  <main class="max-w-6xl mx-auto px-6 py-8">
+    <!-- CARS TAB -->
+    <div id="tab-cars" class="tab-content">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold">Araç Yönetimi</h2>
+        <button id="add-car-btn" class="bg-[#C2A05A] text-[#16130F] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">+ Yeni Araç</button>
+      </div>
+      <div id="cars-list" class="space-y-3"></div>
+    </div>
+
+    <!-- CONTENT TAB -->
+    <div id="tab-content" class="tab-content hidden">
+      <h2 class="text-lg font-semibold mb-6">Site İçerik Düzenleme</h2>
+      <div id="content-editor" class="space-y-6"></div>
+      <button id="save-content-btn" class="mt-8 bg-[#C2A05A] text-[#16130F] px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+    </div>
+
+    <!-- FAQ TAB -->
+    <div id="tab-faq" class="tab-content hidden">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-lg font-semibold">SSS Yönetimi</h2>
+        <button id="add-faq-btn" class="bg-[#C2A05A] text-[#16130F] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">+ Yeni Soru</button>
+      </div>
+      <div id="faq-list" class="space-y-3"></div>
+    </div>
+  </main>
+</div>
+
+<!-- Car Modal -->
+<div id="car-modal" class="fixed inset-0 z-50 hidden">
+  <div class="modal-overlay absolute inset-0" id="car-modal-overlay"></div>
+  <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-[#1C1813] border border-[#2A2620] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="car-modal-title" class="text-lg font-semibold">Yeni Araç</h3>
+        <button id="car-modal-close" class="text-[#8B847A] hover:text-[#F4EFE4] text-xl">&times;</button>
+      </div>
+      <form id="car-form" class="space-y-4">
+        <input type="hidden" id="car-id"/>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2">
+            <label class="text-xs text-[#8B847A] mb-1 block">Araç Adı</label>
+            <input type="text" id="car-name" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Yıl</label>
+            <input type="number" id="car-year" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Fiyat ($/gün)</label>
+            <input type="number" id="car-price" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Eski Fiyat (opsiyonel)</label>
+            <input type="number" id="car-was" class="w-full px-3 py-2 rounded-lg text-sm"/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Puan</label>
+            <input type="number" id="car-rating" step="0.01" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Koltuk</label>
+            <input type="number" id="car-seats" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">BG (HP)</label>
+            <input type="number" id="car-hp" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Kategori (TR)</label>
+            <input type="text" id="car-cat-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Kategori (EN)</label>
+            <input type="text" id="car-cat-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Vites (TR)</label>
+            <input type="text" id="car-gear-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Vites (EN)</label>
+            <input type="text" id="car-gear-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          </div>
+          <div class="col-span-2">
+            <label class="text-xs text-[#8B847A] mb-1 block">Görsel URL (opsiyonel)</label>
+            <input type="text" id="car-img" class="w-full px-3 py-2 rounded-lg text-sm"/>
+          </div>
+          <div class="col-span-2">
+            <label class="text-xs text-[#8B847A] mb-1 block">Turo / Rezervasyon URL</label>
+            <input type="text" id="car-turo" class="w-full px-3 py-2 rounded-lg text-sm"/>
+          </div>
+        </div>
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="car-cancel" class="px-4 py-2 text-sm text-[#8B847A] hover:text-[#F4EFE4] transition">İptal</button>
+          <button type="submit" class="bg-[#C2A05A] text-[#16130F] px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ Modal -->
+<div id="faq-modal" class="fixed inset-0 z-50 hidden">
+  <div class="modal-overlay absolute inset-0" id="faq-modal-overlay"></div>
+  <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+    <div class="bg-[#1C1813] border border-[#2A2620] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+      <div class="flex items-center justify-between mb-6">
+        <h3 id="faq-modal-title" class="text-lg font-semibold">Yeni Soru</h3>
+        <button id="faq-modal-close" class="text-[#8B847A] hover:text-[#F4EFE4] text-xl">&times;</button>
+      </div>
+      <form id="faq-form" class="space-y-4">
+        <input type="hidden" id="faq-id"/>
+        <div>
+          <label class="text-xs text-[#8B847A] mb-1 block">Soru (TR)</label>
+          <input type="text" id="faq-q-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+        </div>
+        <div>
+          <label class="text-xs text-[#8B847A] mb-1 block">Soru (EN)</label>
+          <input type="text" id="faq-q-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+        </div>
+        <div>
+          <label class="text-xs text-[#8B847A] mb-1 block">Cevap (TR)</label>
+          <textarea id="faq-a-tr" rows="3" class="w-full px-3 py-2 rounded-lg text-sm" required></textarea>
+        </div>
+        <div>
+          <label class="text-xs text-[#8B847A] mb-1 block">Cevap (EN)</label>
+          <textarea id="faq-a-en" rows="3" class="w-full px-3 py-2 rounded-lg text-sm" required></textarea>
+        </div>
+        <div class="flex justify-end gap-3 pt-4">
+          <button type="button" id="faq-cancel" class="px-4 py-2 text-sm text-[#8B847A] hover:text-[#F4EFE4] transition">İptal</button>
+          <button type="submit" class="bg-[#C2A05A] text-[#16130F] px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="toast" class="fixed top-4 right-4 z-[60] hidden">
+  <div class="toast bg-[#1C1813] border border-[#2A2620] px-4 py-3 rounded-lg text-sm shadow-xl">
+    <span id="toast-msg"></span>
+  </div>
+</div>
+
+<script>
+const API = '/api';
+let token = localStorage.getItem('cms_token') || '';
+let carsData = [];
+let faqData = [];
+let contentData = {};
+
+function showToast(msg, duration = 2500) {
+  const t = document.getElementById('toast');
+  document.getElementById('toast-msg').textContent = msg;
+  t.classList.remove('hidden');
+  setTimeout(() => t.classList.add('hidden'), duration);
+}
+
+async function api(path, method = 'GET', body = null) {
+  const opts = { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(`${API}${path}`, opts);
+  if (res.status === 401) { logout(); throw new Error('Unauthorized'); }
+  return res.json();
+}
+
+// Auth
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const pw = document.getElementById('login-password').value;
+  try {
+    const res = await fetch(`${API}/auth`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    const data = await res.json();
+    if (data.token) {
+      token = data.token;
+      localStorage.setItem('cms_token', token);
+      showCMS();
+    } else {
+      document.getElementById('login-error').classList.remove('hidden');
+    }
+  } catch {
+    document.getElementById('login-error').classList.remove('hidden');
+  }
+});
+
+function logout() {
+  token = '';
+  localStorage.removeItem('cms_token');
+  document.getElementById('cms-panel').classList.add('hidden');
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+document.getElementById('logout-btn').addEventListener('click', logout);
+
+async function showCMS() {
+  document.getElementById('login-screen').classList.add('hidden');
+  document.getElementById('cms-panel').classList.remove('hidden');
+  await loadAll();
+}
+
+async function loadAll() {
+  try {
+    carsData = await api('/cars');
+    faqData = await api('/faq');
+    contentData = await api('/content');
+    renderCars();
+    renderFaqList();
+    renderContentEditor();
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Tabs
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => { t.classList.remove('tab-active'); t.classList.add('tab-inactive'); });
+    tab.classList.add('tab-active'); tab.classList.remove('tab-inactive');
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+    document.getElementById(`tab-${tab.dataset.tab}`).classList.remove('hidden');
+  });
+});
+
+// Cars
+function renderCars() {
+  const list = document.getElementById('cars-list');
+  list.innerHTML = carsData.map((c, i) => `
+    <div class="flex items-center justify-between p-4 bg-[#1C1813] border border-[#2A2620] rounded-lg">
+      <div class="flex items-center gap-4">
+        <span class="text-xs text-[#8B847A] font-mono">N°${String(i+1).padStart(3,'0')}</span>
+        <div>
+          <div class="font-medium text-sm">${c.name} <span class="text-[#8B847A]">(${c.year})</span></div>
+          <div class="text-xs text-[#8B847A]">${c.cat.tr} · $${c.price}/gün · ${c.hp} BG</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="editCar(${i})" class="text-xs text-[#C2A05A] hover:text-[#D4B776] transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Düzenle</button>
+        <button onclick="deleteCar(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Sil</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openCarModal(car = null, index = -1) {
+  document.getElementById('car-modal-title').textContent = car ? 'Araç Düzenle' : 'Yeni Araç';
+  document.getElementById('car-id').value = index;
+  document.getElementById('car-name').value = car?.name || '';
+  document.getElementById('car-year').value = car?.year || new Date().getFullYear();
+  document.getElementById('car-price').value = car?.price || '';
+  document.getElementById('car-was').value = car?.was || '';
+  document.getElementById('car-rating').value = car?.rating || 5.00;
+  document.getElementById('car-seats').value = car?.seats || '';
+  document.getElementById('car-hp').value = car?.hp || '';
+  document.getElementById('car-cat-tr').value = car?.cat?.tr || '';
+  document.getElementById('car-cat-en').value = car?.cat?.en || '';
+  document.getElementById('car-gear-tr').value = car?.gear?.tr || '';
+  document.getElementById('car-gear-en').value = car?.gear?.en || '';
+  document.getElementById('car-img').value = car?.img || '';
+  document.getElementById('car-turo').value = car?.turoUrl || '';
+  document.getElementById('car-modal').classList.remove('hidden');
+}
+
+function closeCarModal() { document.getElementById('car-modal').classList.add('hidden'); }
+document.getElementById('add-car-btn').addEventListener('click', () => openCarModal());
+document.getElementById('car-modal-close').addEventListener('click', closeCarModal);
+document.getElementById('car-modal-overlay').addEventListener('click', closeCarModal);
+document.getElementById('car-cancel').addEventListener('click', closeCarModal);
+
+window.editCar = (i) => openCarModal(carsData[i], i);
+window.deleteCar = async (i) => {
+  if (!confirm(`"${carsData[i].name}" silinecek. Emin misiniz?`)) return;
+  carsData.splice(i, 1);
+  await api('/cars', 'PUT', carsData);
+  renderCars();
+  showToast('Araç silindi');
+};
+
+document.getElementById('car-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const idx = parseInt(document.getElementById('car-id').value);
+  const car = {
+    id: document.getElementById('car-name').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
+    name: document.getElementById('car-name').value,
+    year: parseInt(document.getElementById('car-year').value),
+    cat: { tr: document.getElementById('car-cat-tr').value, en: document.getElementById('car-cat-en').value },
+    price: parseInt(document.getElementById('car-price').value),
+    was: document.getElementById('car-was').value ? parseInt(document.getElementById('car-was').value) : null,
+    rating: parseFloat(document.getElementById('car-rating').value),
+    seats: parseInt(document.getElementById('car-seats').value),
+    gear: { tr: document.getElementById('car-gear-tr').value, en: document.getElementById('car-gear-en').value },
+    hp: parseInt(document.getElementById('car-hp').value),
+    img: document.getElementById('car-img').value || '',
+    imgLabel: document.getElementById('car-name').value.split(' ').pop().toUpperCase(),
+    turoUrl: document.getElementById('car-turo').value || 'https://turo.com'
+  };
+  if (idx >= 0) { carsData[idx] = car; } else { carsData.push(car); }
+  await api('/cars', 'PUT', carsData);
+  renderCars();
+  closeCarModal();
+  showToast(idx >= 0 ? 'Araç güncellendi' : 'Araç eklendi');
+});
+
+// FAQ
+function renderFaqList() {
+  const list = document.getElementById('faq-list');
+  list.innerHTML = faqData.map((f, i) => `
+    <div class="flex items-center justify-between p-4 bg-[#1C1813] border border-[#2A2620] rounded-lg">
+      <div>
+        <div class="font-medium text-sm">${f.q.tr}</div>
+        <div class="text-xs text-[#8B847A] mt-1">${f.q.en}</div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0 ml-4">
+        <button onclick="editFaq(${i})" class="text-xs text-[#C2A05A] hover:text-[#D4B776] transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Düzenle</button>
+        <button onclick="deleteFaq(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Sil</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openFaqModal(faq = null, index = -1) {
+  document.getElementById('faq-modal-title').textContent = faq ? 'Soru Düzenle' : 'Yeni Soru';
+  document.getElementById('faq-id').value = index;
+  document.getElementById('faq-q-tr').value = faq?.q?.tr || '';
+  document.getElementById('faq-q-en').value = faq?.q?.en || '';
+  document.getElementById('faq-a-tr').value = faq?.a?.tr || '';
+  document.getElementById('faq-a-en').value = faq?.a?.en || '';
+  document.getElementById('faq-modal').classList.remove('hidden');
+}
+
+function closeFaqModal() { document.getElementById('faq-modal').classList.add('hidden'); }
+document.getElementById('add-faq-btn').addEventListener('click', () => openFaqModal());
+document.getElementById('faq-modal-close').addEventListener('click', closeFaqModal);
+document.getElementById('faq-modal-overlay').addEventListener('click', closeFaqModal);
+document.getElementById('faq-cancel').addEventListener('click', closeFaqModal);
+
+window.editFaq = (i) => openFaqModal(faqData[i], i);
+window.deleteFaq = async (i) => {
+  if (!confirm('Bu soru silinecek. Emin misiniz?')) return;
+  faqData.splice(i, 1);
+  await api('/faq', 'PUT', faqData);
+  renderFaqList();
+  showToast('Soru silindi');
+};
+
+document.getElementById('faq-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const idx = parseInt(document.getElementById('faq-id').value);
+  const faq = {
+    id: `faq-${Date.now()}`,
+    q: { tr: document.getElementById('faq-q-tr').value, en: document.getElementById('faq-q-en').value },
+    a: { tr: document.getElementById('faq-a-tr').value, en: document.getElementById('faq-a-en').value }
+  };
+  if (idx >= 0) { faq.id = faqData[idx].id; faqData[idx] = faq; } else { faqData.push(faq); }
+  await api('/faq', 'PUT', faqData);
+  renderFaqList();
+  closeFaqModal();
+  showToast(idx >= 0 ? 'Soru güncellendi' : 'Soru eklendi');
+});
+
+// Content Editor
+function renderContentEditor() {
+  const editor = document.getElementById('content-editor');
+  const sections = [
+    { key: 'hero', label: 'Hero', fields: ['eyebrow','title1','title2_prefix','title2_gold','sub'] },
+    { key: 'about', label: 'Hakkımızda', fields: ['title1','title2_prefix','title2_gold','quote','p1'] },
+    { key: 'site', label: 'Site Genel', fields: ['email','phone','address'], single: true },
+  ];
+  editor.innerHTML = sections.map(s => `
+    <div class="bg-[#1C1813] border border-[#2A2620] rounded-lg p-5">
+      <h3 class="text-sm font-semibold text-[#C2A05A] mb-4">${s.label}</h3>
+      <div class="space-y-3">
+        ${s.fields.map(f => {
+          const val = contentData[s.key]?.[f];
+          if (s.single) {
+            return `<div>
+              <label class="text-xs text-[#8B847A] mb-1 block">${f}</label>
+              <input type="text" data-path="${s.key}.${f}" value="${typeof val === 'string' ? val.replace(/"/g, '&quot;') : ''}" class="w-full px-3 py-2 rounded-lg text-sm"/>
+            </div>`;
+          }
+          return `<div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="text-xs text-[#8B847A] mb-1 block">${f} (TR)</label>
+              <${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea rows="2"' : 'input type="text"'} data-path="${s.key}.${f}.tr" class="w-full px-3 py-2 rounded-lg text-sm">${val?.tr || ''}</${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea' : 'input'}>
+            </div>
+            <div>
+              <label class="text-xs text-[#8B847A] mb-1 block">${f} (EN)</label>
+              <${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea rows="2"' : 'input type="text"'} data-path="${s.key}.${f}.en" class="w-full px-3 py-2 rounded-lg text-sm">${val?.en || ''}</${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea' : 'input'}>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+document.getElementById('save-content-btn').addEventListener('click', async () => {
+  document.querySelectorAll('[data-path]').forEach(el => {
+    const parts = el.dataset.path.split('.');
+    let obj = contentData;
+    for (let i = 0; i < parts.length - 1; i++) {
+      if (!obj[parts[i]]) obj[parts[i]] = {};
+      obj = obj[parts[i]];
+    }
+    obj[parts[parts.length - 1]] = el.value || el.textContent;
+  });
+  await api('/content', 'PUT', contentData);
+  showToast('İçerik kaydedildi');
+});
+
+// Init
+if (token) {
+  api('/cars').then(() => showCMS()).catch(() => logout());
+} else {
+  document.getElementById('login-screen').classList.remove('hidden');
+}
+</script>
+</body>
+</html>

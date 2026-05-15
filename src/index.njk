@@ -1,0 +1,515 @@
+---
+layout: base.njk
+---
+
+<!-- HEADER -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-ink/75 border-b border-line/60">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 h-[72px] md:h-[80px] flex items-center justify-between">
+    <a href="#top" class="flex items-center gap-3 group" aria-label="nisslar">
+      <img src="/assets/favicon.png" alt="" class="h-8 w-8 md:h-9 md:w-9 rounded-md" />
+      <span class="font-serif text-[22px] md:text-[26px] leading-none tracking-tightest text-cream whitespace-nowrap">
+        n<span class="dot-i">i</span>sslar
+      </span>
+    </a>
+
+    <nav class="hidden md:flex items-center gap-9 text-[12.5px] tracking-[0.04em] text-cream/75">
+      <a href="#top" class="hover:text-cream transition lnk" data-i18n="nav.home">Ana Sayfa</a>
+      <a href="#fleet" class="hover:text-cream transition lnk" data-i18n="nav.fleet">Filo</a>
+      <a href="#about" class="hover:text-cream transition lnk" data-i18n="nav.about">Hakkımızda</a>
+      <a href="#faq" class="hover:text-cream transition lnk" data-i18n="nav.faq">SSS</a>
+    </nav>
+
+    <div class="flex items-center gap-3 md:gap-5">
+      <!-- TR / EN -->
+      <div class="lang-track flex items-center p-1 rounded-full border border-line bg-ink2/60" data-lang="tr">
+        <span class="lang-slider"></span>
+        <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="tr">TR</button>
+        <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="en">EN</button>
+      </div>
+
+      <a href="#" class="hidden md:inline-flex group items-center gap-2.5 bg-gold text-ink hover:bg-goldhi transition px-5 py-2.5 rounded-full text-[11.5px] font-semibold tracking-[0.18em] uppercase">
+        <span data-i18n="nav.book">Rezerve Et</span>
+        <span class="arr -mr-0.5">→</span>
+      </a>
+
+      <!-- Hamburger -->
+      <button class="hamburger md:hidden flex flex-col gap-[5px] w-7 h-7 justify-center items-center" aria-label="Menü">
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu fixed inset-0 z-40 bg-ink/98 backdrop-blur-lg flex flex-col items-center justify-center gap-8 md:hidden">
+  <a href="#top" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.home">Ana Sayfa</a>
+  <a href="#fleet" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.fleet">Filo</a>
+  <a href="#about" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.about">Hakkımızda</a>
+  <a href="#faq" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.faq">SSS</a>
+  <a href="#" class="mt-4 group inline-flex items-center gap-2.5 bg-gold text-ink hover:bg-goldhi transition px-7 py-3 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase">
+    <span data-i18n="nav.book">Rezerve Et</span>
+    <span class="arr">→</span>
+  </a>
+</div>
+
+<!-- HERO -->
+<section id="top" class="relative pt-[72px] md:pt-[80px]">
+  <div class="relative h-[600px] md:h-[820px] overflow-hidden ph-hero">
+    <div class="absolute left-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col items-center gap-4 z-10">
+      <span class="vert mono-lbl text-cream/35 uppercase">25.7617° N · 80.1918° W</span>
+      <span class="h-24 w-[1px] bg-gradient-to-b from-gold/60 to-transparent"></span>
+    </div>
+
+    <div class="absolute right-10 top-[120px] hidden lg:flex flex-col gap-10 z-10 text-right">
+      <div class="reveal">
+        <div class="mono-lbl text-cream/35 uppercase mb-2" data-i18n="hero.meta1">Filo</div>
+        <div class="font-serif text-[44px] leading-none stat-num text-cream">42<span class="text-gold">+</span></div>
+      </div>
+      <div class="reveal">
+        <div class="mono-lbl text-cream/35 uppercase mb-2" data-i18n="hero.meta2">Kuruluş</div>
+        <div class="font-serif text-[44px] leading-none stat-num text-cream">2018</div>
+      </div>
+      <div class="reveal">
+        <div class="mono-lbl text-cream/35 uppercase mb-2" data-i18n="hero.meta3">Puan</div>
+        <div class="font-serif text-[44px] leading-none stat-num text-cream">4.97<span class="text-gold">★</span></div>
+      </div>
+    </div>
+
+    <div class="relative max-w-[1440px] mx-auto px-6 md:px-10 h-full flex items-center">
+      <div class="max-w-[820px] md:pl-12">
+        <div class="reveal flex items-center gap-4 mb-6 md:mb-8">
+          <span class="mono-lbl text-gold uppercase">N° 001 — <span data-i18n="hero.eyebrow">Miami · Lüks Filo</span></span>
+        </div>
+        <h1 class="reveal font-serif text-[clamp(42px,7.4vw,108px)] leading-[0.92] tracking-tightest text-cream balance">
+          <span data-i18n="hero.title1">Sürüş değil,</span><br/>
+          <span class="italic font-light text-cream/95" data-i18n="hero.title2">bir <span class="text-gold not-italic font-normal">deneyim</span>.</span>
+        </h1>
+        <p class="reveal mt-6 md:mt-8 max-w-[480px] text-[14px] md:text-[15.5px] leading-relaxed text-cream/65 pretty" data-i18n="hero.sub">
+          Miami sokaklarında, özenle seçilmiş bir filo. Sigorta dahil, gizli ücret yok — yalnız siz, anahtarlar ve yol.
+        </p>
+        <div class="reveal mt-8 md:mt-11 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+          <a href="#fleet" class="group inline-flex items-center gap-3 bg-cream text-ink hover:bg-white transition px-7 py-3.5 text-[11.5px] font-semibold tracking-[0.22em] uppercase">
+            <span data-i18n="hero.cta1">Araçları Gör</span>
+            <span class="arr">→</span>
+          </a>
+          <a href="#" class="group inline-flex items-center gap-3 border border-cream/25 hover:border-gold hover:text-gold text-cream px-7 py-3.5 text-[11.5px] font-semibold tracking-[0.22em] uppercase transition">
+            <span data-i18n="hero.cta2">Rezerve Et</span>
+            <span class="arr">↗</span>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 inset-x-0 border-t border-line/80 bg-ink/40 backdrop-blur-sm">
+      <div class="marquee py-3 md:py-4">
+        <div class="marquee-track mono-lbl text-cream/40 uppercase whitespace-nowrap">
+          <span>Mercedes-Benz S-Class</span><span class="text-gold/50">◆</span>
+          <span>Porsche 911 Carrera</span><span class="text-gold/50">◆</span>
+          <span>Range Rover Sport</span><span class="text-gold/50">◆</span>
+          <span>BMW M4 Competition</span><span class="text-gold/50">◆</span>
+          <span>Audi RS6 Avant</span><span class="text-gold/50">◆</span>
+          <span>Lamborghini Huracán</span><span class="text-gold/50">◆</span>
+          <span>Bentley Continental GT</span><span class="text-gold/50">◆</span>
+          <span>Mercedes-Benz S-Class</span><span class="text-gold/50">◆</span>
+          <span>Porsche 911 Carrera</span><span class="text-gold/50">◆</span>
+          <span>Range Rover Sport</span><span class="text-gold/50">◆</span>
+          <span>BMW M4 Competition</span><span class="text-gold/50">◆</span>
+          <span>Audi RS6 Avant</span><span class="text-gold/50">◆</span>
+          <span>Lamborghini Huracán</span><span class="text-gold/50">◆</span>
+          <span>Bentley Continental GT</span><span class="text-gold/50">◆</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="border-b border-line bg-ink">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-14 md:py-20 grid grid-cols-12 gap-8">
+    <div class="col-span-12 lg:col-span-3 reveal">
+      <div class="mono-lbl text-gold uppercase" data-i18n="trust.eyebrow">— Söz</div>
+      <p class="mt-3 font-serif italic text-[20px] md:text-[22px] leading-snug text-cream/85 pretty" data-i18n="trust.lead">
+        Üç söz veriyoruz, üçünü de tutuyoruz.
+      </p>
+    </div>
+    <div class="col-span-12 lg:col-span-9 grid grid-cols-1 md:grid-cols-3 lg:divide-x lg:divide-line">
+      {% for item in siteContent.trust.items %}
+      <div class="reveal py-2 lg:px-10 {% if loop.first %}first:lg:pl-0{% endif %}">
+        <div class="mono-lbl text-cream/35">0{{ loop.index }}</div>
+        <h3 class="mt-3 font-serif text-[24px] md:text-[28px] leading-tight text-cream" data-i18n="trust.t{{ loop.index }}">{{ item.title.tr }}</h3>
+        <p class="mt-2 text-[14px] leading-relaxed text-cream/55 pretty" data-i18n="trust.s{{ loop.index }}">{{ item.desc.tr }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- FLEET -->
+<section id="fleet" class="relative py-16 md:py-28 border-b border-line">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+    <div class="grid grid-cols-12 gap-8 items-end mb-12 md:mb-16 reveal">
+      <div class="col-span-12 lg:col-span-7">
+        <div class="mono-lbl text-gold uppercase mb-4">— <span data-i18n="fleet.eyebrow">Filo</span> · <span class="text-cream/40">N° 06</span></div>
+        <h2 class="font-serif text-[clamp(40px,5.4vw,80px)] leading-[0.96] tracking-tightest text-cream balance">
+          <span data-i18n="fleet.title1">Az,</span> <span class="italic font-light text-cream/80" data-i18n="fleet.title2">ama</span> <span class="text-gold italic font-light" data-i18n="fleet.title3">özenli</span>.
+        </h2>
+      </div>
+      <div class="col-span-12 lg:col-span-5 lg:text-right">
+        <p class="text-[14px] text-cream/55 max-w-[360px] lg:ml-auto pretty mb-4" data-i18n="fleet.desc">
+          Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.
+        </p>
+        <a href="#" class="inline-flex items-center gap-2 text-[11.5px] tracking-[0.22em] uppercase text-cream/85 hover:text-gold transition lnk">
+          <span data-i18n="fleet.all">Tüm Filoyu Gör</span>
+          <span class="arr">→</span>
+        </a>
+      </div>
+    </div>
+    <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10 md:gap-y-14"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="relative py-20 md:py-32 border-b border-line bg-ink2/40">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 grid grid-cols-12 gap-10 items-start">
+    <div class="col-span-12 lg:col-span-5 reveal">
+      <div class="relative aspect-[4/5] overflow-hidden ph border border-line">
+        <div class="absolute left-5 top-5 mono-lbl text-cream/40 uppercase">[ KURUCU · MIAMI BRICKELL ]</div>
+        <div class="absolute right-5 bottom-5 font-serif italic text-cream/35 text-[14px]">— 1600×2000</div>
+        <span class="absolute left-0 top-0 w-8 h-[1px] bg-gold"></span>
+        <span class="absolute left-0 top-0 w-[1px] h-8 bg-gold"></span>
+        <span class="absolute right-0 bottom-0 w-8 h-[1px] bg-gold"></span>
+        <span class="absolute right-0 bottom-0 w-[1px] h-8 bg-gold"></span>
+      </div>
+      <p class="mt-4 mono-lbl text-cream/35 uppercase">Selim K. — <span data-i18n="about.cap">Kurucu, 2018</span></p>
+    </div>
+    <div class="col-span-12 lg:col-span-7 lg:pl-8 reveal">
+      <div class="mono-lbl text-gold uppercase mb-4">— <span data-i18n="about.eyebrow">Hakkımızda</span> · N° 02</div>
+      <h2 class="font-serif text-[clamp(36px,4.8vw,72px)] leading-[0.98] tracking-tightest text-cream balance">
+        <span data-i18n="about.title1">Miami'de,</span><br/>
+        <span class="italic font-light text-cream/90" data-i18n="about.title2">sessiz bir <span class="text-gold not-italic font-normal">lüks</span>.</span>
+      </h2>
+      <div class="mt-8 md:mt-10 pl-6 border-l border-gold/50">
+        <p class="font-serif italic text-[20px] md:text-[24px] leading-snug text-cream/85 max-w-[520px] pretty" data-i18n="about.quote">
+          "Filomuzu büyütmek değil, derinleştirmek istedik. Her araç tek tek seçildi — sayı değil, sürüş önemli."
+        </p>
+      </div>
+      <p class="mt-8 max-w-[560px] text-[14px] md:text-[15px] leading-relaxed text-cream/60 pretty" data-i18n="about.p1">
+        2018'den bu yana Miami'de butik bir araç deneyimi sunuyoruz. Brickell'deki küçük garajımızdan başlayan iş; bugün özenle bakılan 42 araç ve elden yapılan binlerce teslimata dönüştü. Büyümek isteseydik çoktan büyürdük — biz iyi kalmayı seçtik.
+      </p>
+      <div class="mt-10 md:mt-12 border-t border-line pt-8 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-[640px]">
+        <div>
+          <div class="font-serif text-[32px] md:text-[40px] leading-none stat-num text-cream">2018</div>
+          <div class="mono-lbl text-cream/40 uppercase mt-2" data-i18n="about.y1">Kuruluş</div>
+        </div>
+        <div>
+          <div class="font-serif text-[32px] md:text-[40px] leading-none stat-num text-cream">42<span class="text-gold">+</span></div>
+          <div class="mono-lbl text-cream/40 uppercase mt-2" data-i18n="about.y2">Filo</div>
+        </div>
+        <div>
+          <div class="font-serif text-[32px] md:text-[40px] leading-none stat-num text-cream">3.8<span class="text-cream/50 text-[20px] md:text-[24px]">K</span></div>
+          <div class="mono-lbl text-cream/40 uppercase mt-2" data-i18n="about.y3">Sürücü</div>
+        </div>
+        <div>
+          <div class="font-serif text-[32px] md:text-[40px] leading-none stat-num text-cream">4.97<span class="text-gold">★</span></div>
+          <div class="mono-lbl text-cream/40 uppercase mt-2" data-i18n="about.y4">Puan</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="relative py-16 md:py-28 border-b border-line">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 grid grid-cols-12 gap-10">
+    <div class="col-span-12 lg:col-span-4 reveal">
+      <div class="mono-lbl text-gold uppercase mb-4">— <span data-i18n="faq.eyebrow">Sıkça Sorulanlar</span> · N° 03</div>
+      <h2 class="font-serif text-[clamp(36px,4.6vw,68px)] leading-[0.96] tracking-tightest text-cream balance">
+        <span data-i18n="faq.title1">Önce</span><br/>
+        <span class="italic font-light text-gold" data-i18n="faq.title2">cevaplar</span>.
+      </h2>
+      <p class="mt-6 text-[14px] text-cream/55 max-w-[280px] pretty" data-i18n="faq.desc">
+        Aklınızdaki soruları çoktan duyduk. Eksik kalan varsa, concierge bir mesaj uzağınızda.
+      </p>
+      <a href="mailto:hello@nisslar.com" class="mt-6 inline-flex items-center gap-2 text-[11.5px] tracking-[0.22em] uppercase text-cream/85 hover:text-gold transition lnk">
+        <span data-i18n="faq.contact">Bize Yazın</span>
+        <span class="arr">→</span>
+      </a>
+    </div>
+    <div id="faq-list" class="col-span-12 lg:col-span-8 reveal divide-y divide-line border-y border-line"></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative bg-ink pt-16 md:pt-24 pb-10">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10">
+    <div class="reveal pb-10 md:pb-14 mb-10 md:mb-14 border-b border-line">
+      <div class="mono-lbl text-gold uppercase mb-6" data-i18n="footer.eyebrow">— Rent. Drive. Experience.</div>
+      <div class="font-serif text-[clamp(60px,15vw,220px)] leading-[0.85] tracking-tightest text-cream whitespace-nowrap">
+        n<span class="dot-i">i</span>sslar<span class="text-gold">.</span>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-10 pb-12 md:pb-16">
+      <div class="col-span-2 md:col-span-4">
+        <div class="flex items-center gap-3 mb-5">
+          <img src="/assets/favicon.png" alt="" class="h-10 w-10 rounded-md" />
+          <span class="font-serif text-[24px] leading-none tracking-tightest text-cream whitespace-nowrap">
+            n<span class="dot-i">i</span>sslar
+          </span>
+        </div>
+        <p class="text-[14px] leading-relaxed text-cream/55 max-w-[300px] pretty" data-i18n="footer.about">
+          Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.
+        </p>
+        <div class="mt-6 md:mt-8 flex items-center gap-3">
+          <a href="#" aria-label="Instagram" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
+            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="LinkedIn" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
+            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18H5.7V9.5h2.6V18zM7 8.3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18.3 18h-2.6v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3V18H10V9.5h2.5v1.2h.1c.4-.7 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1V18z"/></svg>
+          </a>
+          <a href="#" aria-label="TikTok" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
+            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M16.6 5.8a5.7 5.7 0 0 0 3.4 1.1v2.6a8.3 8.3 0 0 1-4.6-1.4v6.3a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2 2.7V3h2.6a4.7 4.7 0 0 0 1.2 2.8z"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="col-span-1 md:col-span-3">
+        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h1">İletişim</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
+          <li>1450 Brickell Ave<br/>Miami, FL 33131</li>
+          <li><a href="tel:+13055551234" class="hover:text-gold transition stat-num">+1 (305) 555 12 34</a></li>
+          <li><a href="mailto:hello@nisslar.com" class="hover:text-gold transition">hello@nisslar.com</a></li>
+        </ul>
+      </div>
+
+      <div class="col-span-1 md:col-span-2">
+        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h2">Çalışma Saatleri</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
+          <li class="flex justify-between gap-2"><span data-i18n="footer.d1">Pzt — Cum</span><span class="text-cream/55 stat-num">09 — 21</span></li>
+          <li class="flex justify-between gap-2"><span data-i18n="footer.d2">Cmt — Paz</span><span class="text-cream/55 stat-num">10 — 20</span></li>
+          <li class="flex justify-between gap-2"><span data-i18n="footer.d3">Concierge</span><span class="text-gold">7/24</span></li>
+        </ul>
+      </div>
+
+      <div class="col-span-2 md:col-span-3">
+        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h3">Hızlı Linkler</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
+          <li><a href="#fleet" class="hover:text-gold transition lnk" data-i18n="nav.fleet">Filo</a></li>
+          <li><a href="#about" class="hover:text-gold transition lnk" data-i18n="nav.about">Hakkımızda</a></li>
+          <li><a href="#faq" class="hover:text-gold transition lnk" data-i18n="nav.faq">SSS</a></li>
+          <li><a href="#" class="hover:text-gold transition lnk" data-i18n="footer.l1">Kiralama Koşulları</a></li>
+          <li><a href="#" class="hover:text-gold transition lnk" data-i18n="footer.l2">Gizlilik Politikası</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule-gold opacity-40"></div>
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-[12px] text-cream/40">
+      <div>© 2026 nisslar LLC · <span data-i18n="footer.copy">Tüm hakları saklıdır.</span></div>
+      <div class="mono-lbl tracking-[0.22em]">MIAMI · 25.7617° N · 80.1918° W</div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCRIPTS -->
+<script>
+const FLEET = {{ cars | dump | safe }};
+const FAQ = {{ faq | dump | safe }};
+
+const I18N = {
+  tr: {
+    'nav.home':'Ana Sayfa','nav.fleet':'Filo','nav.about':'Hakkımızda','nav.faq':'SSS','nav.book':'Rezerve Et',
+    'hero.eyebrow':'Miami · Lüks Filo','hero.title1':'Sürüş değil,',
+    'hero.title2':'bir <span class="text-gold not-italic font-normal">deneyim</span>.',
+    'hero.sub':'Miami sokaklarında, özenle seçilmiş bir filo. Sigorta dahil, gizli ücret yok — yalnız siz, anahtarlar ve yol.',
+    'hero.cta1':'Araçları Gör','hero.cta2':'Rezerve Et',
+    'hero.meta1':'Filo','hero.meta2':'Kuruluş','hero.meta3':'Puan',
+    'trust.eyebrow':'— Söz','trust.lead':'Üç söz veriyoruz, üçünü de tutuyoruz.',
+    'trust.t1':'Sigorta Dahil','trust.s1':'Tam kapsamlı koruma, ilk dakikadan son dakikaya kadar. Ek ücret yok, soru yok.',
+    'trust.t2':'7/24 Concierge','trust.s2':'Telefonun ucunda, her gece yarısı. Yol yardımı, plan değişikliği, sessiz destek.',
+    'trust.t3':'Gizli Ücret Yok','trust.s3':'Sözleşmenin üst satırı, alt satıra eşittir. Şeffaf — başka türlüsünü düşünmüyoruz.',
+    'fleet.eyebrow':'Filo','fleet.title1':'Az,','fleet.title2':'ama','fleet.title3':'özenli',
+    'fleet.desc':'Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.',
+    'fleet.all':'Tüm Filoyu Gör',
+    'about.eyebrow':'Hakkımızda','about.cap':'Kurucu, 2018',
+    'about.title1':"Miami'de,",'about.title2':'sessiz bir <span class="text-gold not-italic font-normal">lüks</span>.',
+    'about.quote':'"Filomuzu büyütmek değil, derinleştirmek istedik. Her araç tek tek seçildi — sayı değil, sürüş önemli."',
+    'about.p1':"2018'den bu yana Miami'de butik bir araç deneyimi sunuyoruz. Brickell'deki küçük garajımızdan başlayan iş; bugün özenle bakılan 42 araç ve elden yapılan binlerce teslimata dönüştü. Büyümek isteseydik çoktan büyürdük — biz iyi kalmayı seçtik.",
+    'about.y1':'Kuruluş','about.y2':'Filo','about.y3':'Sürücü','about.y4':'Puan',
+    'faq.eyebrow':'Sıkça Sorulanlar','faq.title1':'Önce','faq.title2':'cevaplar',
+    'faq.desc':'Aklınızdaki soruları çoktan duyduk. Eksik kalan varsa, concierge bir mesaj uzağınızda.',
+    'faq.contact':'Bize Yazın',
+    'footer.eyebrow':'— Rent. Drive. Experience.',
+    'footer.about':"Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.",
+    'footer.h1':'İletişim','footer.h2':'Çalışma Saatleri','footer.h3':'Hızlı Linkler',
+    'footer.d1':'Pzt — Cum','footer.d2':'Cmt — Paz','footer.d3':'Concierge',
+    'footer.l1':'Kiralama Koşulları','footer.l2':'Gizlilik Politikası',
+    'footer.copy':'Tüm hakları saklıdır.',
+    'card.book':'Rezerve Et','card.from':'günlük','card.seats':'koltuk','card.hp':'BG','card.was':'önce',
+  },
+  en: {
+    'nav.home':'Home','nav.fleet':'Fleet','nav.about':'About','nav.faq':'FAQ','nav.book':'Reserve',
+    'hero.eyebrow':'Miami · Luxury Fleet','hero.title1':'Not a drive,',
+    'hero.title2':'an <span class="text-gold not-italic font-normal">experience</span>.',
+    'hero.sub':'A carefully curated fleet on the streets of Miami. Insurance included, no hidden fees — just you, the keys, and the road.',
+    'hero.cta1':'View Fleet','hero.cta2':'Reserve',
+    'hero.meta1':'Fleet','hero.meta2':'Since','hero.meta3':'Rating',
+    'trust.eyebrow':'— Promise','trust.lead':'Three promises — all of them kept.',
+    'trust.t1':'Insurance Included','trust.s1':'Full coverage, from the first minute to the last. No surcharge, no questions.',
+    'trust.t2':'24/7 Concierge','trust.s2':"A phone call away at midnight. Roadside, plan changes, quiet support.",
+    'trust.t3':'No Hidden Fees','trust.s3':"The top line equals the bottom line. Transparent — we don't know another way.",
+    'fleet.eyebrow':'Fleet','fleet.title1':'Few,','fleet.title2':'but','fleet.title3':'considered',
+    'fleet.desc':'Each car personally selected. Detailed clean, full fuel, handover in person — no other way.',
+    'fleet.all':'View Full Fleet',
+    'about.eyebrow':'About','about.cap':'Founder, 2018',
+    'about.title1':'Quiet luxury,','about.title2':'in the heart of <span class="text-gold not-italic font-normal">Miami</span>.',
+    'about.quote':'"We wanted to deepen the fleet, not enlarge it. Each car hand-picked — not numbers, but drives."',
+    'about.p1':"Since 2018 we've offered a boutique driving experience in Miami. From a small Brickell garage to a meticulously maintained 42-car fleet and thousands of in-person handovers. We could have scaled — we chose to stay good.",
+    'about.y1':'Since','about.y2':'Fleet','about.y3':'Drivers','about.y4':'Rating',
+    'faq.eyebrow':'Frequently Asked','faq.title1':'Answers','faq.title2':'first',
+    'faq.desc':"We've heard your questions before. If something is missing, concierge is one message away.",
+    'faq.contact':'Write to Us',
+    'footer.eyebrow':'— Rent. Drive. Experience.',
+    'footer.about':'Miami-based, boutique luxury car rental. Carefully, since 2018.',
+    'footer.h1':'Contact','footer.h2':'Hours','footer.h3':'Quick Links',
+    'footer.d1':'Mon — Fri','footer.d2':'Sat — Sun','footer.d3':'Concierge',
+    'footer.l1':'Rental Terms','footer.l2':'Privacy Policy',
+    'footer.copy':'All rights reserved.',
+    'card.book':'Reserve','card.from':'/day','card.seats':'seats','card.hp':'HP','card.was':'was',
+  }
+};
+
+let LANG = 'tr';
+
+function renderFleet() {
+  const t = I18N[LANG];
+  const grid = document.getElementById('fleet-grid');
+  grid.innerHTML = FLEET.map((c, i) => `
+    <article class="car-card group relative border border-line bg-ink2/40 reveal" style="transition-delay:${i*55}ms">
+      <div class="relative aspect-[4/3] overflow-hidden">
+        ${c.img ? `<img src="${c.img}" alt="${c.name}" class="car-media absolute inset-0 w-full h-full object-cover" />` : `<div class="car-media absolute inset-0 ph"></div>`}
+        <div class="absolute left-4 top-4 z-10 mono-lbl text-cream/85">N° ${String(i+1).padStart(3,'0')}</div>
+        <div class="absolute left-4 bottom-4 z-10">
+          <span class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink uppercase">${c.cat[LANG]}</span>
+        </div>
+        <div class="absolute right-4 top-4 z-10 flex items-center gap-1.5">
+          <svg viewBox="0 0 24 24" class="w-3 h-3 text-gold" fill="currentColor"><path d="M12 2l2.6 6.3L21 9l-5 4.4L17.3 21 12 17.7 6.7 21 8 13.4 3 9l6.4-.7L12 2z"/></svg>
+          <span class="mono-lbl text-cream stat-num">${c.rating.toFixed(2)}</span>
+        </div>
+        ${!c.img ? `<div class="absolute right-4 bottom-4 z-10 mono-lbl text-cream/30 uppercase">[ ${c.imgLabel} ]</div>` : ''}
+      </div>
+      <div class="p-5 md:p-6">
+        <div class="flex items-baseline justify-between gap-3">
+          <h3 class="font-serif text-[20px] md:text-[24px] leading-tight text-cream tracking-tighter2 balance">${c.name}</h3>
+          <span class="mono-lbl text-cream/40 stat-num shrink-0">${c.year}</span>
+        </div>
+        <div class="mt-3 md:mt-4 flex items-center gap-3 mono-lbl text-cream/50 uppercase">
+          <span class="stat-num">${c.seats} ${t['card.seats']}</span>
+          <span class="text-line2">/</span>
+          <span>${c.gear[LANG]}</span>
+          <span class="text-line2">/</span>
+          <span class="stat-num">${c.hp} ${t['card.hp']}</span>
+        </div>
+        <div class="mt-4 md:mt-5 relative h-[1px] bg-line">
+          <div class="car-rule absolute left-0 top-0 h-full bg-gold w-8 transition-all duration-700"></div>
+        </div>
+        <div class="mt-4 md:mt-5 flex items-end justify-between gap-4">
+          <div>
+            ${c.was ? `<div class="mono-lbl text-cream/40 line-through stat-num mb-1">$${c.was} ${t['card.was']}</div>` : `<div class="mono-lbl text-cream/0 mb-1">&middot;</div>`}
+            <div class="flex items-baseline gap-1.5">
+              <span class="font-serif text-[28px] md:text-[34px] leading-none text-cream stat-num">$${c.price}</span>
+              <span class="mono-lbl text-cream/55 uppercase">${t['card.from']}</span>
+            </div>
+          </div>
+          <a href="${c.turoUrl || '#'}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mono-lbl text-cream uppercase hover:text-gold transition pb-1.5">
+            ${t['card.book']}
+            <span class="car-cta-arrow inline-block transition-all duration-500">→</span>
+          </a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+  observeReveals();
+}
+
+function renderFAQ() {
+  const list = document.getElementById('faq-list');
+  list.innerHTML = FAQ.map((f, i) => `
+    <details class="group py-6 md:py-7" ${i === 0 ? 'open' : ''}>
+      <summary class="flex items-start justify-between gap-6 md:gap-8">
+        <div class="flex items-baseline gap-4 md:gap-6">
+          <span class="mono-lbl text-gold stat-num pt-1.5">${String(i+1).padStart(2,'0')}</span>
+          <span class="font-serif text-[18px] md:text-[22px] leading-snug text-cream pretty">${f.q[LANG]}</span>
+        </div>
+        <span class="acc-bar relative shrink-0 w-7 h-7 mt-1 text-cream/60 group-hover:text-gold transition"></span>
+      </summary>
+      <div class="acc-body">
+        <div>
+          <p class="mt-4 pl-[44px] md:pl-[60px] max-w-[640px] text-[13px] md:text-[14.5px] leading-relaxed text-cream/60 pretty">${f.a[LANG]}</p>
+        </div>
+      </div>
+    </details>
+  `).join('');
+}
+
+function applyI18nContent() {
+  const t = I18N[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] != null) el.innerHTML = t[k];
+  });
+  document.documentElement.lang = LANG;
+  document.querySelector('.lang-track').setAttribute('data-lang', LANG);
+  renderFleet();
+  renderFAQ();
+}
+
+function switchLang(next) {
+  if (next === LANG) return;
+  document.body.classList.add('lang-swap');
+  setTimeout(() => {
+    LANG = next;
+    applyI18nContent();
+    requestAnimationFrame(() => document.body.classList.remove('lang-swap'));
+  }, 260);
+}
+
+let io;
+function observeReveals() {
+  if (!io) {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+}
+
+// Lang switch
+document.querySelectorAll('.lang-pill').forEach(p => {
+  p.addEventListener('click', () => switchLang(p.dataset.lang));
+});
+
+// Hamburger
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+renderFleet();
+renderFAQ();
+observeReveals();
+</script>

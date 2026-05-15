@@ -1,0 +1,55 @@
+{
+  "site": {
+    "title": { "tr": "nisslar — Miami Lüks Araç Kiralama", "en": "nisslar — Miami Luxury Car Rental" },
+    "email": "hello@nisslar.com",
+    "phone": "+1 (305) 555 12 34",
+    "address": "1450 Brickell Ave\nMiami, FL 33131",
+    "instagram": "#",
+    "linkedin": "#",
+    "tiktok": "#"
+  },
+  "hero": {
+    "eyebrow": { "tr": "Miami · Lüks Filo", "en": "Miami · Luxury Fleet" },
+    "title1": { "tr": "Sürüş değil,", "en": "Not a drive," },
+    "title2_prefix": { "tr": "bir ", "en": "an " },
+    "title2_gold": { "tr": "deneyim", "en": "experience" },
+    "sub": { "tr": "Miami sokaklarında, özenle seçilmiş bir filo. Sigorta dahil, gizli ücret yok — yalnız siz, anahtarlar ve yol.", "en": "A carefully curated fleet on the streets of Miami. Insurance included, no hidden fees — just you, the keys, and the road." }
+  },
+  "trust": {
+    "lead": { "tr": "Üç söz veriyoruz, üçünü de tutuyoruz.", "en": "Three promises — all of them kept." },
+    "items": [
+      {
+        "title": { "tr": "Sigorta Dahil", "en": "Insurance Included" },
+        "desc": { "tr": "Tam kapsamlı koruma, ilk dakikadan son dakikaya kadar. Ek ücret yok, soru yok.", "en": "Full coverage, from the first minute to the last. No surcharge, no questions." }
+      },
+      {
+        "title": { "tr": "7/24 Concierge", "en": "24/7 Concierge" },
+        "desc": { "tr": "Telefonun ucunda, her gece yarısı. Yol yardımı, plan değişikliği, sessiz destek.", "en": "A phone call away at midnight. Roadside, plan changes, quiet support." }
+      },
+      {
+        "title": { "tr": "Gizli Ücret Yok", "en": "No Hidden Fees" },
+        "desc": { "tr": "Sözleşmenin üst satırı, alt satıra eşittir. Şeffaf — başka türlüsünü düşünmüyoruz.", "en": "The top line equals the bottom line. Transparent — we don't know another way." }
+      }
+    ]
+  },
+  "about": {
+    "title1": { "tr": "Miami'de,", "en": "Quiet luxury," },
+    "title2_prefix": { "tr": "sessiz bir ", "en": "in the heart of " },
+    "title2_gold": { "tr": "lüks", "en": "Miami" },
+    "quote": { "tr": "Filomuzu büyütmek değil, derinleştirmek istedik. Her araç tek tek seçildi — sayı değil, sürüş önemli.", "en": "We wanted to deepen the fleet, not enlarge it. Each car hand-picked — not numbers, but drives." },
+    "p1": { "tr": "2018'den bu yana Miami'de butik bir araç deneyimi sunuyoruz. Brickell'deki küçük garajımızdan başlayan iş; bugün özenle bakılan 42 araç ve elden yapılan binlerce teslimata dönüştü. Büyümek isteseydik çoktan büyürdük — biz iyi kalmayı seçtik.", "en": "Since 2018 we've offered a boutique driving experience in Miami. From a small Brickell garage to a meticulously maintained 42-car fleet and thousands of in-person handovers. We could have scaled — we chose to stay good." },
+    "stats": {
+      "year": "2018",
+      "fleet": "42+",
+      "drivers": "3.8K",
+      "rating": "4.97"
+    }
+  },
+  "footer": {
+    "about": { "tr": "Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.", "en": "Miami-based, boutique luxury car rental. Carefully, since 2018." },
+    "hours": {
+      "weekday": "09 — 21",
+      "weekend": "10 — 20"
+    }
+  }
+}

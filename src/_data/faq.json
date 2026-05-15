@@ -1,0 +1,27 @@
+[
+  {
+    "id": "faq-1",
+    "q": { "tr": "Kiralamak için hangi belgeler gerekli?", "en": "What documents do I need to rent?" },
+    "a": { "tr": "Geçerli bir ehliyet (en az 1 yıl), kimlik veya pasaport ve geçerli bir kredi kartı yeterlidir. Uluslararası sürücüler için Türkiye'den ehliyet + pasaport kabul edilir.", "en": "A valid driver's license (min. 1 year), ID or passport, and a valid credit card. International drivers may use their home-country license with a passport." }
+  },
+  {
+    "id": "faq-2",
+    "q": { "tr": "Asgari sürücü yaşı kaç?", "en": "What is the minimum driver age?" },
+    "a": { "tr": "Çoğu araç için 25 yaş. Seçili sedan ve SUV modellerinde 21+ mümkündür; egzotik modellerde 30+ şartı aranır.", "en": "25 for most vehicles. Selected sedans and SUVs are available at 21+; exotics require 30+." }
+  },
+  {
+    "id": "faq-3",
+    "q": { "tr": "Sigorta neleri kapsıyor?", "en": "What does insurance cover?" },
+    "a": { "tr": "Her kiralamada tam kapsamlı sigorta dahildir. 1.000$ muafiyet ile kasko + üçüncü şahıs sorumluluk koruması sağlanır. Sıfır muafiyet opsiyoneldir.", "en": "Full coverage is included with every rental. Comprehensive + third-party liability with a $1,000 deductible. Zero-deductible upgrade available." }
+  },
+  {
+    "id": "faq-4",
+    "q": { "tr": "Teslimat ve iade nasıl yapılıyor?", "en": "How does delivery & return work?" },
+    "a": { "tr": "Miami International (MIA), Fort Lauderdale (FLL) ve şehir içi otel teslimi ücretsizdir. Şehir dışı teslimat için lütfen iletişime geçin.", "en": "Complimentary delivery at Miami International (MIA), Fort Lauderdale (FLL), and Miami hotels. Out-of-area delivery on request." }
+  },
+  {
+    "id": "faq-5",
+    "q": { "tr": "Rezervasyon nasıl iptal edilir?", "en": "How can I cancel a reservation?" },
+    "a": { "tr": "Teslimattan 48 saat öncesine kadar ücretsiz iptal hakkınız vardır. Sonrası için günlük tarifenin %50'si tahsil edilir.", "en": "Free cancellation up to 48 hours before pickup. After that, 50% of the daily rate applies." }
+  }
+]
