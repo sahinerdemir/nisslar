@@ -212,6 +212,9 @@ let token = localStorage.getItem('cms_token') || '';
 let carsData = [];
 let faqData = [];
 let contentData = {};
+let devMode = false;
+
+const DEV_PASSWORD = 'nisslar2026';
 
 function showToast(msg, duration = 2500) {
   const t = document.getElementById('toast');
@@ -221,6 +224,7 @@ function showToast(msg, duration = 2500) {
 }
 
 async function api(path, method = 'GET', body = null) {
+  if (devMode) return devApi(path, method, body);
   const opts = { method, headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } };
   if (body) opts.body = JSON.stringify(body);
   const res = await fetch(`${API}${path}`, opts);
@@ -228,10 +232,43 @@ async function api(path, method = 'GET', body = null) {
   return res.json();
 }
 
+function devApi(path, method, body) {
+  const key = `cms_dev${path.replace('/', '_')}`;
+  if (method === 'PUT') {
+    localStorage.setItem(key, JSON.stringify(body));
+    return Promise.resolve(body);
+  }
+  const stored = localStorage.getItem(key);
+  if (stored) return Promise.resolve(JSON.parse(stored));
+  return fetch(`/_data${path}.json`).then(r => r.ok ? r.json() : (path === '/siteContent' ? {} : [])).catch(() => path === '/siteContent' ? {} : []);
+}
+
+async function checkDevMode() {
+  try {
+    const res = await fetch(`${API}/auth`, { method: 'OPTIONS' });
+    return !res.ok;
+  } catch { return true; }
+}
+
 // Auth
 document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const pw = document.getElementById('login-password').value;
+
+  const isDev = await checkDevMode();
+  if (isDev) {
+    if (pw === DEV_PASSWORD) {
+      devMode = true;
+      token = 'dev-mode';
+      localStorage.setItem('cms_token', token);
+      localStorage.setItem('cms_dev_mode', 'true');
+      showCMS();
+    } else {
+      document.getElementById('login-error').classList.remove('hidden');
+    }
+    return;
+  }
+
   try {
     const res = await fetch(`${API}/auth`, {
       method: 'POST',
@@ -253,7 +290,9 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
 function logout() {
   token = '';
+  devMode = false;
   localStorage.removeItem('cms_token');
+  localStorage.removeItem('cms_dev_mode');
   document.getElementById('cms-panel').classList.add('hidden');
   document.getElementById('login-screen').classList.remove('hidden');
 }
@@ -269,7 +308,7 @@ async function loadAll() {
   try {
     carsData = await api('/cars');
     faqData = await api('/faq');
-    contentData = await api('/content');
+    contentData = await api(devMode ? '/siteContent' : '/content');
     renderCars();
     renderFaqList();
     renderContentEditor();
@@ -470,16 +509,24 @@ document.getElementById('save-content-btn').addEventListener('click', async () =
     }
     obj[parts[parts.length - 1]] = el.value || el.textContent;
   });
-  await api('/content', 'PUT', contentData);
+  await api(devMode ? '/siteContent' : '/content', 'PUT', contentData);
   showToast('İçerik kaydedildi');
 });
 
 // Init
-if (token) {
-  api('/cars').then(() => showCMS()).catch(() => logout());
-} else {
-  document.getElementById('login-screen').classList.remove('hidden');
-}
+(async () => {
+  if (token) {
+    if (localStorage.getItem('cms_dev_mode') === 'true') {
+      devMode = true;
+    }
+    try {
+      await loadAll();
+      showCMS();
+    } catch { logout(); }
+  } else {
+    document.getElementById('login-screen').classList.remove('hidden');
+  }
+})();
 </script>
 </body>
 </html>
