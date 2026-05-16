@@ -104,22 +104,7 @@ layout: base.njk
 
     <div class="absolute bottom-0 inset-x-0 border-t border-line/80 bg-ink/40 backdrop-blur-sm">
       <div class="marquee py-3 md:py-4">
-        <div class="marquee-track mono-lbl text-cream/40 uppercase whitespace-nowrap">
-          <span>Mercedes-Benz S-Class</span><span class="text-gold/50">◆</span>
-          <span>Porsche 911 Carrera</span><span class="text-gold/50">◆</span>
-          <span>Range Rover Sport</span><span class="text-gold/50">◆</span>
-          <span>BMW M4 Competition</span><span class="text-gold/50">◆</span>
-          <span>Audi RS6 Avant</span><span class="text-gold/50">◆</span>
-          <span>Lamborghini Huracán</span><span class="text-gold/50">◆</span>
-          <span>Bentley Continental GT</span><span class="text-gold/50">◆</span>
-          <span>Mercedes-Benz S-Class</span><span class="text-gold/50">◆</span>
-          <span>Porsche 911 Carrera</span><span class="text-gold/50">◆</span>
-          <span>Range Rover Sport</span><span class="text-gold/50">◆</span>
-          <span>BMW M4 Competition</span><span class="text-gold/50">◆</span>
-          <span>Audi RS6 Avant</span><span class="text-gold/50">◆</span>
-          <span>Lamborghini Huracán</span><span class="text-gold/50">◆</span>
-          <span>Bentley Continental GT</span><span class="text-gold/50">◆</span>
-        </div>
+        <div id="marquee-track" class="marquee-track mono-lbl text-cream/40 uppercase whitespace-nowrap"></div>
       </div>
     </div>
   </div>
@@ -383,6 +368,13 @@ const I18N = {
 
 let LANG = 'tr';
 
+function renderMarquee() {
+  const track = document.getElementById('marquee-track');
+  const names = FLEET.map(c => c.name);
+  const items = names.map(n => `<span>${n}</span><span class="text-gold/50">◆</span>`).join('');
+  track.innerHTML = items + items;
+}
+
 function renderFleet() {
   const t = I18N[LANG];
   const grid = document.getElementById('fleet-grid');
@@ -567,11 +559,13 @@ async function loadLiveData() {
     if (carsRes) FLEET = carsRes;
     if (faqRes) FAQ = faqRes;
     if (contentRes) applyContentToI18N(contentRes);
+    renderMarquee();
     applyI18nContent();
   } catch {}
 }
 
 renderFleet();
+renderMarquee();
 renderFAQ();
 observeReveals();
 loadLiveData();
