@@ -10,7 +10,7 @@
     "seats": 5,
     "gear": { "tr": "Otomatik", "en": "Auto" },
     "hp": 496,
-    "img": "",
+    "img": "/assets/cars/s-class.jpg",
     "imgLabel": "S-CLASS · GECE PROFİLİ",
     "turoUrl": "https://turo.com"
   },
@@ -25,7 +25,7 @@
     "seats": 2,
     "gear": { "tr": "PDK", "en": "PDK" },
     "hp": 379,
-    "img": "",
+    "img": "/assets/cars/911-carrera.jpg",
     "imgLabel": "911 · ¾ ARKA",
     "turoUrl": "https://turo.com"
   },
@@ -40,7 +40,7 @@
     "seats": 5,
     "gear": { "tr": "Otomatik", "en": "Auto" },
     "hp": 523,
-    "img": "",
+    "img": "/assets/cars/rr-sport.jpg",
     "imgLabel": "RR SPORT · YAN",
     "turoUrl": "https://turo.com"
   },
@@ -55,7 +55,7 @@
     "seats": 4,
     "gear": { "tr": "DCT", "en": "DCT" },
     "hp": 503,
-    "img": "",
+    "img": "/assets/cars/m4-competition.jpg",
     "imgLabel": "M4 · ÖN ¾",
     "turoUrl": "https://turo.com"
   },
@@ -70,7 +70,7 @@
     "seats": 5,
     "gear": { "tr": "Tiptronic", "en": "Tiptronic" },
     "hp": 591,
-    "img": "",
+    "img": "/assets/cars/rs6-avant.jpg",
     "imgLabel": "RS6 · YAN PROFİL",
     "turoUrl": "https://turo.com"
   },
@@ -85,7 +85,7 @@
     "seats": 2,
     "gear": { "tr": "DCT", "en": "DCT" },
     "hp": 631,
-    "img": "",
+    "img": "/assets/cars/huracan.jpg",
     "imgLabel": "HURACÁN · ÖN",
     "turoUrl": "https://turo.com"
   }

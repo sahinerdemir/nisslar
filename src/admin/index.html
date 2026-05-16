@@ -147,7 +147,15 @@
           </div>
           <div class="col-span-2">
             <label class="text-xs text-[#8B847A] mb-1 block">Görsel URL (opsiyonel)</label>
-            <input type="text" id="car-img" class="w-full px-3 py-2 rounded-lg text-sm"/>
+            <div class="flex gap-2">
+              <input type="text" id="car-img" class="flex-1 px-3 py-2 rounded-lg text-sm"/>
+              <label class="shrink-0 cursor-pointer bg-[#2A2620] hover:bg-[#3A3630] text-[#F4EFE4] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                Yükle
+                <input type="file" id="car-img-file" accept="image/*" class="hidden"/>
+              </label>
+            </div>
+            <p id="car-img-status" class="text-xs text-[#8B847A] mt-1 hidden"></p>
           </div>
           <div class="col-span-2">
             <label class="text-xs text-[#8B847A] mb-1 block">Turo / Rezervasyon URL</label>
@@ -419,6 +427,39 @@ function openCarModal(car = null, index = -1) {
 }
 
 function closeCarModal() { document.getElementById('car-modal').classList.add('hidden'); }
+document.getElementById('car-img-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const status = document.getElementById('car-img-status');
+  status.textContent = 'Yükleniyor...';
+  status.classList.remove('hidden');
+  try {
+    const res = await fetch(`${API}/upload`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'X-Filename': file.name,
+        'X-Content-Type': file.type
+      },
+      body: file
+    });
+    const data = await res.json();
+    if (data.url) {
+      document.getElementById('car-img').value = data.url;
+      status.textContent = 'Yüklendi!';
+      status.classList.add('text-green-400');
+      setTimeout(() => { status.classList.add('hidden'); status.classList.remove('text-green-400'); }, 2000);
+    } else {
+      status.textContent = 'Hata: ' + (data.error || 'Yükleme başarısız');
+      status.classList.add('text-red-400');
+    }
+  } catch (err) {
+    status.textContent = 'Hata: Yükleme başarısız';
+    status.classList.add('text-red-400');
+  }
+  e.target.value = '';
+});
+
 document.getElementById('add-car-btn').addEventListener('click', () => openCarModal());
 document.getElementById('car-modal-close').addEventListener('click', closeCarModal);
 document.getElementById('car-modal-overlay').addEventListener('click', closeCarModal);
