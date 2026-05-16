@@ -369,15 +369,8 @@ function renderFleet() {
         <div class="mt-4 md:mt-5 relative h-[1px] bg-line">
           <div class="car-rule absolute left-0 top-0 h-full bg-gold w-8 transition-all duration-700"></div>
         </div>
-        <div class="mt-4 md:mt-5 flex items-end justify-between gap-4">
-          <div>
-            ${c.was ? `<div class="mono-lbl text-cream/40 line-through stat-num mb-1">$${c.was} ${t['card.was']}</div>` : `<div class="mono-lbl text-cream/0 mb-1">&middot;</div>`}
-            <div class="flex items-baseline gap-1.5">
-              <span class="font-serif text-[28px] md:text-[34px] leading-none text-cream stat-num">$${c.price}</span>
-              <span class="mono-lbl text-cream/55 uppercase">${t['card.from']}</span>
-            </div>
-          </div>
-          <a href="${c.turoUrl || '#'}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 mono-lbl text-cream uppercase hover:text-gold transition pb-1.5">
+        <div class="mt-4 md:mt-5">
+          <a href="${c.turoUrl || '#'}" target="_blank" rel="noopener" class="inline-flex items-center justify-center gap-2 w-full bg-gold text-ink hover:bg-goldhi transition py-3 text-[11px] font-semibold tracking-[0.18em] uppercase">
             ${t['card.book']}
             <span class="car-cta-arrow inline-block transition-all duration-500">→</span>
           </a>
