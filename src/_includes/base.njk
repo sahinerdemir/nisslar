@@ -116,7 +116,8 @@
   .light .hover\:bg-goldhi:hover { background: #B8912A; }
   .light .border-gold\/50 { border-color: rgba(160,125,46,0.5); }
   .light .bg-cream { background: var(--cream); color: var(--bg); }
-  .light .text-ink { color: #FAFAF7; }
+  .light .bg-cream .text-ink, .light .bg-gold .text-ink { color: #FAFAF7; }
+  .light .bg-cream.text-ink { color: #FAFAF7; }
   .light .hover\:text-cream { color: var(--cream); }
   .light .hover\:text-gold:hover { color: var(--gold); }
   .light .hover\:border-gold:hover { border-color: var(--gold); }
@@ -148,15 +149,27 @@
   .light .mono-lbl.text-cream\/50 { color: rgba(26,23,20,0.45); }
   .light .stat-num { color: var(--cream); }
   .light .car-card .mono-lbl { color: rgba(26,23,20,0.5); }
+  .light .car-card .bg-cream { background: #1A1714; color: #FAFAF7; }
   .light #theme-toggle { color: rgba(26,23,20,0.6); }
   .light #theme-toggle:hover { color: var(--gold); }
   .light .border-line.hover\:border-gold:hover { border-color: var(--gold); }
-  .light .text-cream\/70 svg, .light a[aria-label] svg { color: rgba(26,23,20,0.6); }
-  .light a[aria-label]:hover svg { color: var(--gold); }
   .light a[aria-label] { border-color: var(--line); color: rgba(26,23,20,0.6); }
   .light a[aria-label]:hover { border-color: var(--gold); color: var(--gold); }
   .light .marquee .mono-lbl { color: rgba(26,23,20,0.35); }
   .light .car-rule { background: var(--gold); }
+  .light .hover\:bg-white:hover { background: #2C2820; }
+  .light .mobile-menu { background: rgba(250,250,247,0.98); }
+  .light .mobile-link { color: var(--cream); }
+  .light .car-card h3 { color: var(--cream); }
+  .light .car-card .text-cream { color: var(--cream); }
+  .light .font-serif.text-cream { color: var(--cream); }
+  .light .border-t.border-line { border-color: var(--line); }
+  .light .border-b.border-line { border-color: var(--line); }
+  .light .divide-y.divide-line > * + * { border-color: var(--line); }
+  .light .border-y.border-line { border-color: var(--line); }
+  .light details .acc-bar::after, .light details .acc-bar::before { background: rgba(26,23,20,0.5); }
+  .light .lnk::after { background: currentColor; }
+  .light .text-cream\/0 { color: transparent; }
 </style>
 </head>
 <body class="font-sans">
