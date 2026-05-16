@@ -334,6 +334,9 @@ const DEFAULT_CONTENT = {
     ]
   },
   fleet: {
+    title1: { tr: 'Az,', en: 'Few,' },
+    title2: { tr: 'ama', en: 'but' },
+    title3: { tr: 'özenli', en: 'considered' },
     desc: { tr: 'Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.', en: 'Each car personally selected. Detailed clean, full fuel, handover in person — no other way.' }
   },
   about: {
@@ -575,6 +578,9 @@ const CONTENT_SCHEMA = [
     { id: 'desc', label: 'Açıklama', type: 'textarea' },
   ]}},
   { key: 'fleet', label: 'Filo Bölümü', fields: [
+    { id: 'title1', label: 'Başlık 1', type: 'input' },
+    { id: 'title2', label: 'Başlık 2', type: 'input' },
+    { id: 'title3', label: 'Başlık 3 (vurgulu)', type: 'input' },
     { id: 'desc', label: 'Açıklama', type: 'textarea' },
   ]},
   { key: 'about', label: 'Hakkımızda', fields: [
