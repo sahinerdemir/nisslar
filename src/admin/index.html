@@ -464,39 +464,107 @@ document.getElementById('faq-form').addEventListener('submit', async (e) => {
 });
 
 // Content Editor
+const CONTENT_SCHEMA = [
+  { key: 'hero', label: 'Hero Bölümü', fields: [
+    { id: 'eyebrow', label: 'Üst Etiket', type: 'input' },
+    { id: 'title1', label: 'Başlık 1. Satır', type: 'input' },
+    { id: 'title2_prefix', label: 'Başlık 2. Satır (ön ek)', type: 'input' },
+    { id: 'title2_gold', label: 'Başlık 2. Satır (vurgulu kelime)', type: 'input' },
+    { id: 'sub', label: 'Alt Açıklama', type: 'textarea' },
+  ]},
+  { key: 'trust', label: 'Güven Şeridi', fields: [
+    { id: 'lead', label: 'Giriş Cümlesi', type: 'input' },
+  ], items: { label: 'Madde', fields: [
+    { id: 'title', label: 'Başlık', type: 'input' },
+    { id: 'desc', label: 'Açıklama', type: 'textarea' },
+  ]}},
+  { key: 'about', label: 'Hakkımızda', fields: [
+    { id: 'title1', label: 'Başlık 1. Satır', type: 'input' },
+    { id: 'title2_prefix', label: 'Başlık 2. Satır (ön ek)', type: 'input' },
+    { id: 'title2_gold', label: 'Başlık 2. Satır (vurgulu kelime)', type: 'input' },
+    { id: 'quote', label: 'Alıntı', type: 'textarea' },
+    { id: 'p1', label: 'Paragraf', type: 'textarea' },
+  ]},
+  { key: 'footer', label: 'Footer', fields: [
+    { id: 'about', label: 'Kısa Açıklama', type: 'input' },
+  ]},
+  { key: 'site', label: 'Site Genel', single: true, fields: [
+    { id: 'email', label: 'E-posta', type: 'input' },
+    { id: 'phone', label: 'Telefon', type: 'input' },
+    { id: 'address', label: 'Adres', type: 'input' },
+  ]},
+];
+
+function esc(str) { return (str || '').replace(/"/g, '&quot;'); }
+
 function renderContentEditor() {
   const editor = document.getElementById('content-editor');
-  const sections = [
-    { key: 'hero', label: 'Hero', fields: ['eyebrow','title1','title2_prefix','title2_gold','sub'] },
-    { key: 'about', label: 'Hakkımızda', fields: ['title1','title2_prefix','title2_gold','quote','p1'] },
-    { key: 'site', label: 'Site Genel', fields: ['email','phone','address'], single: true },
-  ];
-  editor.innerHTML = sections.map(s => `
-    <div class="bg-[#1C1813] border border-[#2A2620] rounded-lg p-5">
+  editor.innerHTML = CONTENT_SCHEMA.map(s => {
+    let html = `<div class="bg-[#1C1813] border border-[#2A2620] rounded-lg p-5">
       <h3 class="text-sm font-semibold text-[#C2A05A] mb-4">${s.label}</h3>
-      <div class="space-y-3">
-        ${s.fields.map(f => {
-          const val = contentData[s.key]?.[f];
-          if (s.single) {
-            return `<div>
-              <label class="text-xs text-[#8B847A] mb-1 block">${f}</label>
-              <input type="text" data-path="${s.key}.${f}" value="${typeof val === 'string' ? val.replace(/"/g, '&quot;') : ''}" class="w-full px-3 py-2 rounded-lg text-sm"/>
+      <div class="space-y-4">`;
+
+    html += s.fields.map(f => {
+      const val = contentData[s.key]?.[f.id];
+      if (s.single) {
+        return `<div>
+          <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+          ${f.type === 'textarea'
+            ? `<textarea rows="2" data-path="${s.key}.${f.id}" placeholder="${f.label}" class="w-full px-3 py-2.5 rounded-lg text-sm">${esc(val)}</textarea>`
+            : `<input type="text" data-path="${s.key}.${f.id}" value="${esc(val)}" placeholder="${f.label}" class="w-full px-3 py-2.5 rounded-lg text-sm"/>`}
+        </div>`;
+      }
+      return `<div>
+        <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+        <div class="grid grid-cols-2 gap-3">
+          <div class="relative">
+            <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">TR</span>
+            ${f.type === 'textarea'
+              ? `<textarea rows="2" data-path="${s.key}.${f.id}.tr" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(val?.tr)}</textarea>`
+              : `<input type="text" data-path="${s.key}.${f.id}.tr" value="${esc(val?.tr)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
+          </div>
+          <div class="relative">
+            <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">EN</span>
+            ${f.type === 'textarea'
+              ? `<textarea rows="2" data-path="${s.key}.${f.id}.en" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(val?.en)}</textarea>`
+              : `<input type="text" data-path="${s.key}.${f.id}.en" value="${esc(val?.en)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    if (s.items) {
+      const items = contentData[s.key]?.items || [];
+      html += items.map((item, idx) => `
+        <div class="mt-2 pl-4 border-l-2 border-[#2A2620]">
+          <div class="text-[11px] text-[#8B847A] mb-2 uppercase tracking-wider">${s.items.label} ${idx + 1}</div>
+          ${s.items.fields.map(f => {
+            const v = item[f.id];
+            return `<div class="mb-3">
+              <label class="text-[11px] text-[#8B847A] mb-1 block">${f.label}</label>
+              <div class="grid grid-cols-2 gap-3">
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">TR</span>
+                  ${f.type === 'textarea'
+                    ? `<textarea rows="2" data-path="${s.key}.items.${idx}.${f.id}.tr" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(v?.tr)}</textarea>`
+                    : `<input type="text" data-path="${s.key}.items.${idx}.${f.id}.tr" value="${esc(v?.tr)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
+                </div>
+                <div class="relative">
+                  <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">EN</span>
+                  ${f.type === 'textarea'
+                    ? `<textarea rows="2" data-path="${s.key}.items.${idx}.${f.id}.en" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(v?.en)}</textarea>`
+                    : `<input type="text" data-path="${s.key}.items.${idx}.${f.id}.en" value="${esc(v?.en)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
+                </div>
+              </div>
             </div>`;
-          }
-          return `<div class="grid grid-cols-2 gap-3">
-            <div>
-              <label class="text-xs text-[#8B847A] mb-1 block">${f} (TR)</label>
-              <${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea rows="2"' : 'input type="text"'} data-path="${s.key}.${f}.tr" class="w-full px-3 py-2 rounded-lg text-sm">${val?.tr || ''}</${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea' : 'input'}>
-            </div>
-            <div>
-              <label class="text-xs text-[#8B847A] mb-1 block">${f} (EN)</label>
-              <${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea rows="2"' : 'input type="text"'} data-path="${s.key}.${f}.en" class="w-full px-3 py-2 rounded-lg text-sm">${val?.en || ''}</${f === 'p1' || f === 'quote' || f === 'sub' ? 'textarea' : 'input'}>
-            </div>
-          </div>`;
-        }).join('')}
-      </div>
-    </div>
-  `).join('');
+          }).join('')}
+        </div>
+      `).join('');
+    }
+
+    html += `</div></div>`;
+    return html;
+  }).join('');
 }
 
 document.getElementById('save-content-btn').addEventListener('click', async () => {
@@ -504,10 +572,18 @@ document.getElementById('save-content-btn').addEventListener('click', async () =
     const parts = el.dataset.path.split('.');
     let obj = contentData;
     for (let i = 0; i < parts.length - 1; i++) {
-      if (!obj[parts[i]]) obj[parts[i]] = {};
-      obj = obj[parts[i]];
+      const key = parts[i];
+      const nextKey = parts[i + 1];
+      if (!isNaN(nextKey)) {
+        if (!Array.isArray(obj[key])) obj[key] = [];
+        while (obj[key].length <= parseInt(nextKey)) obj[key].push({});
+        obj = obj[key];
+        continue;
+      }
+      if (!obj[key]) obj[key] = {};
+      obj = obj[key];
     }
-    obj[parts[parts.length - 1]] = el.value || el.textContent;
+    obj[parts[parts.length - 1]] = el.value;
   });
   await api(devMode ? '/siteContent' : '/content', 'PUT', contentData);
   showToast('İçerik kaydedildi');
