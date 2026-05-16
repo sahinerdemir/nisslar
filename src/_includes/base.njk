@@ -74,7 +74,6 @@
   .marquee { display: flex; overflow: hidden; mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent); }
   .marquee-track { display: flex; gap: 4rem; animation: scroll 40s linear infinite; flex-shrink: 0; }
   @keyframes scroll { to { transform: translateX(-50%); } }
-  .vert { writing-mode: vertical-rl; transform: rotate(180deg); }
   .mono-lbl { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: 0.16em; }
   ::-webkit-scrollbar { width: 10px; height: 10px; }
   ::-webkit-scrollbar-track { background: #16130F; }
@@ -142,6 +141,22 @@
   .light ::-webkit-scrollbar-thumb:hover { background: var(--line2); }
   .light .hamburger span { background: var(--cream); }
   .light .dot-i::before { background: var(--gold); }
+  .light .text-cream\/50 { color: rgba(26,23,20,0.45); }
+  .light .text-cream\/70 { color: rgba(26,23,20,0.6); }
+  .light .text-line2 { color: var(--line2); }
+  .light .border-line { border-color: var(--line); }
+  .light .mono-lbl.text-cream\/50 { color: rgba(26,23,20,0.45); }
+  .light .stat-num { color: var(--cream); }
+  .light .car-card .mono-lbl { color: rgba(26,23,20,0.5); }
+  .light #theme-toggle { color: rgba(26,23,20,0.6); }
+  .light #theme-toggle:hover { color: var(--gold); }
+  .light .border-line.hover\:border-gold:hover { border-color: var(--gold); }
+  .light .text-cream\/70 svg, .light a[aria-label] svg { color: rgba(26,23,20,0.6); }
+  .light a[aria-label]:hover svg { color: var(--gold); }
+  .light a[aria-label] { border-color: var(--line); color: rgba(26,23,20,0.6); }
+  .light a[aria-label]:hover { border-color: var(--gold); color: var(--gold); }
+  .light .marquee .mono-lbl { color: rgba(26,23,20,0.35); }
+  .light .car-rule { background: var(--gold); }
 </style>
 </head>
 <body class="font-sans">
