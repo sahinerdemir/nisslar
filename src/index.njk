@@ -96,7 +96,7 @@ layout: base.njk
 
     <div class="absolute bottom-0 inset-x-0 border-t border-line/80 bg-ink/40 backdrop-blur-sm z-10">
       <div class="marquee py-3 md:py-4">
-        <div id="marquee-track" class="marquee-track mono-lbl text-cream/40 uppercase whitespace-nowrap"></div>
+        <div id="marquee-track" class="marquee-track mono-lbl text-cream/40 whitespace-nowrap"></div>
       </div>
     </div>
   </div>
@@ -348,7 +348,7 @@ let LANG = 'tr';
 
 function renderMarquee() {
   const track = document.getElementById('marquee-track');
-  const names = FLEET.map(c => c.name);
+  const names = FLEET.map(c => c.name.toLocaleUpperCase('en-US'));
   const items = names.map(n => `<span>${n}</span><span class="text-gold/50">◆</span>`).join('');
   track.innerHTML = items + items;
 }
@@ -361,7 +361,7 @@ function renderFleet() {
       <div class="relative aspect-[4/3] overflow-hidden">
         ${c.img ? `<img src="${c.img}" alt="${c.name}" class="car-media absolute inset-0 w-full h-full object-cover" />` : `<div class="car-media absolute inset-0 ph"></div>`}
         <div class="absolute left-4 bottom-4 z-10">
-          <span class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink uppercase">${c.cat[LANG]}</span>
+          <span class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink">${c.cat[LANG].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US')}</span>
         </div>
       </div>
       <div class="p-5 md:p-6">
@@ -369,12 +369,12 @@ function renderFleet() {
           <h3 class="font-serif text-[20px] md:text-[24px] leading-tight text-cream tracking-tighter2 balance">${c.name}</h3>
           <span class="mono-lbl text-cream/40 stat-num shrink-0">${c.year}</span>
         </div>
-        <div class="mt-3 md:mt-4 flex items-center gap-3 mono-lbl text-cream/50 uppercase">
-          <span class="stat-num">${c.seats} ${t['card.seats']}</span>
+        <div class="mt-3 md:mt-4 flex items-center gap-3 mono-lbl text-cream/50">
+          <span class="stat-num">${c.seats} ${t['card.seats'].toLocaleUpperCase(LANG)}</span>
           <span class="text-line2">/</span>
-          <span>${c.gear[LANG]}</span>
+          <span>${c.gear[LANG].toLocaleUpperCase('en-US')}</span>
           <span class="text-line2">/</span>
-          <span class="stat-num">${c.hp} ${t['card.hp']}</span>
+          <span class="stat-num">${c.hp} ${t['card.hp'].toLocaleUpperCase(LANG)}</span>
         </div>
         <div class="mt-4 md:mt-5 relative h-[1px] bg-line">
           <div class="car-rule absolute left-0 top-0 h-full bg-gold w-8 transition-all duration-700"></div>
