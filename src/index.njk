@@ -152,7 +152,7 @@ layout: base.njk
   <div class="max-w-[1440px] mx-auto px-6 md:px-10 grid grid-cols-12 gap-10 items-start">
     <div class="col-span-12 lg:col-span-5 reveal">
       <div class="relative w-full aspect-[4/5] overflow-hidden border border-line">
-        <img src="/assets/miami.jpg" alt="Miami skyline" class="absolute inset-0 w-full h-full object-cover"/>
+        <img id="about-img" src="/assets/about.jpg" alt="Miami" class="absolute inset-0 w-full h-full object-cover"/>
         <span class="absolute left-0 top-0 w-8 h-[1px] bg-gold"></span>
         <span class="absolute left-0 top-0 w-[1px] h-8 bg-gold"></span>
         <span class="absolute right-0 bottom-0 w-8 h-[1px] bg-gold"></span>
@@ -537,7 +537,10 @@ async function loadLiveData() {
     ]);
     if (carsRes) FLEET = carsRes;
     if (faqRes) FAQ = faqRes;
-    if (contentRes) applyContentToI18N(contentRes);
+    if (contentRes) {
+      applyContentToI18N(contentRes);
+      if (contentRes.about?.img) document.getElementById('about-img').src = contentRes.about.img;
+    }
     renderMarquee();
     applyI18nContent();
   } catch {}

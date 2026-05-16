@@ -466,6 +466,29 @@ document.getElementById('car-img-file').addEventListener('change', async (e) => 
   e.target.value = '';
 });
 
+window.uploadContentImg = async function(input, path) {
+  const file = input.files[0];
+  if (!file) return;
+  try {
+    const res = await fetch(`${API}/upload`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'X-Filename': file.name, 'X-Content-Type': file.type },
+      body: file
+    });
+    const data = await res.json();
+    if (data.url) {
+      const el = document.querySelector(`[data-path="${path}"]`);
+      if (el) el.value = data.url;
+      showToast('Görsel yüklendi');
+      const parts = path.split('.');
+      let obj = contentData;
+      for (let i = 0; i < parts.length - 1; i++) { if (!obj[parts[i]]) obj[parts[i]] = {}; obj = obj[parts[i]]; }
+      obj[parts[parts.length - 1]] = data.url;
+    }
+  } catch { showToast('Yükleme başarısız'); }
+  input.value = '';
+};
+
 document.getElementById('add-car-btn').addEventListener('click', () => openCarModal());
 document.getElementById('car-modal-close').addEventListener('click', closeCarModal);
 document.getElementById('car-modal-overlay').addEventListener('click', closeCarModal);
@@ -589,6 +612,7 @@ const CONTENT_SCHEMA = [
     { id: 'title2_gold', label: 'Başlık 2. Satır (vurgulu kelime)', type: 'input' },
     { id: 'quote', label: 'Alıntı', type: 'textarea' },
     { id: 'p1', label: 'Paragraf', type: 'textarea' },
+    { id: 'img', label: 'Görsel', type: 'image' },
   ]},
   { key: 'footer', label: 'Footer', fields: [
     { id: 'about', label: 'Kısa Açıklama', type: 'input' },
@@ -611,6 +635,19 @@ function renderContentEditor() {
 
     html += s.fields.map(f => {
       const val = contentData[s.key]?.[f.id];
+      if (f.type === 'image') {
+        return `<div>
+          <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+          <div class="flex items-center gap-3">
+            <input type="text" data-path="${s.key}.${f.id}" value="${esc(val)}" placeholder="Görsel URL" class="flex-1 px-3 py-2.5 rounded-lg text-sm"/>
+            <label class="cursor-pointer bg-[#2A2620] hover:bg-[#39342B] transition px-4 py-2.5 rounded-lg text-xs font-medium">
+              Yükle
+              <input type="file" accept="image/*" class="hidden" onchange="uploadContentImg(this, '${s.key}.${f.id}')"/>
+            </label>
+          </div>
+          ${val ? `<img src="${val}" class="mt-2 h-20 rounded border border-[#2A2620] object-cover"/>` : ''}
+        </div>`;
+      }
       if (s.single) {
         return `<div>
           <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
