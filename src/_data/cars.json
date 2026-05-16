@@ -12,7 +12,7 @@
     "hp": 496,
     "img": "/assets/cars/s-class.jpg",
     "imgLabel": "S-CLASS · GECE PROFİLİ",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
     "id": "911-carrera",
@@ -27,7 +27,7 @@
     "hp": 379,
     "img": "/assets/cars/911-carrera.jpg",
     "imgLabel": "911 · ¾ ARKA",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
     "id": "rr-sport",
@@ -42,7 +42,7 @@
     "hp": 523,
     "img": "/assets/cars/rr-sport.jpg",
     "imgLabel": "RR SPORT · YAN",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
     "id": "m4-competition",
@@ -57,7 +57,7 @@
     "hp": 503,
     "img": "/assets/cars/m4-competition.jpg",
     "imgLabel": "M4 · ÖN ¾",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
     "id": "rs6-avant",
@@ -72,7 +72,7 @@
     "hp": 591,
     "img": "/assets/cars/rs6-avant.jpg",
     "imgLabel": "RS6 · YAN PROFİL",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
     "id": "huracan",
@@ -87,6 +87,6 @@
     "hp": 631,
     "img": "/assets/cars/huracan.jpg",
     "imgLabel": "HURACÁN · ÖN",
-    "turoUrl": "https://turo.com"
+    "turoUrl": "https://turo.com/us/en/host/51476329"
   }
 ]

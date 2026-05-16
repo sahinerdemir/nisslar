@@ -519,7 +519,7 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
     hp: parseInt(document.getElementById('car-hp').value),
     img: document.getElementById('car-img').value || '',
     imgLabel: document.getElementById('car-name').value.split(' ').pop().toUpperCase(),
-    turoUrl: document.getElementById('car-turo').value || 'https://turo.com'
+    turoUrl: document.getElementById('car-turo').value || 'https://turo.com/us/en/host/51476329'
   };
   if (idx >= 0) { carsData[idx] = car; } else { carsData.push(car); }
   await api('/cars', 'PUT', carsData);
