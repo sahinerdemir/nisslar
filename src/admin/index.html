@@ -110,16 +110,6 @@
             <input type="number" id="car-year" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Fiyat ($/gün)</label>
-            <input type="number" id="car-price" class="w-full px-3 py-2 rounded-lg text-sm" required/>
-          </div>
-          <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Eski Fiyat (opsiyonel)</label>
-            <input type="number" id="car-was" class="w-full px-3 py-2 rounded-lg text-sm"/>
-          </div>
-          <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Puan</label>
-            <input type="number" id="car-rating" step="0.01" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
             <label class="text-xs text-[#8B847A] mb-1 block">Koltuk</label>
@@ -410,7 +400,7 @@ function renderCars() {
         <span class="text-xs text-[#8B847A] font-mono">N°${String(i+1).padStart(3,'0')}</span>
         <div>
           <div class="font-medium text-sm">${c.name} <span class="text-[#8B847A]">(${c.year})</span></div>
-          <div class="text-xs text-[#8B847A]">${c.cat.tr} · $${c.price}/gün · ${c.hp} BG</div>
+          <div class="text-xs text-[#8B847A]">${c.cat.tr} · ${c.hp} BG</div>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -426,9 +416,6 @@ function openCarModal(car = null, index = -1) {
   document.getElementById('car-id').value = index;
   document.getElementById('car-name').value = car?.name || '';
   document.getElementById('car-year').value = car?.year || new Date().getFullYear();
-  document.getElementById('car-price').value = car?.price || '';
-  document.getElementById('car-was').value = car?.was || '';
-  document.getElementById('car-rating').value = car?.rating || 5.00;
   document.getElementById('car-seats').value = car?.seats || '';
   document.getElementById('car-hp').value = car?.hp || '';
   document.getElementById('car-cat-tr').value = car?.cat?.tr || '';
@@ -519,9 +506,6 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
     name: document.getElementById('car-name').value,
     year: parseInt(document.getElementById('car-year').value),
     cat: { tr: document.getElementById('car-cat-tr').value, en: document.getElementById('car-cat-en').value },
-    price: parseInt(document.getElementById('car-price').value),
-    was: document.getElementById('car-was').value ? parseInt(document.getElementById('car-was').value) : null,
-    rating: parseFloat(document.getElementById('car-rating').value),
     seats: parseInt(document.getElementById('car-seats').value),
     gear: { tr: document.getElementById('car-gear-tr').value, en: document.getElementById('car-gear-en').value },
     hp: parseInt(document.getElementById('car-hp').value),
