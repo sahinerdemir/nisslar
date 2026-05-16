@@ -1,12 +1,16 @@
 {
   "site": {
-    "title": { "tr": "nisslar — Miami Lüks Araç Kiralama", "en": "nisslar — Miami Luxury Car Rental" },
     "email": "hello@nisslar.com",
     "phone": "+1 (305) 555 12 34",
+    "whatsapp": "18635581238",
     "address": "1450 Brickell Ave\nMiami, FL 33131",
-    "instagram": "#",
-    "linkedin": "#",
-    "tiktok": "#"
+    "socials": [
+      { "platform": "instagram", "url": "" },
+      { "platform": "facebook", "url": "" },
+      { "platform": "tiktok", "url": "" },
+      { "platform": "linkedin", "url": "" },
+      { "platform": "x", "url": "" }
+    ]
   },
   "hero": {
     "eyebrow": { "tr": "Miami · Lüks Filo", "en": "Miami · Luxury Fleet" },

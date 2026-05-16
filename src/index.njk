@@ -189,7 +189,7 @@ layout: base.njk
       <p class="mt-6 text-[14px] text-cream/55 max-w-[280px] pretty" data-i18n="faq.desc">
         Aklınızdaki soruları çoktan duyduk. Eksik kalan varsa, concierge bir mesaj uzağınızda.
       </p>
-      <a href="mailto:hello@nisslar.com" class="mt-6 inline-flex items-center gap-2 text-[11.5px] tracking-[0.22em] uppercase text-cream/85 hover:text-gold transition lnk">
+      <a id="faq-email" href="mailto:hello@nisslar.com" class="mt-6 inline-flex items-center gap-2 text-[11.5px] tracking-[0.22em] uppercase text-cream/85 hover:text-gold transition lnk">
         <span data-i18n="faq.contact">Bize Yazın</span>
         <span class="arr">→</span>
       </a>
@@ -231,25 +231,15 @@ layout: base.njk
         <p class="text-[14px] leading-relaxed text-cream/55 max-w-[300px] pretty" data-i18n="footer.about">
           Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.
         </p>
-        <div class="mt-6 md:mt-8 flex items-center gap-3">
-          <a href="#" aria-label="Instagram" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
-            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
-          </a>
-          <a href="#" aria-label="LinkedIn" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
-            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18H5.7V9.5h2.6V18zM7 8.3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18.3 18h-2.6v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3V18H10V9.5h2.5v1.2h.1c.4-.7 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1V18z"/></svg>
-          </a>
-          <a href="#" aria-label="TikTok" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
-            <svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M16.6 5.8a5.7 5.7 0 0 0 3.4 1.1v2.6a8.3 8.3 0 0 1-4.6-1.4v6.3a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2 2.7V3h2.6a4.7 4.7 0 0 0 1.2 2.8z"/></svg>
-          </a>
-        </div>
+        <div id="footer-socials" class="mt-6 md:mt-8 flex items-center gap-3"></div>
       </div>
 
       <div class="col-span-1 md:col-span-3">
         <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h1">İletişim</div>
         <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
           <li>1450 Brickell Ave<br/>Miami, FL 33131</li>
-          <li><a href="tel:+13055551234" class="hover:text-gold transition stat-num">+1 (305) 555 12 34</a></li>
-          <li><a href="mailto:hello@nisslar.com" class="hover:text-gold transition">hello@nisslar.com</a></li>
+          <li><a id="footer-phone" href="tel:+13055551234" class="hover:text-gold transition stat-num">+1 (305) 555 12 34</a></li>
+          <li><a id="footer-email" href="mailto:hello@nisslar.com" class="hover:text-gold transition">hello@nisslar.com</a></li>
         </ul>
       </div>
 
@@ -272,7 +262,7 @@ layout: base.njk
 </footer>
 
 <!-- WhatsApp -->
-<a href="https://wa.me/18635581238" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#1EBE57] transition rounded-full flex items-center justify-center shadow-lg shadow-black/20">
+<a id="whatsapp-btn" href="https://wa.me/18635581238" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#1EBE57] transition rounded-full flex items-center justify-center shadow-lg shadow-black/20">
   <svg viewBox="0 0 24 24" class="w-7 h-7 text-white" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
@@ -473,6 +463,41 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
+const SOCIAL_ICONS = {
+  instagram: '<svg viewBox="0 0 24 24" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>',
+  facebook: '<svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>',
+  tiktok: '<svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M16.6 5.8a5.7 5.7 0 0 0 3.4 1.1v2.6a8.3 8.3 0 0 1-4.6-1.4v6.3a5.5 5.5 0 1 1-5.5-5.5c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2 2.7V3h2.6a4.7 4.7 0 0 0 1.2 2.8z"/></svg>',
+  linkedin: '<svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zM8.3 18H5.7V9.5h2.6V18zM7 8.3a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zM18.3 18h-2.6v-4.4c0-1 0-2.4-1.5-2.4s-1.7 1.1-1.7 2.3V18H10V9.5h2.5v1.2h.1c.4-.7 1.2-1.4 2.5-1.4 2.7 0 3.2 1.8 3.2 4.1V18z"/></svg>',
+  x: '<svg viewBox="0 0 24 24" class="w-4 h-4" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>'
+};
+
+function applySiteInfo(content) {
+  if (!content?.site) return;
+  const s = content.site;
+  if (s.email) {
+    document.querySelectorAll('#footer-email, #faq-email').forEach(el => {
+      el.href = 'mailto:' + s.email;
+      if (el.id === 'footer-email') el.textContent = s.email;
+    });
+  }
+  if (s.phone) {
+    const el = document.getElementById('footer-phone');
+    if (el) { el.href = 'tel:' + s.phone.replace(/[^+\d]/g, ''); el.textContent = s.phone; }
+  }
+  if (s.whatsapp) {
+    const el = document.getElementById('whatsapp-btn');
+    if (el) el.href = 'https://wa.me/' + s.whatsapp.replace(/[^0-9]/g, '');
+  }
+  if (s.socials) {
+    const container = document.getElementById('footer-socials');
+    container.innerHTML = s.socials.filter(sc => sc.url).map(sc => `
+      <a href="${sc.url}" target="_blank" rel="noopener" aria-label="${sc.platform}" class="w-10 h-10 border border-line hover:border-gold hover:text-gold transition flex items-center justify-center text-cream/70">
+        ${SOCIAL_ICONS[sc.platform] || ''}
+      </a>
+    `).join('');
+  }
+}
+
 function applyContentToI18N(content) {
   if (!content) return;
   const map = {
@@ -535,6 +560,7 @@ async function loadLiveData() {
     if (faqRes) FAQ = faqRes;
     if (contentRes) {
       applyContentToI18N(contentRes);
+      applySiteInfo(contentRes);
       if (contentRes.about?.img) document.getElementById('about-img').src = contentRes.about.img;
     }
     renderMarquee();
