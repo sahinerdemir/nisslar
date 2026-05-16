@@ -27,6 +27,12 @@ layout: base.njk
         <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="en">EN</button>
       </div>
 
+      <!-- Theme toggle -->
+      <button id="theme-toggle" class="w-8 h-8 flex items-center justify-center text-cream/70 hover:text-gold transition" aria-label="Tema değiştir">
+        <svg id="icon-sun" viewBox="0 0 24 24" class="w-[18px] h-[18px]" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        <svg id="icon-moon" viewBox="0 0 24 24" class="w-[18px] h-[18px] hidden" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+
       <a href="#" class="hidden md:inline-flex group items-center gap-2.5 bg-gold text-ink hover:bg-goldhi transition px-5 py-2.5 rounded-full text-[11.5px] font-semibold tracking-[0.18em] uppercase">
         <span data-i18n="nav.book">Rezerve Et</span>
         <span class="arr -mr-0.5">→</span>
@@ -547,6 +553,32 @@ async function loadLiveData() {
     applyI18nContent();
   } catch {}
 }
+
+// Theme toggle
+const themeToggle = document.getElementById('theme-toggle');
+const iconSun = document.getElementById('icon-sun');
+const iconMoon = document.getElementById('icon-moon');
+
+function setTheme(mode) {
+  if (mode === 'light') {
+    document.documentElement.classList.add('light');
+    iconSun.classList.add('hidden');
+    iconMoon.classList.remove('hidden');
+  } else {
+    document.documentElement.classList.remove('light');
+    iconSun.classList.remove('hidden');
+    iconMoon.classList.add('hidden');
+  }
+  localStorage.setItem('theme', mode);
+}
+
+themeToggle.addEventListener('click', () => {
+  const isLight = document.documentElement.classList.contains('light');
+  setTheme(isLight ? 'dark' : 'light');
+});
+
+const savedTheme = localStorage.getItem('theme');
+if (savedTheme) setTheme(savedTheme);
 
 renderFleet();
 renderMarquee();
