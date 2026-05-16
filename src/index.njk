@@ -318,20 +318,6 @@ layout: base.njk
 let FLEET = {{ cars | dump | safe }};
 let FAQ = {{ faq | dump | safe }};
 
-async function loadLiveData() {
-  try {
-    const [carsRes, faqRes] = await Promise.all([
-      fetch('/api/cars').then(r => r.ok ? r.json() : null),
-      fetch('/api/faq').then(r => r.ok ? r.json() : null)
-    ]);
-    if (carsRes) FLEET = carsRes;
-    if (faqRes) FAQ = faqRes;
-    renderFleet();
-    renderFAQ();
-  } catch {}
-}
-loadLiveData();
-
 const I18N = {
   tr: {
     'nav.home':'Ana Sayfa','nav.fleet':'Filo','nav.about':'Hakkımızda','nav.faq':'SSS','nav.book':'Rezerve Et',
@@ -523,7 +509,70 @@ document.querySelectorAll('.mobile-link').forEach(link => {
   });
 });
 
+function applyContentToI18N(content) {
+  if (!content) return;
+  const map = {
+    hero: {
+      eyebrow: 'hero.eyebrow', title1: 'hero.title1', sub: 'hero.sub'
+    },
+    about: {
+      title1: 'about.title1', quote: 'about.quote', p1: 'about.p1'
+    },
+    trust: {},
+    footer: {
+      about: 'footer.about'
+    }
+  };
+  for (const [section, fields] of Object.entries(map)) {
+    for (const [field, i18nKey] of Object.entries(fields)) {
+      const val = content[section]?.[field];
+      if (val?.tr) I18N.tr[i18nKey] = val.tr;
+      if (val?.en) I18N.en[i18nKey] = val.en;
+    }
+  }
+  if (content.hero?.title2_prefix || content.hero?.title2_gold) {
+    const prTr = content.hero.title2_prefix?.tr || 'bir ';
+    const glTr = content.hero.title2_gold?.tr || 'deneyim';
+    I18N.tr['hero.title2'] = `${prTr}<span class="text-gold not-italic font-normal">${glTr}</span>.`;
+    const prEn = content.hero.title2_prefix?.en || 'an ';
+    const glEn = content.hero.title2_gold?.en || 'experience';
+    I18N.en['hero.title2'] = `${prEn}<span class="text-gold not-italic font-normal">${glEn}</span>.`;
+  }
+  if (content.about?.title2_prefix || content.about?.title2_gold) {
+    const prTr = content.about.title2_prefix?.tr || 'sessiz bir ';
+    const glTr = content.about.title2_gold?.tr || 'lüks';
+    I18N.tr['about.title2'] = `${prTr}<span class="text-gold not-italic font-normal">${glTr}</span>.`;
+    const prEn = content.about.title2_prefix?.en || 'in the heart of ';
+    const glEn = content.about.title2_gold?.en || 'Miami';
+    I18N.en['about.title2'] = `${prEn}<span class="text-gold not-italic font-normal">${glEn}</span>.`;
+  }
+  if (content.trust?.items) {
+    content.trust.items.forEach((item, i) => {
+      const n = i + 1;
+      if (item.title?.tr) I18N.tr[`trust.t${n}`] = item.title.tr;
+      if (item.title?.en) I18N.en[`trust.t${n}`] = item.title.en;
+      if (item.desc?.tr) I18N.tr[`trust.s${n}`] = item.desc.tr;
+      if (item.desc?.en) I18N.en[`trust.s${n}`] = item.desc.en;
+    });
+  }
+}
+
+async function loadLiveData() {
+  try {
+    const [carsRes, faqRes, contentRes] = await Promise.all([
+      fetch('/api/cars').then(r => r.ok ? r.json() : null),
+      fetch('/api/faq').then(r => r.ok ? r.json() : null),
+      fetch('/api/content').then(r => r.ok ? r.json() : null)
+    ]);
+    if (carsRes) FLEET = carsRes;
+    if (faqRes) FAQ = faqRes;
+    if (contentRes) applyContentToI18N(contentRes);
+    applyI18nContent();
+  } catch {}
+}
+
 renderFleet();
 renderFAQ();
 observeReveals();
+loadLiveData();
 </script>
