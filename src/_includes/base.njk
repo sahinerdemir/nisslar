@@ -70,9 +70,9 @@
   .rule-gold { height: 1px; background: linear-gradient(90deg, transparent, #C2A05A 30%, #C2A05A 70%, transparent); }
   details > summary { list-style: none; cursor: pointer; }
   details > summary::-webkit-details-marker { display: none; }
-  details .acc-bar::after { content: ""; position: absolute; right: 0; top: 50%; width: 14px; height: 1px; background: currentColor; transform: rotate(90deg); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
-  details .acc-bar::before { content: ""; position: absolute; right: 0; top: 50%; width: 14px; height: 1px; background: currentColor; transition: opacity .35s; }
-  details[open] .acc-bar::after { transform: rotate(0deg); }
+  details .acc-bar::after { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; background: currentColor; transform: translate(-50%,-50%) rotate(90deg); transition: transform .35s cubic-bezier(.2,.7,.2,1); }
+  details .acc-bar::before { content: ""; position: absolute; left: 50%; top: 50%; width: 14px; height: 2px; background: currentColor; transform: translate(-50%,-50%); }
+  details[open] .acc-bar::after { transform: translate(-50%,-50%) rotate(0deg); }
   details .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .5s cubic-bezier(.2,.7,.2,1); }
   details[open] .acc-body { grid-template-rows: 1fr; }
   details .acc-body > div { overflow: hidden; }
