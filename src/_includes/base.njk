@@ -33,8 +33,9 @@
 <style>
   :root { color-scheme: dark; --bg: #16130F; --bg2: #1C1813; --bg3: #23201A; --line: #2A2620; --line2: #39342B; --cream: #F4EFE4; --cream2: #E7E0D0; --gold: #C2A05A; --muted: #8B847A; }
   .light { color-scheme: light; --bg: #FAFAF7; --bg2: #F2F0EB; --bg3: #E8E5DE; --line: #D9D4CA; --line2: #C8C2B6; --cream: #1A1714; --cream2: #2C2820; --gold: #A07D2E; --muted: #6B6560; }
-  html { scroll-behavior: smooth; }
+  html { scroll-behavior: smooth; overflow-x: hidden; }
   html, body { background: var(--bg); color: var(--cream); transition: background .4s, color .4s; }
+  body { overflow-x: hidden; }
   body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   .font-serif { font-family: 'Playfair Display', Georgia, serif; }
   section[id], #faq, #fleet, #about { scroll-margin-top: 88px; }
