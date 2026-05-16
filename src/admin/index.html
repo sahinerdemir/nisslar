@@ -333,6 +333,9 @@ const DEFAULT_CONTENT = {
       { title: { tr: 'Gizli Ücret Yok', en: 'No Hidden Fees' }, desc: { tr: 'Sözleşmenin üst satırı, alt satıra eşittir. Şeffaf — başka türlüsünü düşünmüyoruz.', en: "The top line equals the bottom line. Transparent — we don't know another way." } }
     ]
   },
+  fleet: {
+    desc: { tr: 'Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.', en: 'Each car personally selected. Detailed clean, full fuel, handover in person — no other way.' }
+  },
   about: {
     title1: { tr: "Miami'de,", en: 'Quiet luxury,' },
     title2_prefix: { tr: 'sessiz bir ', en: 'in the heart of ' },
@@ -571,6 +574,9 @@ const CONTENT_SCHEMA = [
     { id: 'title', label: 'Başlık', type: 'input' },
     { id: 'desc', label: 'Açıklama', type: 'textarea' },
   ]}},
+  { key: 'fleet', label: 'Filo Bölümü', fields: [
+    { id: 'desc', label: 'Açıklama', type: 'textarea' },
+  ]},
   { key: 'about', label: 'Hakkımızda', fields: [
     { id: 'title1', label: 'Başlık 1. Satır', type: 'input' },
     { id: 'title2_prefix', label: 'Başlık 2. Satır (ön ek)', type: 'input' },

@@ -15,6 +15,9 @@
     "title2_gold": { "tr": "deneyim", "en": "experience" },
     "sub": { "tr": "Miami sokaklarında, özenle seçilmiş bir filo. Sigorta dahil, gizli ücret yok — yalnız siz, anahtarlar ve yol.", "en": "A carefully curated fleet on the streets of Miami. Insurance included, no hidden fees — just you, the keys, and the road." }
   },
+  "fleet": {
+    "desc": { "tr": "Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.", "en": "Each car personally selected. Detailed clean, full fuel, handover in person — no other way." }
+  },
   "trust": {
     "lead": { "tr": "Üç söz veriyoruz, üçünü de tutuyoruz.", "en": "Three promises — all of them kept." },
     "items": [
