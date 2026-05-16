@@ -315,8 +315,22 @@ layout: base.njk
 
 <!-- SCRIPTS -->
 <script>
-const FLEET = {{ cars | dump | safe }};
-const FAQ = {{ faq | dump | safe }};
+let FLEET = {{ cars | dump | safe }};
+let FAQ = {{ faq | dump | safe }};
+
+async function loadLiveData() {
+  try {
+    const [carsRes, faqRes] = await Promise.all([
+      fetch('/api/cars').then(r => r.ok ? r.json() : null),
+      fetch('/api/faq').then(r => r.ok ? r.json() : null)
+    ]);
+    if (carsRes) FLEET = carsRes;
+    if (faqRes) FAQ = faqRes;
+    renderFleet();
+    renderFAQ();
+  } catch {}
+}
+loadLiveData();
 
 const I18N = {
   tr: {
