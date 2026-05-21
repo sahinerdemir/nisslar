@@ -344,15 +344,15 @@ function renderFleet() {
   const grid = document.getElementById('fleet-grid');
   grid.innerHTML = FLEET.slice(0, 6).map((c, i) => `
     <article class="car-card group relative border border-line bg-white reveal" style="transition-delay:${i*55}ms">
-      <div class="relative aspect-[4/3] overflow-hidden">
+      <a href="/fleet/detail/?id=${c.id}" class="block relative aspect-[4/3] overflow-hidden">
         ${c.img ? `<img src="${c.img}" alt="${c.name}" class="car-media absolute inset-0 w-full h-full object-cover" />` : `<div class="car-media absolute inset-0 ph"></div>`}
         <div class="absolute left-4 bottom-4 z-10">
           <span class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink">${c.cat[LANG].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US')}</span>
         </div>
-      </div>
+      </a>
       <div class="p-5 md:p-6">
         <div class="flex items-baseline justify-between gap-3">
-          <h3 class="font-serif text-[20px] md:text-[24px] leading-tight text-cream tracking-tighter2 balance">${c.name}</h3>
+          <a href="/fleet/detail/?id=${c.id}" class="font-serif text-[20px] md:text-[24px] leading-tight text-cream tracking-tighter2 balance hover:text-accent transition">${c.name}</a>
           <span class="mono-lbl text-cream/40 stat-num shrink-0">${c.year}</span>
         </div>
         <div class="mt-3 md:mt-4 flex items-center gap-3 mono-lbl text-cream/50">

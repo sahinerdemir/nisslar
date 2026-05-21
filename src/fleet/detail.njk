@@ -1,0 +1,433 @@
+---
+layout: base.njk
+title: "Araç Detay — nisslar"
+permalink: /fleet/detail/index.html
+---
+
+<!-- HEADER -->
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/90 border-b border-gray-200 shadow-sm">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 h-[72px] md:h-[80px] flex items-center justify-between">
+    <a href="/" class="flex items-center gap-3 group" aria-label="nisslar">
+      <img src="/assets/favicon.png" alt="" class="h-9 w-9 md:h-10 md:w-10 rounded-md" />
+      <span class="font-serif text-[25px] md:text-[30px] leading-none tracking-tightest text-cream whitespace-nowrap">nisslar</span>
+    </a>
+    <nav class="hidden md:flex items-center gap-9 text-[15px] tracking-[0.04em] text-cream/70">
+      <a href="/" class="hover:text-accent transition lnk" data-i18n="nav.home">Ana Sayfa</a>
+      <a href="/fleet/" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a>
+      <a href="/#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a>
+      <a href="/#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a>
+    </nav>
+    <div class="flex items-center gap-3 md:gap-5">
+      <div class="lang-track flex items-center p-1 rounded-full border border-line bg-ink2/60" data-lang="tr">
+        <span class="lang-slider"></span>
+        <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="tr">TR</button>
+        <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="en">EN</button>
+      </div>
+      <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="hidden md:inline-flex group items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-5 py-2.5 rounded-full text-[11.5px] font-semibold tracking-[0.18em] uppercase">
+        <span data-i18n="nav.book">Rezerve Et</span>
+        <span class="arr -mr-0.5">→</span>
+      </a>
+      <button class="hamburger md:hidden flex flex-col gap-[5px] w-7 h-7 justify-center items-center" aria-label="Menü">
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+        <span class="block w-5 h-[1.5px] bg-cream"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu fixed inset-0 z-40 bg-white/98 backdrop-blur-lg flex flex-col items-center justify-center gap-8 md:hidden">
+  <a href="/" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.home">Ana Sayfa</a>
+  <a href="/fleet/" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.fleet">Filo</a>
+  <a href="/#about" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.about">Hakkımızda</a>
+  <a href="/#faq" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.faq">SSS</a>
+  <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="mt-4 group inline-flex items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-7 py-3 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase">
+    <span data-i18n="nav.book">Rezerve Et</span>
+    <span class="arr">→</span>
+  </a>
+</div>
+
+<!-- DETAIL CONTENT -->
+<main class="pt-[72px] md:pt-[80px]">
+  <div id="detail-loading" class="max-w-[1440px] mx-auto px-6 md:px-10 py-20 text-center text-cream/40">
+    Yükleniyor...
+  </div>
+
+  <div id="detail-content" class="hidden">
+    <!-- Breadcrumb -->
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-5">
+      <div class="flex items-center gap-2 text-[13px] text-cream/50">
+        <a href="/" class="hover:text-accent transition">Ana Sayfa</a>
+        <span>/</span>
+        <a href="/fleet/" class="hover:text-accent transition" data-i18n="nav.fleet">Filo</a>
+        <span>/</span>
+        <span id="bc-name" class="text-cream"></span>
+      </div>
+    </div>
+
+    <!-- Gallery + Info -->
+    <div class="max-w-[1440px] mx-auto px-6 md:px-10 pb-16 md:pb-24">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12">
+
+        <!-- Gallery -->
+        <div class="relative">
+          <div id="gallery" class="relative aspect-[4/3] overflow-hidden rounded-xl border border-line bg-ink2">
+            <div id="gallery-track" class="flex h-full transition-transform duration-500 ease-out"></div>
+            <button id="gallery-prev" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg text-cream transition z-10">
+              <svg viewBox="0 0 20 20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4l-6 6 6 6"/></svg>
+            </button>
+            <button id="gallery-next" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full flex items-center justify-center shadow-lg text-cream transition z-10">
+              <svg viewBox="0 0 20 20" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 4l6 6-6 6"/></svg>
+            </button>
+            <div id="gallery-dots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 z-10"></div>
+            <div id="gallery-counter" class="absolute top-4 right-4 mono-lbl bg-white/90 text-cream px-3 py-1.5 rounded-full z-10"></div>
+          </div>
+          <!-- Thumbnails -->
+          <div id="gallery-thumbs" class="mt-3 flex gap-2 overflow-x-auto pb-2"></div>
+        </div>
+
+        <!-- Info -->
+        <div>
+          <div class="flex items-center gap-3 mb-3">
+            <span id="detail-cat" class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink rounded"></span>
+            <span id="detail-year" class="mono-lbl text-cream/40"></span>
+          </div>
+          <h1 id="detail-name" class="font-serif text-[clamp(32px,4vw,56px)] leading-[0.96] tracking-tightest text-cream"></h1>
+          <p id="detail-brand" class="mt-2 text-[14px] text-cream/50"></p>
+
+          <!-- Specs grid -->
+          <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div class="bg-ink2 border border-line rounded-xl p-4 text-center">
+              <div class="mono-lbl text-cream/40 uppercase mb-2">HP</div>
+              <div id="spec-hp" class="font-serif text-[28px] text-cream stat-num"></div>
+            </div>
+            <div class="bg-ink2 border border-line rounded-xl p-4 text-center">
+              <div class="mono-lbl text-cream/40 uppercase" data-i18n="detail.seats">Koltuk</div>
+              <div id="spec-seats" class="mt-2 font-serif text-[28px] text-cream stat-num"></div>
+            </div>
+            <div class="bg-ink2 border border-line rounded-xl p-4 text-center">
+              <div class="mono-lbl text-cream/40 uppercase" data-i18n="detail.gas">Yakıt</div>
+              <div id="spec-gas" class="mt-2 font-serif text-[20px] text-cream"></div>
+            </div>
+            <div class="bg-ink2 border border-line rounded-xl p-4 text-center">
+              <div class="mono-lbl text-cream/40 uppercase">MPG</div>
+              <div id="spec-mpg" class="mt-2 font-serif text-[20px] text-cream stat-num"></div>
+            </div>
+          </div>
+
+          <!-- Gear -->
+          <div class="mt-6 flex items-center gap-3">
+            <span class="mono-lbl text-cream/40 uppercase" data-i18n="detail.gear">Vites</span>
+            <span id="spec-gear" class="text-[15px] text-cream"></span>
+          </div>
+
+          <!-- Features -->
+          <div class="mt-8">
+            <h3 class="mono-lbl text-accent uppercase mb-4" data-i18n="detail.features">Araç Özellikleri</h3>
+            <div id="features-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5"></div>
+          </div>
+
+          <!-- CTA -->
+          <div class="mt-10 flex flex-col sm:flex-row gap-3">
+            <a id="cta-turo" href="#" target="_blank" rel="noopener" class="group inline-flex items-center justify-center gap-3 bg-gold text-white hover:bg-goldhi transition px-8 py-4 rounded-full text-[12px] font-semibold tracking-[0.20em] uppercase">
+              <span data-i18n="detail.reserve">Rezerve Et</span>
+              <span class="arr">→</span>
+            </a>
+            <a href="/fleet/" class="group inline-flex items-center justify-center gap-3 border border-line hover:border-accent hover:text-accent text-cream/70 transition px-8 py-4 rounded-full text-[12px] font-semibold tracking-[0.20em] uppercase">
+              <span>←</span>
+              <span data-i18n="detail.back">Filoya Dön</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="detail-404" class="hidden max-w-[1440px] mx-auto px-6 md:px-10 py-20 text-center">
+    <h2 class="font-serif text-[32px] text-cream mb-4">Araç bulunamadı</h2>
+    <a href="/fleet/" class="text-accent hover:underline">← Filoya Dön</a>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="relative pt-16 md:pt-24 pb-10 overflow-hidden" style="background:#F0F2F5">
+  <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="n-pattern" x="0" y="0" width="100" height="60" patternUnits="userSpaceOnUse">
+        <g transform="scale(0.09)" opacity="0.04" fill="white">
+          <path d="M389.9,100.2c40.5-1.8,78.1,11,107.2,39.7,17.1,16.8,27,40,37.9,61.2l27,53.2,54.4,107.3,15.4,30.9c3.8,7.7,8.2,17.2,13.3,23.9,5.2,6.9,12.2,12.3,20.3,15.5,12.2,4.8,25.8,4.5,37.7-.8,9.5-4.3,17.4-11.6,22.5-20.7,4.4-7.6,11.3-27.6,14.9-36.9l24.1-63.5,79.6-206.4c35.5.6,71.7-.3,107.2,0-3.1,9.3-7.7,20.6-11.2,29.8l-17.7,46.6-58.6,153.4-40.5,105.9c-12.7,32.7-18.7,59.1-45,84.6-51.5,46.8-139.1,46.3-189.4-2.6-18.7-18.2-29.5-44.3-41-67.6l-26.2-53-58.2-116.6-11.3-22.6c-7.8-15.5-13.9-28.5-30.9-35.8-11.1-4.8-23.6-4.9-34.8-.3-21.2,8.8-26.9,26.8-35,46.3l-16.7,40.1-59.5,143.7c-41.1.2-82.2.2-123.4,0,11-25.4,22-53.3,32.5-79,15-36.2,30.1-72.2,45.5-108.2l23.1-54.1c9.5-22.1,20.1-50.5,36-67.9,27.4-30,60.8-43.7,100.6-46Z"/>
+          <path d="M156.3,496.4l102.5.2c-10.9,28-23.5,57-35.1,84.9-6.9.1-14,0-20.8,0-32.1-.1-71.4,1.1-102.9-.2,3.7-10.5,10.1-24.6,14.5-35,7-16.5,13.9-33.1,20.7-49.8l21.1-.2Z"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#n-pattern)"/>
+  </svg>
+  <div class="relative max-w-[1440px] mx-auto px-6 md:px-10">
+    <div class="reveal pb-10 md:pb-14 mb-10 md:mb-14 border-b border-line">
+      <div class="mono-lbl text-accent mb-6" data-i18n="footer.eyebrow">— RENT. DRIVE. EXPERIENCE.</div>
+      <div class="font-serif text-[clamp(60px,15vw,220px)] leading-[0.85] tracking-tightest text-cream whitespace-nowrap">
+        nisslar<span class="text-accent">.</span>
+      </div>
+    </div>
+    <div class="grid grid-cols-2 md:grid-cols-12 gap-8 md:gap-10 pb-12 md:pb-16">
+      <div class="col-span-2 md:col-span-4">
+        <div class="flex items-center gap-3 mb-5">
+          <img src="/assets/favicon.png" alt="" class="h-10 w-10 rounded-md" />
+          <span class="font-serif text-[24px] leading-none tracking-tightest text-cream whitespace-nowrap">nisslar</span>
+        </div>
+        <p class="text-[14px] leading-relaxed text-cream/55 max-w-[300px] pretty" data-i18n="footer.about">Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.</p>
+        <div id="footer-socials" class="mt-6 md:mt-8 flex items-center gap-3"></div>
+      </div>
+      <div class="col-span-1 md:col-span-3">
+        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h1">İletişim</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
+          <li>1450 Brickell Ave<br/>Miami, FL 33131</li>
+          <li><a id="footer-phone" href="tel:+13055551234" class="hover:text-accent transition stat-num">+1 (305) 555 12 34</a></li>
+          <li><a id="footer-email" href="mailto:hello@nisslar.com" class="hover:text-accent transition">hello@nisslar.com</a></li>
+        </ul>
+      </div>
+      <div class="col-span-2 md:col-span-5">
+        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h3">Hızlı Linkler</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
+          <li><a href="/fleet/" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a></li>
+          <li><a href="/#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a></li>
+          <li><a href="/#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="rule-accent opacity-40"></div>
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-[12px] text-cream/40">
+      <div>© 2026 nisslar LLC · <span data-i18n="footer.copy">Tüm hakları saklıdır.</span></div>
+      <div class="mono-lbl tracking-[0.22em]">MIAMI, FL</div>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp -->
+<a id="whatsapp-btn" href="https://wa.me/18635581238" target="_blank" rel="noopener" aria-label="WhatsApp" class="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#25D366] hover:bg-[#1EBE57] transition rounded-full flex items-center justify-center shadow-lg shadow-black/20">
+  <svg viewBox="0 0 24 24" class="w-7 h-7 text-white" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+let FLEET = {{ cars | dump | safe }};
+let LANG = 'tr';
+
+const I18N = {
+  tr: {
+    'nav.home':'Ana Sayfa','nav.fleet':'Filo','nav.about':'Hakkımızda','nav.faq':'SSS','nav.book':'Rezerve Et',
+    'detail.seats':'Koltuk','detail.gas':'Yakıt','detail.gear':'Vites',
+    'detail.features':'Araç Özellikleri','detail.reserve':'Rezerve Et','detail.back':'Filoya Dön',
+    'footer.eyebrow':'— RENT. DRIVE. EXPERIENCE.',
+    'footer.about':"Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.",
+    'footer.h1':'İletişim','footer.h3':'Hızlı Linkler','footer.copy':'Tüm hakları saklıdır.',
+  },
+  en: {
+    'nav.home':'Home','nav.fleet':'Fleet','nav.about':'About','nav.faq':'FAQ','nav.book':'Reserve',
+    'detail.seats':'Seats','detail.gas':'Fuel','detail.gear':'Transmission',
+    'detail.features':'Vehicle Features','detail.reserve':'Reserve Now','detail.back':'Back to Fleet',
+    'footer.eyebrow':'— RENT. DRIVE. EXPERIENCE.',
+    'footer.about':'Miami-based, boutique luxury car rental. Carefully, since 2018.',
+    'footer.h1':'Contact','footer.h3':'Quick Links','footer.copy':'All rights reserved.',
+  }
+};
+
+let galleryIndex = 0;
+let galleryImages = [];
+
+function initGallery(images) {
+  galleryImages = images.length > 0 ? images : [];
+  if (galleryImages.length === 0) {
+    document.getElementById('gallery-track').innerHTML = '<div class="w-full h-full shrink-0 ph"></div>';
+    document.getElementById('gallery-prev').classList.add('hidden');
+    document.getElementById('gallery-next').classList.add('hidden');
+    document.getElementById('gallery-dots').innerHTML = '';
+    document.getElementById('gallery-counter').classList.add('hidden');
+    document.getElementById('gallery-thumbs').innerHTML = '';
+    return;
+  }
+
+  const track = document.getElementById('gallery-track');
+  track.innerHTML = galleryImages.map(src =>
+    `<div class="w-full h-full shrink-0"><img src="${src}" alt="" class="w-full h-full object-cover"/></div>`
+  ).join('');
+
+  const dots = document.getElementById('gallery-dots');
+  dots.innerHTML = galleryImages.map((_, i) =>
+    `<button class="gallery-dot w-2.5 h-2.5 rounded-full transition ${i === 0 ? 'bg-white' : 'bg-white/40'}" data-i="${i}"></button>`
+  ).join('');
+  dots.querySelectorAll('.gallery-dot').forEach(d => d.addEventListener('click', () => goToSlide(parseInt(d.dataset.i))));
+
+  const thumbs = document.getElementById('gallery-thumbs');
+  thumbs.innerHTML = galleryImages.map((src, i) =>
+    `<button class="gallery-thumb shrink-0 w-16 h-12 md:w-20 md:h-14 rounded-lg overflow-hidden border-2 transition ${i === 0 ? 'border-gold' : 'border-transparent opacity-60'}" data-i="${i}">
+      <img src="${src}" alt="" class="w-full h-full object-cover"/>
+    </button>`
+  ).join('');
+  thumbs.querySelectorAll('.gallery-thumb').forEach(t => t.addEventListener('click', () => goToSlide(parseInt(t.dataset.i))));
+
+  if (galleryImages.length <= 1) {
+    document.getElementById('gallery-prev').classList.add('hidden');
+    document.getElementById('gallery-next').classList.add('hidden');
+    dots.classList.add('hidden');
+  }
+
+  updateGallery();
+
+  let touchStartX = 0;
+  const gallery = document.getElementById('gallery');
+  gallery.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+  gallery.addEventListener('touchend', e => {
+    const diff = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && galleryIndex < galleryImages.length - 1) goToSlide(galleryIndex + 1);
+      else if (diff < 0 && galleryIndex > 0) goToSlide(galleryIndex - 1);
+    }
+  }, { passive: true });
+}
+
+function goToSlide(i) {
+  galleryIndex = i;
+  updateGallery();
+}
+
+function updateGallery() {
+  const track = document.getElementById('gallery-track');
+  track.style.transform = `translateX(-${galleryIndex * 100}%)`;
+  document.getElementById('gallery-counter').textContent = `${galleryIndex + 1} / ${galleryImages.length}`;
+
+  document.querySelectorAll('.gallery-dot').forEach((d, i) => {
+    d.classList.toggle('bg-white', i === galleryIndex);
+    d.classList.toggle('bg-white/40', i !== galleryIndex);
+  });
+  document.querySelectorAll('.gallery-thumb').forEach((t, i) => {
+    t.classList.toggle('border-gold', i === galleryIndex);
+    t.classList.toggle('border-transparent', i !== galleryIndex);
+    t.classList.toggle('opacity-60', i !== galleryIndex);
+  });
+}
+
+document.getElementById('gallery-prev').addEventListener('click', () => {
+  if (galleryIndex > 0) goToSlide(galleryIndex - 1);
+});
+document.getElementById('gallery-next').addEventListener('click', () => {
+  if (galleryIndex < galleryImages.length - 1) goToSlide(galleryIndex + 1);
+});
+
+function renderDetail(car) {
+  const t = I18N[LANG];
+  document.title = `${car.name} — nisslar`;
+  document.getElementById('bc-name').textContent = car.name;
+  document.getElementById('detail-name').textContent = car.name;
+  document.getElementById('detail-brand').textContent = car.brand || '';
+  document.getElementById('detail-cat').textContent = car.cat[LANG].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US');
+  document.getElementById('detail-year').textContent = car.year;
+  document.getElementById('spec-hp').textContent = car.hp;
+  document.getElementById('spec-seats').textContent = car.seats;
+  document.getElementById('spec-gas').textContent = car.gas || 'Premium';
+  document.getElementById('spec-mpg').textContent = car.mpg || '—';
+  document.getElementById('spec-gear').textContent = car.gear[LANG];
+  document.getElementById('cta-turo').href = car.turoUrl || '#';
+
+  const featGrid = document.getElementById('features-grid');
+  const features = car.features || [];
+  featGrid.innerHTML = features.map(f =>
+    `<div class="flex items-center gap-2.5 py-1.5">
+      <svg viewBox="0 0 16 16" class="w-4 h-4 text-accent shrink-0" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8l3.5 3.5L13 5"/></svg>
+      <span class="text-[14px] text-cream/75">${f}</span>
+    </div>`
+  ).join('');
+
+  const images = (car.gallery && car.gallery.length > 0) ? car.gallery.filter(g => g) : (car.img ? [car.img] : []);
+  initGallery(images);
+
+  document.getElementById('detail-loading').classList.add('hidden');
+  document.getElementById('detail-content').classList.remove('hidden');
+}
+
+function applyI18nContent() {
+  const t = I18N[LANG];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const k = el.getAttribute('data-i18n');
+    if (t[k] != null) el.innerHTML = t[k];
+  });
+  document.documentElement.lang = LANG;
+  document.querySelector('.lang-track').setAttribute('data-lang', LANG);
+  const carId = new URLSearchParams(window.location.search).get('id');
+  const car = FLEET.find(c => c.id === carId);
+  if (car) renderDetail(car);
+}
+
+function switchLang(next) {
+  if (next === LANG) return;
+  document.body.classList.add('lang-swap');
+  setTimeout(() => {
+    LANG = next;
+    applyI18nContent();
+    requestAnimationFrame(() => document.body.classList.remove('lang-swap'));
+  }, 260);
+}
+
+document.querySelectorAll('.lang-pill').forEach(p => {
+  p.addEventListener('click', () => switchLang(p.dataset.lang));
+});
+
+const hamburger = document.querySelector('.hamburger');
+const mobileMenu = document.querySelector('.mobile-menu');
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('active');
+  mobileMenu.classList.toggle('open');
+  document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+});
+document.querySelectorAll('.mobile-link').forEach(link => {
+  link.addEventListener('click', () => {
+    hamburger.classList.remove('active');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+let io;
+function observeReveals() {
+  if (!io) {
+    io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.10, rootMargin: '0px 0px -40px 0px' });
+  }
+  document.querySelectorAll('.reveal:not(.in)').forEach(el => io.observe(el));
+}
+
+async function loadLiveData() {
+  try {
+    const carsRes = await fetch('/api/cars').then(r => r.ok ? r.json() : null);
+    if (carsRes && carsRes.length > 0) {
+      const cmsIds = new Set(carsRes.map(c => c.id));
+      const localOnly = FLEET.filter(c => !cmsIds.has(c.id));
+      FLEET = [...carsRes, ...localOnly];
+    }
+  } catch {}
+}
+
+async function init() {
+  await loadLiveData();
+  const carId = new URLSearchParams(window.location.search).get('id');
+  const car = FLEET.find(c => c.id === carId);
+  if (car) {
+    renderDetail(car);
+  } else {
+    document.getElementById('detail-loading').classList.add('hidden');
+    document.getElementById('detail-404').classList.remove('hidden');
+  }
+  observeReveals();
+}
+
+document.addEventListener('keydown', e => {
+  if (galleryImages.length <= 1) return;
+  if (e.key === 'ArrowLeft' && galleryIndex > 0) goToSlide(galleryIndex - 1);
+  if (e.key === 'ArrowRight' && galleryIndex < galleryImages.length - 1) goToSlide(galleryIndex + 1);
+});
+
+init();
+</script>

@@ -149,6 +149,30 @@
             </div>
             <p id="car-img-status" class="text-xs text-[#8B847A] mt-1 hidden"></p>
           </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Yakıt</label>
+            <input type="text" id="car-gas" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="Premium"/>
+          </div>
+          <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">MPG</label>
+            <input type="text" id="car-mpg" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="20/26"/>
+          </div>
+          <div class="col-span-2">
+            <label class="text-xs text-[#8B847A] mb-1 block">Özellikler (virgülle ayır)</label>
+            <textarea id="car-features" class="w-full px-3 py-2 rounded-lg text-sm" rows="3" placeholder="Heated seats, Panoramic roof, Apple CarPlay"></textarea>
+          </div>
+          <div class="col-span-2">
+            <label class="text-xs text-[#8B847A] mb-1 block">Galeri URL'leri (her satıra bir URL)</label>
+            <div class="flex gap-2">
+              <textarea id="car-gallery" class="flex-1 px-3 py-2 rounded-lg text-sm" rows="3" placeholder="/assets/cars/foto1.jpg&#10;/assets/cars/foto2.jpg"></textarea>
+              <label class="shrink-0 cursor-pointer bg-[#2A2620] hover:bg-[#3A3630] text-[#F4EFE4] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5 self-start">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                Yükle
+                <input type="file" id="car-gallery-file" accept="image/*" class="hidden"/>
+              </label>
+            </div>
+            <p id="car-gallery-status" class="text-xs text-[#8B847A] mt-1 hidden"></p>
+          </div>
           <div class="col-span-2">
             <label class="text-xs text-[#8B847A] mb-1 block">Turo / Rezervasyon URL</label>
             <input type="text" id="car-turo" class="w-full px-3 py-2 rounded-lg text-sm"/>
@@ -426,6 +450,10 @@ function openCarModal(car = null, index = -1) {
   document.getElementById('car-gear-tr').value = car?.gear?.tr || '';
   document.getElementById('car-gear-en').value = car?.gear?.en || '';
   document.getElementById('car-img').value = car?.img || '';
+  document.getElementById('car-gas').value = car?.gas || '';
+  document.getElementById('car-mpg').value = car?.mpg || '';
+  document.getElementById('car-features').value = (car?.features || []).join(', ');
+  document.getElementById('car-gallery').value = (car?.gallery || []).join('\n');
   document.getElementById('car-turo').value = car?.turoUrl || '';
   document.getElementById('car-modal').classList.remove('hidden');
 }
@@ -461,6 +489,33 @@ document.getElementById('car-img-file').addEventListener('change', async (e) => 
     status.textContent = 'Hata: Yükleme başarısız';
     status.classList.add('text-red-400');
   }
+  e.target.value = '';
+});
+
+document.getElementById('car-gallery-file').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const status = document.getElementById('car-gallery-status');
+  status.textContent = 'Yükleniyor...';
+  status.classList.remove('hidden');
+  try {
+    const res = await fetch(`${API}/upload`, {
+      method: 'POST',
+      headers: { 'Authorization': `Bearer ${token}`, 'X-Filename': file.name, 'X-Content-Type': file.type },
+      body: file
+    });
+    const data = await res.json();
+    if (data.url) {
+      const ta = document.getElementById('car-gallery');
+      ta.value = ta.value ? ta.value + '\n' + data.url : data.url;
+      status.textContent = 'Yüklendi!';
+      status.classList.add('text-green-400');
+      setTimeout(() => { status.classList.add('hidden'); status.classList.remove('text-green-400'); }, 2000);
+    } else {
+      status.textContent = 'Hata: ' + (data.error || 'Yükleme başarısız');
+      status.classList.add('text-red-400');
+    }
+  } catch { status.textContent = 'Hata: Yükleme başarısız'; status.classList.add('text-red-400'); }
   e.target.value = '';
 });
 
@@ -514,6 +569,10 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
     gear: { tr: document.getElementById('car-gear-tr').value, en: document.getElementById('car-gear-en').value },
     hp: parseInt(document.getElementById('car-hp').value),
     img: document.getElementById('car-img').value || '',
+    gas: document.getElementById('car-gas').value || 'Premium',
+    mpg: document.getElementById('car-mpg').value || '',
+    features: document.getElementById('car-features').value.split(',').map(f => f.trim()).filter(f => f),
+    gallery: document.getElementById('car-gallery').value.split('\n').map(u => u.trim()).filter(u => u),
     imgLabel: document.getElementById('car-name').value.split(' ').pop().toUpperCase(),
     turoUrl: document.getElementById('car-turo').value || 'https://turo.com/us/en/host/51476329'
   };
