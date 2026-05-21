@@ -468,7 +468,11 @@ async function loadLiveData() {
       fetch('/api/cars').then(r => r.ok ? r.json() : null),
       fetch('/api/content').then(r => r.ok ? r.json() : null)
     ]);
-    if (carsRes) FLEET = carsRes;
+    if (carsRes && carsRes.length > 0) {
+      const cmsIds = new Set(carsRes.map(c => c.id));
+      const localOnly = FLEET.filter(c => !cmsIds.has(c.id));
+      FLEET = [...carsRes, ...localOnly];
+    }
     if (contentRes) applySiteInfo(contentRes);
     populateFilters();
     renderFleet();
