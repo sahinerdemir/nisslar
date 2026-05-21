@@ -11,7 +11,7 @@
     "gas": "Premium",
     "mpg": "24/33",
     "features": ["Heated seats", "Ventilated seats", "Panoramic roof", "360° camera", "Burmester sound", "Ambient lighting", "Massage seats", "Head-up display", "Keyless entry", "Apple CarPlay"],
-    "gallery": ["/assets/cars/s-class.jpg"],
+    "gallery": ["/assets/cars/s-class.jpg", "/assets/cars/s-class.jpg", "/assets/cars/s-class.jpg", "/assets/cars/s-class.jpg"],
     "img": "/assets/cars/s-class.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -27,7 +27,7 @@
     "gas": "Premium",
     "mpg": "20/26",
     "features": ["Sport Chrono package", "PASM suspension", "Heated seats", "Bose sound", "Sport exhaust", "Apple CarPlay", "Keyless entry", "Parking sensors"],
-    "gallery": ["/assets/cars/911-carrera.jpg"],
+    "gallery": ["/assets/cars/911-carrera.jpg", "/assets/cars/911-carrera.jpg", "/assets/cars/911-carrera.jpg", "/assets/cars/911-carrera.jpg"],
     "img": "/assets/cars/911-carrera.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -43,7 +43,7 @@
     "gas": "Premium",
     "mpg": "17/23",
     "features": ["Panoramic roof", "Meridian sound", "Heated seats", "Ventilated seats", "360° camera", "Air suspension", "Terrain response", "Apple CarPlay", "Keyless entry", "Heated steering wheel"],
-    "gallery": ["/assets/cars/rr-sport.jpg"],
+    "gallery": ["/assets/cars/rr-sport.jpg", "/assets/cars/rr-sport.jpg", "/assets/cars/rr-sport.jpg", "/assets/cars/rr-sport.jpg"],
     "img": "/assets/cars/rr-sport.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -59,7 +59,7 @@
     "gas": "Premium",
     "mpg": "16/23",
     "features": ["M Sport exhaust", "Carbon fiber roof", "Heated seats", "Harman Kardon sound", "Head-up display", "M Sport differential", "Apple CarPlay", "Keyless entry", "Parking assistant"],
-    "gallery": ["/assets/cars/m4-competition.jpg"],
+    "gallery": ["/assets/cars/m4-competition.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/m4-competition.jpg"],
     "img": "/assets/cars/m4-competition.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -75,7 +75,7 @@
     "gas": "Premium",
     "mpg": "15/22",
     "features": ["Quattro AWD", "Air suspension", "Bang & Olufsen sound", "Panoramic roof", "Heated seats", "Ventilated seats", "Matrix LED headlights", "Virtual cockpit", "Apple CarPlay", "360° camera"],
-    "gallery": ["/assets/cars/rs6-avant.jpg"],
+    "gallery": ["/assets/cars/rs6-avant.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/rs6-avant.jpg"],
     "img": "/assets/cars/rs6-avant.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -91,7 +91,7 @@
     "gas": "Premium",
     "mpg": "13/18",
     "features": ["LDVI system", "Carbon ceramic brakes", "Lifting system", "Heated seats", "Apple CarPlay", "Parking sensors", "Sport exhaust", "Drive mode selector"],
-    "gallery": ["/assets/cars/huracan.jpg"],
+    "gallery": ["/assets/cars/huracan.jpg", "/assets/cars/huracan.jpg", "/assets/cars/huracan.jpg", "/assets/cars/huracan.jpg"],
     "img": "/assets/cars/huracan.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
@@ -107,8 +107,8 @@
     "gas": "Premium",
     "mpg": "15/20",
     "features": ["AMG Performance exhaust", "Burmester sound", "Heated seats", "AMG Ride Control", "360° camera", "Head-up display", "Keyless entry", "Apple CarPlay", "Ambient lighting"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/s-class.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/911-carrera.jpg"],
+    "img": "/assets/cars/s-class.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -123,8 +123,8 @@
     "gas": "Premium",
     "mpg": "15/19",
     "features": ["PASM suspension", "Panoramic roof", "Bose sound", "Heated seats", "Ventilated seats", "360° camera", "Sport Chrono package", "Apple CarPlay", "Keyless entry", "Power tailgate"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rr-sport.jpg", "/assets/cars/911-carrera.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/huracan.jpg"],
+    "img": "/assets/cars/rr-sport.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -139,8 +139,8 @@
     "gas": "Electric",
     "mpg": "82 MPGe",
     "features": ["Quattro AWD", "Air suspension", "Bang & Olufsen sound", "Panoramic roof", "Heated seats", "Virtual cockpit", "Matrix LED headlights", "Apple CarPlay", "360° camera", "Regenerative braking"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rs6-avant.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/s-class.jpg", "/assets/cars/rr-sport.jpg"],
+    "img": "/assets/cars/rs6-avant.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -155,8 +155,8 @@
     "gas": "Premium",
     "mpg": "16/22",
     "features": ["3rd row seats", "Panoramic roof", "Harman Kardon sound", "Heated seats", "Ventilated seats", "360° camera", "Air suspension", "Head-up display", "Apple CarPlay", "Gesture control"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rr-sport.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/s-class.jpg", "/assets/cars/huracan.jpg"],
+    "img": "/assets/cars/rr-sport.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -171,8 +171,8 @@
     "gas": "Premium",
     "mpg": "14/19",
     "features": ["Terrain response 2", "Air suspension", "Meridian sound", "Heated seats", "360° camera", "Wade sensing", "Keyless entry", "Apple CarPlay", "Tow package"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rr-sport.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/911-carrera.jpg"],
+    "img": "/assets/cars/rr-sport.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -187,8 +187,8 @@
     "gas": "Premium",
     "mpg": "18/24",
     "features": ["Sport Chrono package", "PASM suspension", "Carbon bucket seats", "Sport exhaust", "Bose sound", "Apple CarPlay", "Parking sensors", "GT4 aero kit"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/911-carrera.jpg", "/assets/cars/huracan.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/rs6-avant.jpg"],
+    "img": "/assets/cars/911-carrera.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -203,8 +203,8 @@
     "gas": "Premium",
     "mpg": "15/19",
     "features": ["AMG Performance exhaust", "Burmester sound", "Panoramic roof", "Heated seats", "Ventilated seats", "360° camera", "Air suspension", "Head-up display", "Apple CarPlay", "Ambient lighting"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/s-class.jpg", "/assets/cars/rr-sport.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/m4-competition.jpg"],
+    "img": "/assets/cars/s-class.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -219,8 +219,8 @@
     "gas": "Premium",
     "mpg": "14/19",
     "features": ["Quattro AWD", "Air suspension", "Bang & Olufsen sound", "Panoramic roof", "Heated seats", "Ventilated seats", "Virtual cockpit", "Matrix LED headlights", "Apple CarPlay", "360° camera"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rs6-avant.jpg", "/assets/cars/rr-sport.jpg", "/assets/cars/huracan.jpg", "/assets/cars/s-class.jpg"],
+    "img": "/assets/cars/rs6-avant.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -235,8 +235,8 @@
     "gas": "Premium",
     "mpg": "15/21",
     "features": ["M Sport exhaust", "Carbon fiber roof", "Harman Kardon sound", "Heated seats", "Ventilated seats", "Head-up display", "M Sport differential", "Apple CarPlay", "Keyless entry", "Laser headlights"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/m4-competition.jpg", "/assets/cars/911-carrera.jpg", "/assets/cars/s-class.jpg", "/assets/cars/huracan.jpg"],
+    "img": "/assets/cars/m4-competition.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -251,8 +251,8 @@
     "gas": "Premium",
     "mpg": "12/17",
     "features": ["ANIMA drive modes", "Air suspension", "Bang & Olufsen sound", "Panoramic roof", "Heated seats", "Ventilated seats", "360° camera", "Carbon ceramic brakes", "Apple CarPlay", "Keyless entry"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/huracan.jpg", "/assets/cars/rr-sport.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/m4-competition.jpg"],
+    "img": "/assets/cars/huracan.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -267,8 +267,8 @@
     "gas": "Premium",
     "mpg": "17/24",
     "features": ["PASM suspension", "Panoramic roof", "Bose sound", "Heated seats", "Ventilated seats", "Sport Chrono package", "360° camera", "Head-up display", "Apple CarPlay", "Keyless entry"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/911-carrera.jpg", "/assets/cars/s-class.jpg", "/assets/cars/rs6-avant.jpg", "/assets/cars/rr-sport.jpg"],
+    "img": "/assets/cars/911-carrera.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -283,8 +283,8 @@
     "gas": "Premium",
     "mpg": "20/27",
     "features": ["AMG Performance exhaust", "Burmester sound", "Heated seats", "AMG Ride Control", "Head-up display", "Ambient lighting", "Apple CarPlay", "Keyless entry", "360° camera"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/s-class.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/huracan.jpg", "/assets/cars/911-carrera.jpg"],
+    "img": "/assets/cars/s-class.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -299,8 +299,8 @@
     "gas": "Premium",
     "mpg": "18/25",
     "features": ["Quattro AWD", "Sport differential", "Bang & Olufsen sound", "Heated seats", "Virtual cockpit", "Matrix LED headlights", "Apple CarPlay", "Keyless entry", "Parking sensors"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rs6-avant.jpg", "/assets/cars/m4-competition.jpg", "/assets/cars/911-carrera.jpg", "/assets/cars/s-class.jpg"],
+    "img": "/assets/cars/rs6-avant.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   },
   {
@@ -315,8 +315,8 @@
     "gas": "Premium",
     "mpg": "20/26",
     "features": ["Meridian sound", "Panoramic roof", "Heated seats", "360° camera", "Air suspension", "Terrain response", "Apple CarPlay", "Keyless entry", "Heated steering wheel", "Power tailgate"],
-    "gallery": [],
-    "img": "",
+    "gallery": ["/assets/cars/rr-sport.jpg", "/assets/cars/s-class.jpg", "/assets/cars/huracan.jpg", "/assets/cars/rs6-avant.jpg"],
+    "img": "/assets/cars/rr-sport.jpg",
     "turoUrl": "https://turo.com/us/en/host/51476329"
   }
 ]
