@@ -25,12 +25,14 @@ module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   if (req.method === 'GET') {
-    const data = await readBlob();
-    if (data) return res.status(200).json(data);
     const fs = require('fs'), path = require('path');
-    try {
-      return res.status(200).json(JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', '_data', 'cars.json'), 'utf-8')));
-    } catch { return res.status(200).json([]); }
+    let local = [];
+    try { local = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', '_data', 'cars.json'), 'utf-8')); } catch {}
+    const blob = await readBlob();
+    if (!blob || blob.length === 0) return res.status(200).json(local);
+    const blobIds = new Set(blob.map(c => c.id));
+    const merged = [...blob, ...local.filter(c => !blobIds.has(c.id))];
+    return res.status(200).json(merged);
   }
 
   if (!verifyToken(req)) return res.status(401).json({ error: 'Unauthorized' });

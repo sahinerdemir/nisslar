@@ -106,10 +106,12 @@
             <input type="text" id="car-name" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Yıl</label>
-            <input type="number" id="car-year" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+            <label class="text-xs text-[#8B847A] mb-1 block">Marka</label>
+            <input type="text" id="car-brand" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="ör: Mercedes-Benz" required/>
           </div>
           <div>
+            <label class="text-xs text-[#8B847A] mb-1 block">Yıl</label>
+            <input type="number" id="car-year" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
             <label class="text-xs text-[#8B847A] mb-1 block">Koltuk</label>
@@ -400,7 +402,7 @@ function renderCars() {
         <span class="text-xs text-[#8B847A] font-mono">N°${String(i+1).padStart(3,'0')}</span>
         <div>
           <div class="font-medium text-sm">${c.name} <span class="text-[#8B847A]">(${c.year})</span></div>
-          <div class="text-xs text-[#8B847A]">${c.cat.tr} · ${c.hp} BG</div>
+          <div class="text-xs text-[#8B847A]">${c.brand || ''} · ${c.cat.tr} · ${c.hp} BG</div>
         </div>
       </div>
       <div class="flex items-center gap-2">
@@ -415,6 +417,7 @@ function openCarModal(car = null, index = -1) {
   document.getElementById('car-modal-title').textContent = car ? 'Araç Düzenle' : 'Yeni Araç';
   document.getElementById('car-id').value = index;
   document.getElementById('car-name').value = car?.name || '';
+  document.getElementById('car-brand').value = car?.brand || '';
   document.getElementById('car-year').value = car?.year || new Date().getFullYear();
   document.getElementById('car-seats').value = car?.seats || '';
   document.getElementById('car-hp').value = car?.hp || '';
@@ -504,6 +507,7 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
   const car = {
     id: document.getElementById('car-name').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: document.getElementById('car-name').value,
+    brand: document.getElementById('car-brand').value,
     year: parseInt(document.getElementById('car-year').value),
     cat: { tr: document.getElementById('car-cat-tr').value, en: document.getElementById('car-cat-en').value },
     seats: parseInt(document.getElementById('car-seats').value),
