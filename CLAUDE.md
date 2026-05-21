@@ -12,8 +12,8 @@ Miami merkezli lüks araç kiralama sitesi.
 ## Renk Paleti
 - `#FFFFFF` — ink (beyaz arka plan)
 - `#1E293B` — cream (koyu metin)
-- `#7AADDB` — gold (pastel mavi, butonlar)
-- `#E8854A` — accent (turuncu, dekoratif detaylar)
+- `#3B82F6` — gold (canlı mavi, butonlar)
+- `#F97316` — accent (canlı turuncu, dekoratif detaylar)
 
 ## Dil
 - Türkçe (varsayılan) + İngilizce
