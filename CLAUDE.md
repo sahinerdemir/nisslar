@@ -10,9 +10,10 @@ Miami merkezli lüks araç kiralama sitesi.
 - **Fonts:** Fraunces (serif display), Inter (body), JetBrains Mono (labels)
 
 ## Renk Paleti
-- `#16130F` — ink (ana zemin)
-- `#F4EFE4` — cream (ana metin)
-- `#C2A05A` — gold (vurgular, dozunda kullanım)
+- `#FFFFFF` — ink (beyaz arka plan)
+- `#1E293B` — cream (koyu metin)
+- `#7AADDB` — gold (pastel mavi, butonlar)
+- `#E8854A` — accent (turuncu, dekoratif detaylar)
 
 ## Dil
 - Türkçe (varsayılan) + İngilizce
