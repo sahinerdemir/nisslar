@@ -9,16 +9,16 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   body { font-family: 'Inter', system-ui, sans-serif; }
-  .tab-active { border-bottom: 2px solid #C2A05A; color: #F4EFE4; }
-  .tab-inactive { color: #8B847A; }
-  .modal-overlay { background: rgba(0,0,0,0.7); backdrop-filter: blur(4px); }
-  input, textarea, select { background: #1C1813; border: 1px solid #2A2620; color: #F4EFE4; }
-  input:focus, textarea:focus, select:focus { outline: none; border-color: #C2A05A; }
+  .tab-active { border-bottom: 2px solid #3B82F6; color: #1E293B; }
+  .tab-inactive { color: #94A3B8; }
+  .modal-overlay { background: rgba(0,0,0,0.4); backdrop-filter: blur(4px); }
+  input, textarea, select { background: #FFFFFF; border: 1px solid #E2E8F0; color: #1E293B; }
+  input:focus, textarea:focus, select:focus { outline: none; border-color: #3B82F6; box-shadow: 0 0 0 3px rgba(59,130,246,0.1); }
   .toast { animation: slideIn .3s ease; }
   @keyframes slideIn { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 </style>
 </head>
-<body class="bg-[#16130F] text-[#F4EFE4] min-h-screen">
+<body class="bg-white text-[#1E293B] min-h-screen">
 
 <!-- Login Screen -->
 <div id="login-screen" class="min-h-screen flex items-center justify-center">
@@ -26,11 +26,11 @@
     <div class="text-center mb-8">
       <img src="/assets/favicon.png" alt="" class="h-12 w-12 rounded-md mx-auto mb-4"/>
       <h1 class="text-2xl font-semibold tracking-tight">nisslar CMS</h1>
-      <p class="text-sm text-[#8B847A] mt-2">Yönetim paneline giriş yapın</p>
+      <p class="text-sm text-[#94A3B8] mt-2">Yönetim paneline giriş yapın</p>
     </div>
     <form id="login-form" class="space-y-4">
       <input type="password" id="login-password" placeholder="Şifre" class="w-full px-4 py-3 rounded-lg text-sm" autocomplete="current-password"/>
-      <button type="submit" class="w-full bg-[#C2A05A] text-[#16130F] py-3 rounded-lg font-semibold text-sm hover:bg-[#D4B776] transition">Giriş</button>
+      <button type="submit" class="w-full bg-[#3B82F6] text-white py-3 rounded-lg font-semibold text-sm hover:bg-[#2563EB] transition">Giriş</button>
       <p id="login-error" class="text-red-400 text-xs text-center hidden">Geçersiz şifre</p>
     </form>
   </div>
@@ -39,21 +39,21 @@
 <!-- CMS Panel -->
 <div id="cms-panel" class="hidden">
   <!-- Top bar -->
-  <header class="sticky top-0 z-40 bg-[#16130F]/90 backdrop-blur border-b border-[#2A2620]">
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E2E8F0] shadow-sm">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
         <img src="/assets/favicon.png" alt="" class="h-8 w-8 rounded-md"/>
         <span class="font-semibold tracking-tight">nisslar CMS</span>
       </div>
       <div class="flex items-center gap-4">
-        <a href="/" target="_blank" class="text-xs text-[#8B847A] hover:text-[#F4EFE4] transition">Siteyi Gör ↗</a>
-        <button id="logout-btn" class="text-xs text-[#8B847A] hover:text-red-400 transition">Çıkış</button>
+        <a href="/" target="_blank" class="text-xs text-[#94A3B8] hover:text-[#3B82F6] transition">Siteyi Gör ↗</a>
+        <button id="logout-btn" class="text-xs text-[#94A3B8] hover:text-red-400 transition">Çıkış</button>
       </div>
     </div>
   </header>
 
   <!-- Tabs -->
-  <nav class="border-b border-[#2A2620]">
+  <nav class="border-b border-[#E2E8F0]">
     <div class="max-w-6xl mx-auto px-6 flex gap-8">
       <button class="tab py-4 text-sm font-medium tab-active" data-tab="cars">Araçlar</button>
       <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="content">İçerik</button>
@@ -66,7 +66,7 @@
     <div id="tab-cars" class="tab-content">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-lg font-semibold">Araç Yönetimi</h2>
-        <button id="add-car-btn" class="bg-[#C2A05A] text-[#16130F] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">+ Yeni Araç</button>
+        <button id="add-car-btn" class="bg-[#3B82F6] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">+ Yeni Araç</button>
       </div>
       <div id="cars-list" class="space-y-3"></div>
     </div>
@@ -75,14 +75,14 @@
     <div id="tab-content" class="tab-content hidden">
       <h2 class="text-lg font-semibold mb-6">Site İçerik Düzenleme</h2>
       <div id="content-editor" class="space-y-6"></div>
-      <button id="save-content-btn" class="mt-8 bg-[#C2A05A] text-[#16130F] px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+      <button id="save-content-btn" class="mt-8 bg-[#3B82F6] text-white px-6 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">Kaydet</button>
     </div>
 
     <!-- FAQ TAB -->
     <div id="tab-faq" class="tab-content hidden">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-lg font-semibold">SSS Yönetimi</h2>
-        <button id="add-faq-btn" class="bg-[#C2A05A] text-[#16130F] px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">+ Yeni Soru</button>
+        <button id="add-faq-btn" class="bg-[#3B82F6] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">+ Yeni Soru</button>
       </div>
       <div id="faq-list" class="space-y-3"></div>
     </div>
@@ -93,94 +93,94 @@
 <div id="car-modal" class="fixed inset-0 z-50 hidden">
   <div class="modal-overlay absolute inset-0" id="car-modal-overlay"></div>
   <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-[#1C1813] border border-[#2A2620] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+    <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
       <div class="flex items-center justify-between mb-6">
         <h3 id="car-modal-title" class="text-lg font-semibold">Yeni Araç</h3>
-        <button id="car-modal-close" class="text-[#8B847A] hover:text-[#F4EFE4] text-xl">&times;</button>
+        <button id="car-modal-close" class="text-[#94A3B8] hover:text-[#1E293B] text-xl">&times;</button>
       </div>
       <form id="car-form" class="space-y-4">
         <input type="hidden" id="car-id"/>
         <div class="grid grid-cols-2 gap-4">
           <div class="col-span-2">
-            <label class="text-xs text-[#8B847A] mb-1 block">Araç Adı</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Araç Adı</label>
             <input type="text" id="car-name" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Marka</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Marka</label>
             <input type="text" id="car-brand" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="ör: Mercedes-Benz" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Yıl</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Yıl</label>
             <input type="number" id="car-year" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Koltuk</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Koltuk</label>
             <input type="number" id="car-seats" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">BG (HP)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">BG (HP)</label>
             <input type="number" id="car-hp" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Kategori (TR)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Kategori (TR)</label>
             <input type="text" id="car-cat-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Kategori (EN)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Kategori (EN)</label>
             <input type="text" id="car-cat-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Vites (TR)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Vites (TR)</label>
             <input type="text" id="car-gear-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Vites (EN)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Vites (EN)</label>
             <input type="text" id="car-gear-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#8B847A] mb-1 block">Görsel URL (opsiyonel)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Görsel URL (opsiyonel)</label>
             <div class="flex gap-2">
               <input type="text" id="car-img" class="flex-1 px-3 py-2 rounded-lg text-sm"/>
-              <label class="shrink-0 cursor-pointer bg-[#2A2620] hover:bg-[#3A3630] text-[#F4EFE4] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
+              <label class="shrink-0 cursor-pointer bg-[#E2E8F0] hover:bg-[#CBD5E1] text-[#475569] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 Yükle
                 <input type="file" id="car-img-file" accept="image/*" class="hidden"/>
               </label>
             </div>
-            <p id="car-img-status" class="text-xs text-[#8B847A] mt-1 hidden"></p>
+            <p id="car-img-status" class="text-xs text-[#94A3B8] mt-1 hidden"></p>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">Yakıt</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Yakıt</label>
             <input type="text" id="car-gas" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="Premium"/>
           </div>
           <div>
-            <label class="text-xs text-[#8B847A] mb-1 block">MPG</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">MPG</label>
             <input type="text" id="car-mpg" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="20/26"/>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#8B847A] mb-1 block">Özellikler (virgülle ayır)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Özellikler (virgülle ayır)</label>
             <textarea id="car-features" class="w-full px-3 py-2 rounded-lg text-sm" rows="3" placeholder="Heated seats, Panoramic roof, Apple CarPlay"></textarea>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#8B847A] mb-1 block">Galeri URL'leri (her satıra bir URL)</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Galeri URL'leri (her satıra bir URL)</label>
             <div class="flex gap-2">
               <textarea id="car-gallery" class="flex-1 px-3 py-2 rounded-lg text-sm" rows="3" placeholder="/assets/cars/foto1.jpg&#10;/assets/cars/foto2.jpg"></textarea>
-              <label class="shrink-0 cursor-pointer bg-[#2A2620] hover:bg-[#3A3630] text-[#F4EFE4] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5 self-start">
+              <label class="shrink-0 cursor-pointer bg-[#E2E8F0] hover:bg-[#CBD5E1] text-[#475569] px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-1.5 self-start">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                 Yükle
                 <input type="file" id="car-gallery-file" accept="image/*" class="hidden"/>
               </label>
             </div>
-            <p id="car-gallery-status" class="text-xs text-[#8B847A] mt-1 hidden"></p>
+            <p id="car-gallery-status" class="text-xs text-[#94A3B8] mt-1 hidden"></p>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#8B847A] mb-1 block">Turo / Rezervasyon URL</label>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Turo / Rezervasyon URL</label>
             <input type="text" id="car-turo" class="w-full px-3 py-2 rounded-lg text-sm"/>
           </div>
         </div>
         <div class="flex justify-end gap-3 pt-4">
-          <button type="button" id="car-cancel" class="px-4 py-2 text-sm text-[#8B847A] hover:text-[#F4EFE4] transition">İptal</button>
-          <button type="submit" class="bg-[#C2A05A] text-[#16130F] px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+          <button type="button" id="car-cancel" class="px-4 py-2 text-sm text-[#94A3B8] hover:text-[#1E293B] transition">İptal</button>
+          <button type="submit" class="bg-[#3B82F6] text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">Kaydet</button>
         </div>
       </form>
     </div>
@@ -191,32 +191,32 @@
 <div id="faq-modal" class="fixed inset-0 z-50 hidden">
   <div class="modal-overlay absolute inset-0" id="faq-modal-overlay"></div>
   <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
-    <div class="bg-[#1C1813] border border-[#2A2620] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
+    <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6">
       <div class="flex items-center justify-between mb-6">
         <h3 id="faq-modal-title" class="text-lg font-semibold">Yeni Soru</h3>
-        <button id="faq-modal-close" class="text-[#8B847A] hover:text-[#F4EFE4] text-xl">&times;</button>
+        <button id="faq-modal-close" class="text-[#94A3B8] hover:text-[#1E293B] text-xl">&times;</button>
       </div>
       <form id="faq-form" class="space-y-4">
         <input type="hidden" id="faq-id"/>
         <div>
-          <label class="text-xs text-[#8B847A] mb-1 block">Soru (TR)</label>
+          <label class="text-xs text-[#94A3B8] mb-1 block">Soru (TR)</label>
           <input type="text" id="faq-q-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
         </div>
         <div>
-          <label class="text-xs text-[#8B847A] mb-1 block">Soru (EN)</label>
+          <label class="text-xs text-[#94A3B8] mb-1 block">Soru (EN)</label>
           <input type="text" id="faq-q-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
         </div>
         <div>
-          <label class="text-xs text-[#8B847A] mb-1 block">Cevap (TR)</label>
+          <label class="text-xs text-[#94A3B8] mb-1 block">Cevap (TR)</label>
           <textarea id="faq-a-tr" rows="3" class="w-full px-3 py-2 rounded-lg text-sm" required></textarea>
         </div>
         <div>
-          <label class="text-xs text-[#8B847A] mb-1 block">Cevap (EN)</label>
+          <label class="text-xs text-[#94A3B8] mb-1 block">Cevap (EN)</label>
           <textarea id="faq-a-en" rows="3" class="w-full px-3 py-2 rounded-lg text-sm" required></textarea>
         </div>
         <div class="flex justify-end gap-3 pt-4">
-          <button type="button" id="faq-cancel" class="px-4 py-2 text-sm text-[#8B847A] hover:text-[#F4EFE4] transition">İptal</button>
-          <button type="submit" class="bg-[#C2A05A] text-[#16130F] px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#D4B776] transition">Kaydet</button>
+          <button type="button" id="faq-cancel" class="px-4 py-2 text-sm text-[#94A3B8] hover:text-[#1E293B] transition">İptal</button>
+          <button type="submit" class="bg-[#3B82F6] text-white px-6 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">Kaydet</button>
         </div>
       </form>
     </div>
@@ -225,7 +225,7 @@
 
 <!-- Toast -->
 <div id="toast" class="fixed top-4 right-4 z-[60] hidden">
-  <div class="toast bg-[#1C1813] border border-[#2A2620] px-4 py-3 rounded-lg text-sm shadow-xl">
+  <div class="toast bg-[#F8FAFC] border border-[#E2E8F0] px-4 py-3 rounded-lg text-sm shadow-xl">
     <span id="toast-msg"></span>
   </div>
 </div>
@@ -421,17 +421,17 @@ document.querySelectorAll('.tab').forEach(tab => {
 function renderCars() {
   const list = document.getElementById('cars-list');
   list.innerHTML = carsData.map((c, i) => `
-    <div class="flex items-center justify-between p-4 bg-[#1C1813] border border-[#2A2620] rounded-lg">
+    <div class="flex items-center justify-between p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg">
       <div class="flex items-center gap-4">
-        <span class="text-xs text-[#8B847A] font-mono">N°${String(i+1).padStart(3,'0')}</span>
+        <span class="text-xs text-[#94A3B8] font-mono">N°${String(i+1).padStart(3,'0')}</span>
         <div>
-          <div class="font-medium text-sm">${c.name} <span class="text-[#8B847A]">(${c.year})</span></div>
-          <div class="text-xs text-[#8B847A]">${c.brand || ''} · ${c.cat.tr} · ${c.hp} BG</div>
+          <div class="font-medium text-sm">${c.name} <span class="text-[#94A3B8]">(${c.year})</span></div>
+          <div class="text-xs text-[#94A3B8]">${c.brand || ''} · ${c.cat.tr} · ${c.hp} BG</div>
         </div>
       </div>
       <div class="flex items-center gap-2">
-        <button onclick="editCar(${i})" class="text-xs text-[#C2A05A] hover:text-[#D4B776] transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Düzenle</button>
-        <button onclick="deleteCar(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Sil</button>
+        <button onclick="editCar(${i})" class="text-xs text-[#F97316] hover:text-[#EA580C] transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Düzenle</button>
+        <button onclick="deleteCar(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Sil</button>
       </div>
     </div>
   `).join('');
@@ -587,14 +587,14 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
 function renderFaqList() {
   const list = document.getElementById('faq-list');
   list.innerHTML = faqData.map((f, i) => `
-    <div class="flex items-center justify-between p-4 bg-[#1C1813] border border-[#2A2620] rounded-lg">
+    <div class="flex items-center justify-between p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg">
       <div>
         <div class="font-medium text-sm">${f.q.tr}</div>
-        <div class="text-xs text-[#8B847A] mt-1">${f.q.en}</div>
+        <div class="text-xs text-[#94A3B8] mt-1">${f.q.en}</div>
       </div>
       <div class="flex items-center gap-2 shrink-0 ml-4">
-        <button onclick="editFaq(${i})" class="text-xs text-[#C2A05A] hover:text-[#D4B776] transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Düzenle</button>
-        <button onclick="deleteFaq(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#2A2620] rounded-lg">Sil</button>
+        <button onclick="editFaq(${i})" class="text-xs text-[#F97316] hover:text-[#EA580C] transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Düzenle</button>
+        <button onclick="deleteFaq(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Sil</button>
       </div>
     </div>
   `).join('');
@@ -685,44 +685,44 @@ function esc(str) { return (str || '').replace(/"/g, '&quot;'); }
 function renderContentEditor() {
   const editor = document.getElementById('content-editor');
   editor.innerHTML = CONTENT_SCHEMA.map(s => {
-    let html = `<div class="bg-[#1C1813] border border-[#2A2620] rounded-lg p-5">
-      <h3 class="text-sm font-semibold text-[#C2A05A] mb-4">${s.label}</h3>
+    let html = `<div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg p-5">
+      <h3 class="text-sm font-semibold text-[#F97316] mb-4">${s.label}</h3>
       <div class="space-y-4">`;
 
     html += s.fields.map(f => {
       const val = contentData[s.key]?.[f.id];
       if (f.type === 'image') {
         return `<div>
-          <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+          <label class="text-[11px] text-[#94A3B8] mb-1.5 block uppercase tracking-wider">${f.label}</label>
           <div class="flex items-center gap-3">
             <input type="text" data-path="${s.key}.${f.id}" value="${esc(val)}" placeholder="Görsel URL" class="flex-1 px-3 py-2.5 rounded-lg text-sm"/>
-            <label class="cursor-pointer bg-[#2A2620] hover:bg-[#39342B] transition px-4 py-2.5 rounded-lg text-xs font-medium">
+            <label class="cursor-pointer bg-[#E2E8F0] hover:bg-[#39342B] transition px-4 py-2.5 rounded-lg text-xs font-medium">
               Yükle
               <input type="file" accept="image/*" class="hidden" onchange="uploadContentImg(this, '${s.key}.${f.id}')"/>
             </label>
           </div>
-          ${val ? `<img src="${val}" class="mt-2 h-20 rounded border border-[#2A2620] object-cover"/>` : ''}
+          ${val ? `<img src="${val}" class="mt-2 h-20 rounded border border-[#E2E8F0] object-cover"/>` : ''}
         </div>`;
       }
       if (s.single) {
         return `<div>
-          <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+          <label class="text-[11px] text-[#94A3B8] mb-1.5 block uppercase tracking-wider">${f.label}</label>
           ${f.type === 'textarea'
             ? `<textarea rows="2" data-path="${s.key}.${f.id}" placeholder="${f.label}" class="w-full px-3 py-2.5 rounded-lg text-sm">${esc(val)}</textarea>`
             : `<input type="text" data-path="${s.key}.${f.id}" value="${esc(val)}" placeholder="${f.label}" class="w-full px-3 py-2.5 rounded-lg text-sm"/>`}
         </div>`;
       }
       return `<div>
-        <label class="text-[11px] text-[#8B847A] mb-1.5 block uppercase tracking-wider">${f.label}</label>
+        <label class="text-[11px] text-[#94A3B8] mb-1.5 block uppercase tracking-wider">${f.label}</label>
         <div class="grid grid-cols-2 gap-3">
           <div class="relative">
-            <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">TR</span>
+            <span class="absolute left-3 top-2.5 text-[10px] text-[#F97316] font-medium pointer-events-none">TR</span>
             ${f.type === 'textarea'
               ? `<textarea rows="2" data-path="${s.key}.${f.id}.tr" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(val?.tr)}</textarea>`
               : `<input type="text" data-path="${s.key}.${f.id}.tr" value="${esc(val?.tr)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
           </div>
           <div class="relative">
-            <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">EN</span>
+            <span class="absolute left-3 top-2.5 text-[10px] text-[#F97316] font-medium pointer-events-none">EN</span>
             ${f.type === 'textarea'
               ? `<textarea rows="2" data-path="${s.key}.${f.id}.en" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(val?.en)}</textarea>`
               : `<input type="text" data-path="${s.key}.${f.id}.en" value="${esc(val?.en)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
@@ -734,21 +734,21 @@ function renderContentEditor() {
     if (s.items) {
       const items = contentData[s.key]?.items || [];
       html += items.map((item, idx) => `
-        <div class="mt-2 pl-4 border-l-2 border-[#2A2620]">
-          <div class="text-[11px] text-[#8B847A] mb-2 uppercase tracking-wider">${s.items.label} ${idx + 1}</div>
+        <div class="mt-2 pl-4 border-l-2 border-[#E2E8F0]">
+          <div class="text-[11px] text-[#94A3B8] mb-2 uppercase tracking-wider">${s.items.label} ${idx + 1}</div>
           ${s.items.fields.map(f => {
             const v = item[f.id];
             return `<div class="mb-3">
-              <label class="text-[11px] text-[#8B847A] mb-1 block">${f.label}</label>
+              <label class="text-[11px] text-[#94A3B8] mb-1 block">${f.label}</label>
               <div class="grid grid-cols-2 gap-3">
                 <div class="relative">
-                  <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">TR</span>
+                  <span class="absolute left-3 top-2.5 text-[10px] text-[#F97316] font-medium pointer-events-none">TR</span>
                   ${f.type === 'textarea'
                     ? `<textarea rows="2" data-path="${s.key}.items.${idx}.${f.id}.tr" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(v?.tr)}</textarea>`
                     : `<input type="text" data-path="${s.key}.items.${idx}.${f.id}.tr" value="${esc(v?.tr)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
                 </div>
                 <div class="relative">
-                  <span class="absolute left-3 top-2.5 text-[10px] text-[#C2A05A] font-medium pointer-events-none">EN</span>
+                  <span class="absolute left-3 top-2.5 text-[10px] text-[#F97316] font-medium pointer-events-none">EN</span>
                   ${f.type === 'textarea'
                     ? `<textarea rows="2" data-path="${s.key}.items.${idx}.${f.id}.en" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm">${esc(v?.en)}</textarea>`
                     : `<input type="text" data-path="${s.key}.items.${idx}.${f.id}.en" value="${esc(v?.en)}" class="w-full pl-9 pr-3 py-2.5 rounded-lg text-sm"/>`}
@@ -763,14 +763,14 @@ function renderContentEditor() {
     if (s.socials) {
       const platforms = { instagram: 'Instagram', facebook: 'Facebook', tiktok: 'TikTok', linkedin: 'LinkedIn', x: 'X (Twitter)' };
       const socials = contentData[s.key]?.socials || [];
-      html += `<div class="mt-4 pt-4 border-t border-[#2A2620]">
-        <div class="text-[11px] text-[#8B847A] mb-3 uppercase tracking-wider">Sosyal Medya</div>
+      html += `<div class="mt-4 pt-4 border-t border-[#E2E8F0]">
+        <div class="text-[11px] text-[#94A3B8] mb-3 uppercase tracking-wider">Sosyal Medya</div>
         <div class="space-y-3">
           ${Object.entries(platforms).map(([key, label]) => {
             const existing = socials.find(sc => sc.platform === key);
             const url = existing?.url || '';
             return `<div class="flex items-center gap-3">
-              <span class="text-xs text-[#8B847A] w-20 shrink-0">${label}</span>
+              <span class="text-xs text-[#94A3B8] w-20 shrink-0">${label}</span>
               <input type="text" data-social="${key}" value="${esc(url)}" placeholder="https://..." class="flex-1 px-3 py-2 rounded-lg text-sm"/>
             </div>`;
           }).join('')}
