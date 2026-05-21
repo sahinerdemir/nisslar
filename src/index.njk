@@ -124,7 +124,7 @@ layout: base.njk
       <div class="col-span-12 lg:col-span-7">
         <div class="mono-lbl text-accent uppercase mb-4">— <span data-i18n="fleet.eyebrow">Filo</span></div>
         <h2 class="font-serif text-[clamp(40px,5.4vw,80px)] leading-[0.96] tracking-tightest text-cream balance">
-          <span data-i18n="fleet.title1">Az,</span> <span class="italic font-light text-cream/80" data-i18n="fleet.title2">ama</span> <span class="text-accent italic font-light" data-i18n="fleet.title3">özenli</span>.
+          <span data-i18n="fleet.title1">Size özel</span> <span class="text-accent italic font-light" data-i18n="fleet.title2">araçlar</span>.
         </h2>
       </div>
       <div class="col-span-12 lg:col-span-5 lg:text-right">
@@ -279,7 +279,7 @@ const I18N = {
     'trust.t1':'Sigorta Dahil','trust.s1':'Tam kapsamlı koruma, ilk dakikadan son dakikaya kadar. Ek ücret yok, soru yok.',
     'trust.t2':'7/24 Concierge','trust.s2':'Telefonun ucunda, her gece yarısı. Yol yardımı, plan değişikliği, sessiz destek.',
     'trust.t3':'Gizli Ücret Yok','trust.s3':'Sözleşmenin üst satırı, alt satıra eşittir. Şeffaf — başka türlüsünü düşünmüyoruz.',
-    'fleet.eyebrow':'Filo','fleet.title1':'Az,','fleet.title2':'ama','fleet.title3':'özenli',
+    'fleet.eyebrow':'Filo','fleet.title1':'Size özel','fleet.title2':'araçlar',
     'fleet.desc':'Her araç bizzat seçildi. Detaylı temizlik, tam yakıt, anahtar elden teslim — başka türlüsü olmaz.',
     'fleet.all':'Tüm Filoyu Gör',
     'about.eyebrow':'Hakkımızda','about.cap':'Kurucu, 2018',
@@ -309,7 +309,7 @@ const I18N = {
     'trust.t1':'Insurance Included','trust.s1':'Full coverage, from the first minute to the last. No surcharge, no questions.',
     'trust.t2':'24/7 Concierge','trust.s2':"A phone call away at midnight. Roadside, plan changes, quiet support.",
     'trust.t3':'No Hidden Fees','trust.s3':"The top line equals the bottom line. Transparent — we don't know another way.",
-    'fleet.eyebrow':'Fleet','fleet.title1':'Few,','fleet.title2':'but','fleet.title3':'considered',
+    'fleet.eyebrow':'Fleet','fleet.title1':'Cars curated','fleet.title2':'for you',
     'fleet.desc':'Each car personally selected. Detailed clean, full fuel, handover in person — no other way.',
     'fleet.all':'View Full Fleet',
     'about.eyebrow':'About','about.cap':'Founder, 2018',
@@ -497,7 +497,7 @@ function applyContentToI18N(content) {
       eyebrow: 'hero.eyebrow', title1: 'hero.title1', sub: 'hero.sub'
     },
     fleet: {
-      title1: 'fleet.title1', title2: 'fleet.title2', title3: 'fleet.title3', desc: 'fleet.desc'
+      title1: 'fleet.title1', title2: 'fleet.title2', desc: 'fleet.desc'
     },
     about: {
       title1: 'about.title1', quote: 'about.quote', p1: 'about.p1'
