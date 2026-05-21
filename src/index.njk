@@ -3,25 +3,25 @@ layout: base.njk
 ---
 
 <!-- HEADER -->
-<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-white/80 border-b border-line shadow-sm">
+<header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-[#16130F]/80 border-b border-white/10">
   <div class="max-w-[1440px] mx-auto px-6 md:px-10 h-[72px] md:h-[80px] flex items-center justify-between">
     <a href="#top" class="flex items-center gap-3 group" aria-label="nisslar">
       <img src="/assets/favicon.png" alt="" class="h-9 w-9 md:h-10 md:w-10 rounded-md" />
-      <span class="font-serif text-[25px] md:text-[30px] leading-none tracking-tightest text-cream whitespace-nowrap">
+      <span class="font-serif text-[25px] md:text-[30px] leading-none tracking-tightest text-white whitespace-nowrap">
         nisslar
       </span>
     </a>
 
-    <nav class="hidden md:flex items-center gap-9 text-[15px] tracking-[0.04em] text-cream/75">
-      <a href="#top" class="hover:text-accent transition lnk" data-i18n="nav.home">Ana Sayfa</a>
-      <a href="#fleet" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a>
-      <a href="#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a>
-      <a href="#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a>
+    <nav class="hidden md:flex items-center gap-9 text-[15px] tracking-[0.04em] text-white/75">
+      <a href="#top" class="hover:text-white transition lnk" data-i18n="nav.home">Ana Sayfa</a>
+      <a href="#fleet" class="hover:text-white transition lnk" data-i18n="nav.fleet">Filo</a>
+      <a href="#about" class="hover:text-white transition lnk" data-i18n="nav.about">Hakkımızda</a>
+      <a href="#faq" class="hover:text-white transition lnk" data-i18n="nav.faq">SSS</a>
     </nav>
 
     <div class="flex items-center gap-3 md:gap-5">
       <!-- TR / EN -->
-      <div class="lang-track flex items-center p-1 rounded-full border border-line bg-ink2/60" data-lang="tr">
+      <div class="lang-track flex items-center p-1 rounded-full border border-white/20 bg-white/10" data-lang="tr">
         <span class="lang-slider"></span>
         <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="tr">TR</button>
         <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="en">EN</button>
@@ -34,9 +34,9 @@ layout: base.njk
 
       <!-- Hamburger -->
       <button class="hamburger md:hidden flex flex-col gap-[5px] w-7 h-7 justify-center items-center" aria-label="Menü">
-        <span class="block w-5 h-[1.5px] bg-cream"></span>
-        <span class="block w-5 h-[1.5px] bg-cream"></span>
-        <span class="block w-5 h-[1.5px] bg-cream"></span>
+        <span class="block w-5 h-[1.5px] bg-white"></span>
+        <span class="block w-5 h-[1.5px] bg-white"></span>
+        <span class="block w-5 h-[1.5px] bg-white"></span>
       </button>
     </div>
   </div>
@@ -68,11 +68,11 @@ layout: base.njk
         <div class="reveal flex items-center gap-4 mb-6 md:mb-8">
           <span class="mono-lbl text-accent uppercase" data-i18n="hero.eyebrow">Miami · Lüks Filo</span>
         </div>
-        <h1 class="reveal font-serif text-[clamp(42px,7.4vw,108px)] leading-[0.92] tracking-tightest text-cream balance">
+        <h1 class="reveal font-serif text-[clamp(42px,7.4vw,108px)] leading-[0.92] tracking-tightest text-white balance">
           <span data-i18n="hero.title1">Sürüş değil,</span><br/>
-          <span class="italic font-light text-cream/95" data-i18n="hero.title2">bir <span class="text-accent not-italic font-normal">deneyim</span>.</span>
+          <span class="italic font-light text-white/95" data-i18n="hero.title2">bir <span class="text-accent not-italic font-normal">deneyim</span>.</span>
         </h1>
-        <p class="reveal mt-6 md:mt-8 max-w-[480px] text-[14px] md:text-[15.5px] leading-relaxed text-cream/65 pretty" data-i18n="hero.sub">
+        <p class="reveal mt-6 md:mt-8 max-w-[480px] text-[14px] md:text-[15.5px] leading-relaxed text-white/65 pretty" data-i18n="hero.sub">
           Miami sokaklarında, özenle seçilmiş bir filo. Sigorta dahil, gizli ücret yok — yalnız siz, anahtarlar ve yol.
         </p>
         <div class="reveal mt-8 md:mt-11 flex flex-col sm:flex-row items-start sm:items-center gap-3">
@@ -80,7 +80,7 @@ layout: base.njk
             <span data-i18n="hero.cta1">Araçları Gör</span>
             <span class="arr">→</span>
           </a>
-          <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 border border-cream/25 hover:border-accent hover:text-accent text-cream px-7 py-3.5 rounded-full text-[11.5px] font-semibold tracking-[0.22em] uppercase transition">
+          <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 border border-white/25 hover:border-accent hover:text-accent text-white px-7 py-3.5 rounded-full text-[11.5px] font-semibold tracking-[0.22em] uppercase transition">
             <span data-i18n="hero.cta2">Rezerve Et</span>
             <span class="arr">↗</span>
           </a>
@@ -88,9 +88,9 @@ layout: base.njk
       </div>
     </div>
 
-    <div class="absolute bottom-0 inset-x-0 border-t border-line bg-white/60 backdrop-blur-sm z-10">
+    <div class="absolute bottom-0 inset-x-0 border-t border-white/10 bg-[#16130F]/40 backdrop-blur-sm z-10">
       <div class="marquee py-3 md:py-4">
-        <div id="marquee-track" class="marquee-track mono-lbl text-cream/40 whitespace-nowrap"></div>
+        <div id="marquee-track" class="marquee-track mono-lbl text-white/40 whitespace-nowrap"></div>
       </div>
     </div>
   </div>
