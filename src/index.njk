@@ -14,7 +14,7 @@ layout: base.njk
 
     <nav class="hidden md:flex items-center gap-9 text-[15px] tracking-[0.04em] text-cream/70">
       <a href="#top" class="hover:text-accent transition lnk" data-i18n="nav.home">Ana Sayfa</a>
-      <a href="#fleet" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a>
+      <a href="/fleet/" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a>
       <a href="#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a>
       <a href="#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a>
     </nav>
@@ -45,7 +45,7 @@ layout: base.njk
 <!-- Mobile Menu -->
 <div class="mobile-menu fixed inset-0 z-40 bg-white/98 backdrop-blur-lg flex flex-col items-center justify-center gap-8 md:hidden">
   <a href="#top" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.home">Ana Sayfa</a>
-  <a href="#fleet" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.fleet">Filo</a>
+  <a href="/fleet/" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.fleet">Filo</a>
   <a href="#about" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.about">Hakkımızda</a>
   <a href="#faq" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.faq">SSS</a>
   <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="mt-4 group inline-flex items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-7 py-3 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase">
@@ -134,6 +134,12 @@ layout: base.njk
       </div>
     </div>
     <div id="fleet-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-7 gap-y-10 md:gap-y-14"></div>
+    <div class="reveal mt-12 md:mt-16 text-center">
+      <a href="/fleet/" class="group inline-flex items-center gap-3 bg-gold text-white hover:bg-goldhi transition px-8 py-3.5 rounded-full text-[11.5px] font-semibold tracking-[0.22em] uppercase">
+        <span data-i18n="fleet.all">Tüm Filoyu Gör</span>
+        <span class="arr">→</span>
+      </a>
+    </div>
   </div>
 </section>
 
@@ -236,7 +242,7 @@ layout: base.njk
       <div class="col-span-2 md:col-span-5">
         <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h3">Hızlı Linkler</div>
         <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
-          <li><a href="#fleet" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a></li>
+          <li><a href="/fleet/" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Filo</a></li>
           <li><a href="#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a></li>
           <li><a href="#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a></li>
         </ul>
@@ -336,7 +342,7 @@ function renderMarquee() {
 function renderFleet() {
   const t = I18N[LANG];
   const grid = document.getElementById('fleet-grid');
-  grid.innerHTML = FLEET.map((c, i) => `
+  grid.innerHTML = FLEET.slice(0, 6).map((c, i) => `
     <article class="car-card group relative border border-line bg-white reveal" style="transition-delay:${i*55}ms">
       <div class="relative aspect-[4/3] overflow-hidden">
         ${c.img ? `<img src="${c.img}" alt="${c.name}" class="car-media absolute inset-0 w-full h-full object-cover" />` : `<div class="car-media absolute inset-0 ph"></div>`}
