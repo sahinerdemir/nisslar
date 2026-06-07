@@ -537,6 +537,11 @@ document.getElementById('car-gallery-file').addEventListener('change', async (e)
         base64Data: base64Data
       })
     });
+    if (res.status === 401) {
+      logout();
+      showToast('Oturum süresi doldu, lütfen tekrar giriş yapın');
+      return;
+    }
     const data = await res.json();
     if (data.url) {
       window._carGallery.push(data.url);
@@ -573,6 +578,11 @@ window.uploadContentImg = async function(input, path) {
         base64Data: base64Data
       })
     });
+    if (res.status === 401) {
+      logout();
+      showToast('Oturum süresi doldu, lütfen tekrar giriş yapın');
+      return;
+    }
     const data = await res.json();
     if (data.url) {
       const el = document.querySelector(`[data-path="${path}"]`);
@@ -863,9 +873,18 @@ document.getElementById('save-content-btn').addEventListener('click', async () =
   showToast('İçerik kaydedildi');
 });
 
+function isTokenExpired(t) {
+  if (!t) return true;
+  if (t === 'dev-mode') return false;
+  const parts = t.split('.');
+  if (parts.length < 2) return true;
+  const expiry = parseInt(parts[parts.length - 1]);
+  return isNaN(expiry) || Date.now() >= expiry;
+}
+
 // Init
 (async () => {
-  if (token) {
+  if (token && !isTokenExpired(token)) {
     if (localStorage.getItem('cms_dev_mode') === 'true') {
       devMode = true;
     }
@@ -874,7 +893,7 @@ document.getElementById('save-content-btn').addEventListener('click', async () =
       showCMS();
     } catch { logout(); }
   } else {
-    document.getElementById('login-screen').classList.remove('hidden');
+    logout();
   }
 })();
 </script>
