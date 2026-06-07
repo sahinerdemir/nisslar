@@ -454,18 +454,67 @@ function renderGalleryPreview() {
     return;
   }
   container.innerHTML = window._carGallery.map((url, i) => `
-    <div class="relative group">
-      <img src="${url}" class="w-20 h-14 object-cover rounded-lg border border-[#E2E8F0]"/>
-      <button type="button" onclick="removeGalleryImg(${i})" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition">×</button>
-      <span class="absolute bottom-0.5 left-0.5 text-[9px] bg-black/50 text-white px-1 rounded">${i + 1}</span>
+    <div class="relative group cursor-grab active:cursor-grabbing border-2 border-transparent hover:border-[#3B82F6] rounded-lg transition" draggable="true" data-index="${i}">
+      <img src="${url}" class="w-20 h-14 object-cover rounded-lg pointer-events-none"/>
+      <button type="button" onclick="removeGalleryImg(${i})" class="absolute -top-1.5 -right-1.5 w-5 h-5 bg-red-500 text-white rounded-full text-xs flex items-center justify-center opacity-0 group-hover:opacity-100 transition z-10">×</button>
+      <span class="absolute bottom-0.5 left-0.5 text-[9px] bg-black/60 text-white px-1.5 py-0.5 rounded pointer-events-none">${i === 0 ? 'Kapak' : i + 1}</span>
     </div>
   `).join('');
+
+  initGalleryDragAndDrop();
+}
+
+function initGalleryDragAndDrop() {
+  const container = document.getElementById('car-gallery-preview');
+  const items = container.querySelectorAll('[draggable="true"]');
+  
+  items.forEach(item => {
+    item.addEventListener('dragstart', (e) => {
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData('text/plain', item.getAttribute('data-index'));
+      item.classList.add('opacity-40', 'scale-95');
+    });
+
+    item.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      item.classList.add('border-[#3B82F6]');
+    });
+
+    item.addEventListener('dragleave', () => {
+      item.classList.remove('border-[#3B82F6]');
+    });
+
+    item.addEventListener('drop', (e) => {
+      e.preventDefault();
+      item.classList.remove('border-[#3B82F6]');
+      const fromIndex = parseInt(e.dataTransfer.getData('text/plain'));
+      const toIndex = parseInt(item.getAttribute('data-index'));
+      if (!isNaN(fromIndex) && fromIndex !== toIndex) {
+        const movedItem = window._carGallery.splice(fromIndex, 1)[0];
+        window._carGallery.splice(toIndex, 0, movedItem);
+        renderGalleryPreview();
+      }
+    });
+
+    item.addEventListener('dragend', () => {
+      item.classList.remove('opacity-40', 'scale-95', 'border-[#3B82F6]');
+    });
+  });
 }
 
 window.removeGalleryImg = function(i) {
   window._carGallery.splice(i, 1);
   renderGalleryPreview();
 };
+
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result.split(',')[1]);
+    reader.onerror = error => reject(error);
+  });
+}
 
 document.getElementById('car-gallery-file').addEventListener('change', async (e) => {
   const file = e.target.files[0];
@@ -475,10 +524,18 @@ document.getElementById('car-gallery-file').addEventListener('change', async (e)
   status.className = 'text-xs text-[#94A3B8] mt-2';
   status.classList.remove('hidden');
   try {
+    const base64Data = await fileToBase64(file);
     const res = await fetch(`${API}/upload`, {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${token}`, 'X-Filename': file.name, 'X-Content-Type': file.type },
-      body: file
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        filename: file.name,
+        contentType: file.type,
+        base64Data: base64Data
+      })
     });
     const data = await res.json();
     if (data.url) {
@@ -491,7 +548,11 @@ document.getElementById('car-gallery-file').addEventListener('change', async (e)
       status.textContent = 'Hata: ' + (data.error || 'Yükleme başarısız');
       status.classList.add('text-red-500');
     }
-  } catch { status.textContent = 'Hata: Yükleme başarısız'; status.classList.add('text-red-500'); }
+  } catch (err) {
+    console.error(err);
+    status.textContent = 'Hata: Yükleme başarısız';
+    status.classList.add('text-red-500');
+  }
   e.target.value = '';
 });
 
@@ -499,10 +560,18 @@ window.uploadContentImg = async function(input, path) {
   const file = input.files[0];
   if (!file) return;
   try {
+    const base64Data = await fileToBase64(file);
     const res = await fetch(`${API}/upload`, {
       method: 'POST',
-      headers: { 'Authorization': `Bearer ${token}`, 'X-Filename': file.name, 'X-Content-Type': file.type },
-      body: file
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        filename: file.name,
+        contentType: file.type,
+        base64Data: base64Data
+      })
     });
     const data = await res.json();
     if (data.url) {
@@ -513,8 +582,13 @@ window.uploadContentImg = async function(input, path) {
       let obj = contentData;
       for (let i = 0; i < parts.length - 1; i++) { if (!obj[parts[i]]) obj[parts[i]] = {}; obj = obj[parts[i]]; }
       obj[parts[parts.length - 1]] = data.url;
+    } else {
+      showToast('Yükleme başarısız: ' + (data.error || ''));
     }
-  } catch { showToast('Yükleme başarısız'); }
+  } catch (err) {
+    console.error(err);
+    showToast('Yükleme başarısız');
+  }
   input.value = '';
 };
 

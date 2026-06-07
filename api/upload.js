@@ -11,28 +11,28 @@ function verifyToken(req) {
 module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, X-Filename, X-Content-Type');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   if (req.method === 'OPTIONS') return res.status(200).end();
 
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
   if (!verifyToken(req)) return res.status(401).json({ error: 'Unauthorized' });
 
   try {
-    const filename = req.headers['x-filename'] || `car-${Date.now()}.jpg`;
-    const contentType = req.headers['x-content-type'] || req.headers['content-type'] || 'image/jpeg';
+    const { filename, contentType, base64Data } = req.body || {};
 
-    // Read raw body buffer
-    const chunks = [];
-    for await (const chunk of req) {
-      chunks.push(chunk);
+    if (!base64Data) {
+      return res.status(400).json({ error: 'No file data received' });
     }
-    const buffer = Buffer.concat(chunks);
 
-    if (!buffer.length) return res.status(400).json({ error: 'No file data received' });
+    const buffer = Buffer.from(base64Data, 'base64');
 
-    const blob = await put(`cars/${filename}`, buffer, {
+    if (!buffer.length) {
+      return res.status(400).json({ error: 'Buffer is empty' });
+    }
+
+    const blob = await put(`cars/${filename || `car-${Date.now()}.jpg`}`, buffer, {
       access: 'public',
-      contentType,
+      contentType: contentType || 'image/jpeg',
       addRandomSuffix: true
     });
 
@@ -40,11 +40,5 @@ module.exports = async function handler(req, res) {
   } catch (err) {
     console.error('Upload error:', err);
     return res.status(500).json({ error: 'Upload failed' });
-  }
-};
-
-module.exports.config = {
-  api: {
-    bodyParser: false
   }
 };
