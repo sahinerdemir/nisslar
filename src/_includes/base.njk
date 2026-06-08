@@ -39,7 +39,7 @@
   body { font-family: 'Inter', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
   .font-serif { font-family: 'Playfair Display', Georgia, serif; }
   section[id], #faq, #fleet, #about { scroll-margin-top: 88px; }
-  .hero-overlay { background: rgba(22,19,15,0.52); }
+  .hero-overlay { background: rgba(22,19,15,0.2); }
 
   body::before, body::after { content: ""; position: fixed; border-radius: 50%; pointer-events: none; z-index: -1; filter: blur(120px); opacity: 0.4; }
   body::before { width: 600px; height: 600px; top: -100px; left: -150px; background: radial-gradient(circle, rgba(59,130,246,0.10) 0%, transparent 70%); }
@@ -105,5 +105,122 @@
 </head>
 <body class="font-sans">
 {{ content | safe }}
+
+<!-- Contact Modal -->
+<div id="contact-modal" class="fixed inset-0 z-[100] hidden items-center justify-center p-4">
+  <div class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity duration-300 opacity-0" id="contact-modal-overlay"></div>
+  <div class="relative bg-white text-cream max-w-md w-full border border-line p-6 md:p-8 transform scale-95 opacity-0 transition-all duration-300 z-10 shadow-2xl flex flex-col gap-6" id="contact-modal-box">
+    <!-- Header -->
+    <div class="flex items-start justify-between">
+      <div>
+        <div class="mono-lbl text-accent uppercase mb-1.5">— CONTACT / İLETİŞİM</div>
+        <h3 class="font-serif text-[24px] md:text-[28px] leading-tight text-cream" data-i18n="modal.title">Rezerve Et</h3>
+      </div>
+      <button id="contact-modal-close" class="text-cream/40 hover:text-cream text-2xl transition" aria-label="Kapat">&times;</button>
+    </div>
+
+    <!-- Body -->
+    <p class="text-[14px] md:text-[15px] leading-relaxed text-cream/70 pretty" data-i18n="modal.desc">
+      Bizimle iletişime geçmek için aşağıdaki iletişim yollarını kullanabilirsiniz.
+    </p>
+
+    <!-- Details -->
+    <div class="flex flex-col gap-3">
+      <!-- Phone -->
+      <a id="modal-phone" href="tel:{{ siteContent.site.phone }}" class="flex items-center gap-4 p-4 border border-line hover:border-gold/50 bg-ink2/30 hover:bg-gold/5 transition group">
+        <div class="w-10 h-10 bg-gold/10 text-gold flex items-center justify-center rounded-full shrink-0 group-hover:scale-105 transition duration-300">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="mono-lbl text-[10px] text-cream/40 uppercase" data-i18n="modal.phone">Telefon Numarası</span>
+          <span id="modal-phone-text" class="font-serif text-[17px] text-cream tracking-tight">{{ siteContent.site.phone }}</span>
+        </div>
+      </a>
+
+      <!-- Email -->
+      <a id="modal-email" href="mailto:{{ siteContent.site.email }}" class="flex items-center gap-4 p-4 border border-line hover:border-gold/50 bg-ink2/30 hover:bg-gold/5 transition group">
+        <div class="w-10 h-10 bg-gold/10 text-gold flex items-center justify-center rounded-full shrink-0 group-hover:scale-105 transition duration-300">
+          <svg viewBox="0 0 24 24" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+            <polyline points="22,6 12,13 2,6"/>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="mono-lbl text-[10px] text-cream/40 uppercase" data-i18n="modal.email">E-posta Adresi</span>
+          <span id="modal-email-text" class="font-serif text-[17px] text-cream tracking-tight">{{ siteContent.site.email }}</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</div>
+
+<script>
+window.openReserveModal = function(event) {
+  if (event) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+  
+  // Sync details from footer dynamically
+  const footerPhone = document.getElementById('footer-phone');
+  const footerEmail = document.getElementById('footer-email');
+  const modalPhone = document.getElementById('modal-phone');
+  const modalPhoneText = document.getElementById('modal-phone-text');
+  const modalEmail = document.getElementById('modal-email');
+  const modalEmailText = document.getElementById('modal-email-text');
+  
+  if (footerPhone && modalPhone && modalPhoneText) {
+    modalPhone.href = footerPhone.href;
+    modalPhoneText.textContent = footerPhone.textContent.trim();
+  }
+  if (footerEmail && modalEmail && modalEmailText) {
+    modalEmail.href = footerEmail.href;
+    modalEmailText.textContent = footerEmail.textContent.trim();
+  }
+
+  const modal = document.getElementById('contact-modal');
+  const overlay = document.getElementById('contact-modal-overlay');
+  const box = document.getElementById('contact-modal-box');
+  if (!modal) return;
+  
+  modal.classList.remove('hidden');
+  modal.classList.add('flex');
+  document.body.style.overflow = 'hidden';
+  
+  setTimeout(() => {
+    overlay.classList.remove('opacity-0');
+    overlay.classList.add('opacity-100');
+    box.classList.remove('scale-95', 'opacity-0');
+    box.classList.add('scale-100', 'opacity-100');
+  }, 10);
+};
+
+window.closeReserveModal = function() {
+  const modal = document.getElementById('contact-modal');
+  const overlay = document.getElementById('contact-modal-overlay');
+  const box = document.getElementById('contact-modal-box');
+  if (!modal) return;
+  
+  overlay.classList.remove('opacity-100');
+  overlay.classList.add('opacity-0');
+  box.classList.remove('scale-100', 'opacity-100');
+  box.classList.add('scale-95', 'opacity-0');
+  
+  setTimeout(() => {
+    modal.classList.remove('flex');
+    modal.classList.add('hidden');
+    document.body.style.overflow = '';
+  }, 300);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('contact-modal-overlay');
+  const closeBtn = document.getElementById('contact-modal-close');
+  if (overlay) overlay.addEventListener('click', window.closeReserveModal);
+  if (closeBtn) closeBtn.addEventListener('click', window.closeReserveModal);
+});
+</script>
 </body>
 </html>

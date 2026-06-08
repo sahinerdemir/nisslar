@@ -27,7 +27,7 @@ layout: base.njk
         <button type="button" class="lang-pill flex items-center gap-1 md:gap-1.5 px-2.5 md:px-3.5 py-1.5 rounded-full text-[10px] md:text-[11px] font-medium tracking-[0.14em]" data-lang="en">EN</button>
       </div>
 
-      <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="hidden md:inline-flex group items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-5 py-2.5 rounded-full text-[11.5px] font-semibold tracking-[0.18em] uppercase">
+      <a href="/fleet/" class="hidden md:inline-flex group items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-5 py-2.5 rounded-full text-[11.5px] font-semibold tracking-[0.18em] uppercase">
         <span data-i18n="nav.book">Rezerve Et</span>
         <span class="arr -mr-0.5">→</span>
       </a>
@@ -48,7 +48,7 @@ layout: base.njk
   <a href="/fleet/" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.fleet">Araçlar</a>
   <a href="#about" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.about">Hakkımızda</a>
   <a href="#faq" class="mobile-link text-cream text-[18px] font-serif tracking-tightest" data-i18n="nav.faq">SSS</a>
-  <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="mt-4 group inline-flex items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-7 py-3 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase">
+  <a href="/fleet/" class="mt-4 group inline-flex items-center gap-2.5 bg-gold text-white hover:bg-goldhi transition px-7 py-3 rounded-full text-[12px] font-semibold tracking-[0.18em] uppercase">
     <span data-i18n="nav.book">Rezerve Et</span>
     <span class="arr">→</span>
   </a>
@@ -59,7 +59,7 @@ layout: base.njk
   <div class="relative h-[600px] md:h-[820px] overflow-hidden">
     <!-- Video background -->
     <video class="absolute inset-0 w-full h-full object-cover" autoplay muted loop playsinline>
-      <source src="/assets/background.mp4" type="video/mp4"/>
+      <source src="/assets/mclaren.mp4" type="video/mp4"/>
     </video>
     <div class="hero-overlay absolute inset-0"></div>
 
@@ -80,7 +80,7 @@ layout: base.njk
             <span data-i18n="hero.cta1">Araçları Gör</span>
             <span class="arr">→</span>
           </a>
-          <a href="https://turo.com/us/en/host/51476329" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 border border-white/25 hover:border-accent hover:text-accent text-white px-7 py-3.5 rounded-full text-[11.5px] font-semibold tracking-[0.22em] uppercase transition">
+          <a href="/fleet/" class="group inline-flex items-center gap-3 border border-white/25 hover:border-accent hover:text-accent text-white px-7 py-3.5 rounded-full text-[11.5px] font-semibold tracking-[0.22em] uppercase transition">
             <span data-i18n="hero.cta2">Rezerve Et</span>
             <span class="arr">↗</span>
           </a>
@@ -92,27 +92,6 @@ layout: base.njk
       <div class="marquee py-3 md:py-4">
         <div id="marquee-track" class="marquee-track mono-lbl text-white/40 whitespace-nowrap"></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- TRUST STRIP -->
-<section class="border-b border-white/10 bg-[#2A5F9E]">
-  <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-14 md:py-20 grid grid-cols-12 gap-8">
-    <div class="col-span-12 lg:col-span-3 reveal">
-      <div class="mono-lbl text-white/60 uppercase" data-i18n="trust.eyebrow">— Söz</div>
-      <p class="mt-3 font-serif italic text-[20px] md:text-[22px] leading-snug text-white/90 pretty" data-i18n="trust.lead">
-        Üç söz veriyoruz, üçünü de tutuyoruz.
-      </p>
-    </div>
-    <div class="col-span-12 lg:col-span-9 grid grid-cols-1 md:grid-cols-3 lg:divide-x lg:divide-white/15">
-      {% for item in siteContent.trust.items %}
-      <div class="reveal py-2 lg:px-10 {% if loop.first %}first:lg:pl-0{% endif %}">
-        <div class="mono-lbl text-white/35">0{{ loop.index }}</div>
-        <h3 class="mt-3 font-serif text-[24px] md:text-[28px] leading-tight text-white" data-i18n="trust.t{{ loop.index }}">{{ item.title.tr }}</h3>
-        <p class="mt-2 text-[14px] leading-relaxed text-white/60 pretty" data-i18n="trust.s{{ loop.index }}">{{ item.desc.tr }}</p>
-      </div>
-      {% endfor %}
     </div>
   </div>
 </section>
@@ -139,6 +118,27 @@ layout: base.njk
         <span data-i18n="fleet.all">Tüm Filoyu Gör</span>
         <span class="arr">→</span>
       </a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<section class="border-b border-white/10 bg-[#2A5F9E]">
+  <div class="max-w-[1440px] mx-auto px-6 md:px-10 py-14 md:py-20 grid grid-cols-12 gap-8">
+    <div class="col-span-12 lg:col-span-3 reveal">
+      <div class="mono-lbl text-white/60 uppercase" data-i18n="trust.eyebrow">— Söz</div>
+      <p class="mt-3 font-serif italic text-[20px] md:text-[22px] leading-snug text-white/90 pretty" data-i18n="trust.lead">
+        Üç söz veriyoruz, üçünü de tutuyoruz.
+      </p>
+    </div>
+    <div class="col-span-12 lg:col-span-9 grid grid-cols-1 md:grid-cols-3 lg:divide-x lg:divide-white/15">
+      {% for item in siteContent.trust.items %}
+      <div class="reveal py-2 lg:px-10 {% if loop.first %}first:lg:pl-0{% endif %}">
+        <div class="mono-lbl text-white/35">0{{ loop.index }}</div>
+        <h3 class="mt-3 font-serif text-[24px] md:text-[28px] leading-tight text-white" data-i18n="trust.t{{ loop.index }}">{{ item.title.tr }}</h3>
+        <p class="mt-2 text-[14px] leading-relaxed text-white/60 pretty" data-i18n="trust.s{{ loop.index }}">{{ item.desc.tr }}</p>
+      </div>
+      {% endfor %}
     </div>
   </div>
 </section>
@@ -195,23 +195,11 @@ layout: base.njk
 </section>
 
 <!-- FOOTER -->
-<footer class="relative pt-16 md:pt-24 pb-10 overflow-hidden bg-white">
-  <!-- N pattern background -->
-  <svg class="absolute inset-0 w-full h-full pointer-events-none" xmlns="http://www.w3.org/2000/svg">
-    <defs>
-      <pattern id="n-pattern" x="0" y="0" width="100" height="60" patternUnits="userSpaceOnUse">
-        <g transform="scale(0.09)" opacity="0.04" fill="white">
-          <path d="M389.9,100.2c40.5-1.8,78.1,11,107.2,39.7,17.1,16.8,27,40,37.9,61.2l27,53.2,54.4,107.3,15.4,30.9c3.8,7.7,8.2,17.2,13.3,23.9,5.2,6.9,12.2,12.3,20.3,15.5,12.2,4.8,25.8,4.5,37.7-.8,9.5-4.3,17.4-11.6,22.5-20.7,4.4-7.6,11.3-27.6,14.9-36.9l24.1-63.5,79.6-206.4c35.5.6,71.7-.3,107.2,0-3.1,9.3-7.7,20.6-11.2,29.8l-17.7,46.6-58.6,153.4-40.5,105.9c-12.7,32.7-18.7,59.1-45,84.6-51.5,46.8-139.1,46.3-189.4-2.6-18.7-18.2-29.5-44.3-41-67.6l-26.2-53-58.2-116.6-11.3-22.6c-7.8-15.5-13.9-28.5-30.9-35.8-11.1-4.8-23.6-4.9-34.8-.3-21.2,8.8-26.9,26.8-35,46.3l-16.7,40.1-59.5,143.7c-41.1.2-82.2.2-123.4,0,11-25.4,22-53.3,32.5-79,15-36.2,30.1-72.2,45.5-108.2l23.1-54.1c9.5-22.1,20.1-50.5,36-67.9,27.4-30,60.8-43.7,100.6-46Z"/>
-          <path d="M156.3,496.4l102.5.2c-10.9,28-23.5,57-35.1,84.9-6.9.1-14,0-20.8,0-32.1-.1-71.4,1.1-102.9-.2,3.7-10.5,10.1-24.6,14.5-35,7-16.5,13.9-33.1,20.7-49.8l21.1-.2Z"/>
-        </g>
-      </pattern>
-    </defs>
-    <rect width="100%" height="100%" fill="url(#n-pattern)"/>
-  </svg>
+<footer class="relative pt-16 md:pt-24 pb-10 overflow-hidden bg-[#1e293b]">
   <div class="relative max-w-[1440px] mx-auto px-6 md:px-10">
-    <div class="reveal pb-10 md:pb-14 mb-10 md:mb-14 border-b border-line">
+    <div class="reveal pb-10 md:pb-14 mb-10 md:mb-14 border-b border-white/10">
       <div class="mono-lbl text-accent mb-6" data-i18n="footer.eyebrow">— RENT. DRIVE. EXPERIENCE.</div>
-      <div class="font-serif text-[clamp(60px,15vw,220px)] leading-[0.85] tracking-tightest text-cream whitespace-nowrap">
+      <div class="font-serif text-[clamp(60px,15vw,220px)] leading-[0.85] tracking-tightest text-white whitespace-nowrap">
         NISSLAR<span class="text-accent">.</span>
       </div>
     </div>
@@ -220,37 +208,37 @@ layout: base.njk
       <div class="col-span-2 md:col-span-4">
         <div class="flex items-center gap-3 mb-5">
           <img src="/assets/favicon.png" alt="" class="h-10 w-10 rounded-md" />
-          <span class="font-serif text-[24px] leading-none tracking-tightest text-cream whitespace-nowrap">
+          <span class="font-serif text-[24px] leading-none tracking-tightest text-white whitespace-nowrap">
             NISSLAR
           </span>
         </div>
-        <p class="text-[14px] leading-relaxed text-cream/55 max-w-[300px] pretty" data-i18n="footer.about">
+        <p class="text-[14px] leading-relaxed text-white/60 max-w-[300px] pretty" data-i18n="footer.about">
           Miami merkezli, butik lüks araç kiralama. 2018'den beri özenle.
         </p>
         <div id="footer-socials" class="mt-6 md:mt-8 flex items-center gap-3"></div>
       </div>
 
       <div class="col-span-1 md:col-span-3">
-        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h1">İletişim</div>
-        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
-          <li>1450 Brickell Ave<br/>Miami, FL 33131</li>
-          <li><a id="footer-phone" href="tel:+13055551234" class="hover:text-accent transition stat-num">+1 (305) 555 12 34</a></li>
-          <li><a id="footer-email" href="mailto:hello@nisslar.com" class="hover:text-accent transition">hello@nisslar.com</a></li>
+        <div class="mono-lbl text-white/40 uppercase mb-5" data-i18n="footer.h1">İletişim</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-white/80">
+          <li class="text-white/70">1450 Brickell Ave<br/>Miami, FL 33131</li>
+          <li><a id="footer-phone" href="tel:+13055551234" class="hover:text-accent transition stat-num text-white">+1 (305) 555 12 34</a></li>
+          <li><a id="footer-email" href="mailto:hello@nisslar.com" class="hover:text-accent transition text-white">hello@nisslar.com</a></li>
         </ul>
       </div>
 
       <div class="col-span-2 md:col-span-5">
-        <div class="mono-lbl text-cream/40 uppercase mb-5" data-i18n="footer.h3">Hızlı Linkler</div>
-        <ul class="space-y-3 text-[13px] md:text-[14px] text-cream/80">
-          <li><a href="/fleet/" class="hover:text-accent transition lnk" data-i18n="nav.fleet">Araçlar</a></li>
-          <li><a href="#about" class="hover:text-accent transition lnk" data-i18n="nav.about">Hakkımızda</a></li>
-          <li><a href="#faq" class="hover:text-accent transition lnk" data-i18n="nav.faq">SSS</a></li>
+        <div class="mono-lbl text-white/40 uppercase mb-5" data-i18n="footer.h3">Hızlı Linkler</div>
+        <ul class="space-y-3 text-[13px] md:text-[14px] text-white/80">
+          <li><a href="/fleet/" class="hover:text-accent transition lnk text-white" data-i18n="nav.fleet">Araçlar</a></li>
+          <li><a href="#about" class="hover:text-accent transition lnk text-white" data-i18n="nav.about">Hakkımızda</a></li>
+          <li><a href="#faq" class="hover:text-accent transition lnk text-white" data-i18n="nav.faq">SSS</a></li>
         </ul>
       </div>
     </div>
 
-    <div class="rule-accent opacity-40"></div>
-    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-[12px] text-cream/40">
+    <div class="rule-accent opacity-20"></div>
+    <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-3 text-[11px] md:text-[12px] text-white/40">
       <div>© 2026 NISSLAR LLC · <span data-i18n="footer.copy">Tüm hakları saklıdır.</span></div>
       <div class="mono-lbl tracking-[0.22em]">MIAMI, FL</div>
     </div>
@@ -297,6 +285,7 @@ const I18N = {
     'footer.l1':'Kiralama Koşulları','footer.l2':'Gizlilik Politikası',
     'footer.copy':'Tüm hakları saklıdır.',
     'card.book':'Rezerve Et','card.from':'günlük','card.seats':'koltuk','card.hp':'BG','card.was':'önce',
+    'modal.title':'Rezerve Et','modal.desc':'Bizimle iletişime geçmek için aşağıdaki iletişim yollarını kullanabilirsiniz.','modal.phone':'Telefon Numarası','modal.email':'E-posta Adresi',
   },
   en: {
     'nav.home':'Home','nav.fleet':'Fleet','nav.about':'About','nav.faq':'FAQ','nav.book':'Reserve',
@@ -327,6 +316,7 @@ const I18N = {
     'footer.l1':'Rental Terms','footer.l2':'Privacy Policy',
     'footer.copy':'All rights reserved.',
     'card.book':'Reserve','card.from':'/day','card.seats':'seats','card.hp':'HP','card.was':'was',
+    'modal.title':'Reserve','modal.desc':'You can use the contact methods below to reach us.','modal.phone':'Phone Number','modal.email':'Email Address',
   }
 };
 
@@ -346,14 +336,14 @@ function renderFleet() {
     <article class="car-card group relative border border-line bg-white reveal" style="transition-delay:${i*55}ms">
       <a href="/fleet/detail/?id=${c.id}" class="block relative aspect-[4/3] overflow-hidden">
         ${c.img ? `<img src="${c.img}" alt="${c.name}" class="car-media absolute inset-0 w-full h-full object-cover" />` : `<div class="car-media absolute inset-0 ph"></div>`}
-        <div class="absolute left-4 bottom-4 z-10">
-          <span class="mono-lbl inline-block px-2.5 py-1 bg-cream text-ink">${c.cat[LANG].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US')}</span>
+        <div class="absolute left-4 bottom-4 z-10 flex items-center gap-2">
+          <span class="mono-lbl inline-block px-3 py-1 bg-emerald-600 text-white rounded-full">${c.cat[LANG].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US')}</span>
+          <span class="mono-lbl inline-block px-3 py-1 bg-accent text-white rounded-full">${c.year}</span>
         </div>
       </a>
       <div class="p-5 md:p-6">
         <div class="flex items-baseline justify-between gap-3">
           <a href="/fleet/detail/?id=${c.id}" class="font-serif text-[20px] md:text-[24px] leading-tight text-cream tracking-tighter2 balance hover:text-accent transition">${c.name}</a>
-          <span class="mono-lbl text-cream/40 stat-num shrink-0">${c.year}</span>
         </div>
         <div class="mt-3 md:mt-4 flex items-center gap-3 mono-lbl text-cream/50">
           <span class="stat-num">${c.seats} ${t['card.seats'].toLocaleUpperCase(LANG)}</span>
@@ -365,6 +355,12 @@ function renderFleet() {
         <div class="mt-4 md:mt-5 relative h-[1px] bg-line">
           <div class="car-rule absolute left-0 top-0 h-full bg-accent w-8 transition-all duration-700"></div>
         </div>
+        <a href="${(c.turoUrl && c.turoUrl !== '#') ? c.turoUrl : '#'}" 
+           ${(c.turoUrl && c.turoUrl !== '#') ? 'target="_blank" rel="noopener"' : 'onclick="openReserveModal(event)"'} 
+           class="mt-5 w-full bg-gold text-white hover:bg-goldhi transition py-3 rounded-full text-center text-[11px] font-semibold tracking-[0.18em] uppercase flex items-center justify-center gap-2">
+          <span>${t['card.book'].toLocaleUpperCase(LANG === 'tr' ? 'tr-TR' : 'en-US')}</span>
+          <span class="arr">→</span>
+        </a>
       </div>
     </article>
   `).join('');
@@ -477,7 +473,7 @@ function applySiteInfo(content) {
   if (s.socials) {
     const container = document.getElementById('footer-socials');
     container.innerHTML = s.socials.filter(sc => sc.url).map(sc => `
-      <a href="${sc.url}" target="_blank" rel="noopener" aria-label="${sc.platform}" class="w-10 h-10 border border-line hover:border-accent hover:text-accent transition flex items-center justify-center text-cream/70">
+      <a href="${sc.url}" target="_blank" rel="noopener" aria-label="${sc.platform}" class="w-10 h-10 border border-white/10 hover:border-accent hover:text-accent transition flex items-center justify-center text-white/70">
         ${SOCIAL_ICONS[sc.platform] || ''}
       </a>
     `).join('');

@@ -129,35 +129,51 @@
             <label class="text-xs text-[#94A3B8] mb-1 block">Kategori (EN)</label>
             <input type="text" id="car-cat-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
           </div>
-          <div>
-            <label class="text-xs text-[#94A3B8] mb-1 block">Vites (TR)</label>
-            <input type="text" id="car-gear-tr" class="w-full px-3 py-2 rounded-lg text-sm" required/>
+          <div class="col-span-2 sm:col-span-1">
+            <label class="text-xs text-[#94A3B8] mb-1 block">Vites</label>
+            <select id="car-gear" class="w-full px-3 py-2 rounded-lg text-sm bg-white border border-[#E2E8F0] text-[#1E293B]" required>
+              <option value="otomatik">Otomatik / Auto</option>
+              <option value="pdk">PDK / PDK</option>
+              <option value="dct">DCT / DCT</option>
+              <option value="tiptronic">Tiptronic / Tiptronic</option>
+              <option value="manuel">Manuel / Manual</option>
+            </select>
           </div>
-          <div>
-            <label class="text-xs text-[#94A3B8] mb-1 block">Vites (EN)</label>
-            <input type="text" id="car-gear-en" class="w-full px-3 py-2 rounded-lg text-sm" required/>
-          </div>
-          <div>
+          <div class="col-span-2 sm:col-span-1">
             <label class="text-xs text-[#94A3B8] mb-1 block">Yakıt</label>
-            <input type="text" id="car-gas" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="Premium"/>
+            <select id="car-gas" class="w-full px-3 py-2 rounded-lg text-sm bg-white border border-[#E2E8F0] text-[#1E293B]" required>
+              <option value="benzin">Benzin / Gas</option>
+              <option value="dizel">Dizel / Diesel</option>
+              <option value="elektrik">Elektrik / Electric</option>
+              <option value="hibrit">Hibrit / Hybrid</option>
+            </select>
           </div>
-          <div>
+          <div class="col-span-2 sm:col-span-1">
             <label class="text-xs text-[#94A3B8] mb-1 block">MPG</label>
             <input type="text" id="car-mpg" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="20/26"/>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#94A3B8] mb-1 block">Özellikler (virgülle ayır)</label>
-            <textarea id="car-features" class="w-full px-3 py-2 rounded-lg text-sm" rows="3" placeholder="Heated seats, Panoramic roof, Apple CarPlay"></textarea>
+            <label class="text-xs text-[#94A3B8] mb-2 block font-medium">Araç Özellikleri</label>
+            <div id="features-checklist" class="grid grid-cols-2 sm:grid-cols-3 gap-2 p-3 bg-white border border-[#E2E8F0] rounded-lg max-h-48 overflow-y-auto mb-2">
+              <!-- Checklist populated dynamically -->
+            </div>
+            <label class="text-xs text-[#94A3B8] mb-1 block">Diğer Özellikler (virgülle ayırın)</label>
+            <input type="text" id="car-features-custom" class="w-full px-3 py-2 rounded-lg text-sm" placeholder="ör: GT4 aero kit, Wade sensing"/>
           </div>
           <div class="col-span-2">
-            <label class="text-xs text-[#94A3B8] mb-2 block">Görseller</label>
+            <label class="text-xs text-[#94A3B8] mb-2 block font-medium">Görseller (Sürükleyip bırakarak sıralayabilirsiniz)</label>
             <div id="car-gallery-preview" class="flex flex-wrap gap-2 mb-3"></div>
-            <label class="inline-flex cursor-pointer bg-[#3B82F6] hover:bg-[#2563EB] text-white px-4 py-2.5 rounded-lg text-sm font-medium transition items-center gap-2">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>
-              Görsel Yükle
-              <input type="file" id="car-gallery-file" accept="image/*" class="hidden"/>
-            </label>
-            <p id="car-gallery-status" class="text-xs text-[#94A3B8] mt-2 hidden"></p>
+            
+            <!-- Drag & Drop Zone -->
+            <div id="car-image-dropzone" class="border-2 border-dashed border-[#E2E8F0] hover:border-[#3B82F6] rounded-xl p-6 text-center cursor-pointer transition bg-white mb-2">
+              <div class="flex flex-col items-center justify-center gap-2">
+                <svg class="w-8 h-8 text-[#94A3B8]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <span class="text-sm font-medium text-[#1E293B]">Görselleri sürükleyip buraya bırakın veya tıklayarak seçin</span>
+                <span class="text-xs text-[#94A3B8]">Birden fazla görsel seçebilir/yükleyebilirsiniz</span>
+              </div>
+              <input type="file" id="car-gallery-file" accept="image/*" class="hidden" multiple/>
+            </div>
+            <p id="car-gallery-status" class="text-xs text-[#94A3B8] mt-1 hidden"></p>
           </div>
           <div class="col-span-2">
             <label class="text-xs text-[#94A3B8] mb-1 block">Turo / Rezervasyon URL</label>
@@ -423,6 +439,51 @@ function renderCars() {
   `).join('');
 }
 
+const STANDARD_FEATURES = [
+  "Apple CarPlay", "Keyless entry", "Heated seats", "360° camera", "Panoramic roof", 
+  "Ambient lighting", "Ventilated seats", "Massage seats", "Heated steering wheel", 
+  "Head-up display", "Virtual cockpit", "Bose sound", "Burmester sound", 
+  "Harman Kardon sound", "Bang & Olufsen sound", "Meridian sound", "Air suspension", 
+  "PASM suspension", "AMG Ride Control", "Quattro AWD", "Sport exhaust", 
+  "AMG Performance exhaust", "M Sport exhaust", "Sport Chrono package", 
+  "M Sport differential", "Carbon ceramic brakes", "Lifting system", "Carbon fiber roof", 
+  "Laser headlights", "Matrix LED headlights", "Power tailgate", "3rd row seats", 
+  "Parking assistant", "Parking sensors", "Terrain response", "Drive mode selector"
+];
+
+const DEFAULT_FEATURES = [
+  "Apple CarPlay", "Keyless entry", "Heated seats", "360° camera", "Panoramic roof", "Ambient lighting"
+];
+
+const GEAR_MAP = {
+  otomatik: { tr: "Otomatik", en: "Auto" },
+  pdk: { tr: "PDK", en: "PDK" },
+  dct: { tr: "DCT", en: "DCT" },
+  tiptronic: { tr: "Tiptronic", en: "Tiptronic" },
+  manuel: { tr: "Manuel", en: "Manual" }
+};
+
+const GAS_MAP = {
+  benzin: { tr: "Benzin", en: "Gas" },
+  dizel: { tr: "Dizel", en: "Diesel" },
+  elektrik: { tr: "Elektrik", en: "Electric" },
+  hibrit: { tr: "Hibrit", en: "Hybrid" }
+};
+
+function renderFeaturesChecklist(checkedFeatures = []) {
+  const container = document.getElementById('features-checklist');
+  if (!container) return;
+  container.innerHTML = STANDARD_FEATURES.map(f => {
+    const isChecked = checkedFeatures.includes(f);
+    return `
+      <label class="flex items-center gap-2 text-xs text-[#1E293B] cursor-pointer">
+        <input type="checkbox" name="standard-feature" value="${f}" ${isChecked ? 'checked' : ''} class="rounded text-[#3B82F6] focus:ring-[#3B82F6]"/>
+        <span>${f}</span>
+      </label>
+    `;
+  }).join('');
+}
+
 function openCarModal(car = null, index = -1) {
   document.getElementById('car-modal-title').textContent = car ? 'Araç Düzenle' : 'Yeni Araç';
   document.getElementById('car-id').value = index;
@@ -433,11 +494,39 @@ function openCarModal(car = null, index = -1) {
   document.getElementById('car-hp').value = car?.hp || '';
   document.getElementById('car-cat-tr').value = car?.cat?.tr || '';
   document.getElementById('car-cat-en').value = car?.cat?.en || '';
-  document.getElementById('car-gear-tr').value = car?.gear?.tr || '';
-  document.getElementById('car-gear-en').value = car?.gear?.en || '';
-  document.getElementById('car-gas').value = car?.gas || '';
-  document.getElementById('car-mpg').value = car?.mpg || '';
-  document.getElementById('car-features').value = (car?.features || []).join(', ');
+  
+  // Set gear select value
+  const gearObj = car?.gear || { tr: "Otomatik", en: "Auto" };
+  const gearKey = Object.keys(GEAR_MAP).find(k => GEAR_MAP[k].tr === gearObj.tr) || "otomatik";
+  document.getElementById('car-gear').value = gearKey;
+
+  // Set gas select value
+  const gasObj = car?.gas || "Premium";
+  let gasKey = "benzin";
+  if (typeof gasObj === 'object') {
+    gasKey = Object.keys(GAS_MAP).find(k => GAS_MAP[k].tr === gasObj.tr) || "benzin";
+  } else {
+    const lowerGas = String(gasObj).toLowerCase();
+    if (lowerGas.includes('electric') || lowerGas.includes('elektrik')) gasKey = "elektrik";
+    else if (lowerGas.includes('diesel') || lowerGas.includes('dizel')) gasKey = "dizel";
+    else if (lowerGas.includes('hybrid') || lowerGas.includes('hibrit')) gasKey = "hibrit";
+    else gasKey = "benzin"; // default for Premium, Benzin etc.
+  }
+  document.getElementById('car-gas').value = gasKey;
+
+  // Set features checklist and custom features input
+  const carFeatures = car?.features || [];
+  const standardChecked = carFeatures.filter(f => STANDARD_FEATURES.includes(f));
+  const customFeatures = carFeatures.filter(f => !STANDARD_FEATURES.includes(f));
+  
+  if (car) {
+    renderFeaturesChecklist(standardChecked);
+    document.getElementById('car-features-custom').value = customFeatures.join(', ');
+  } else {
+    renderFeaturesChecklist(DEFAULT_FEATURES);
+    document.getElementById('car-features-custom').value = '';
+  }
+
   window._carGallery = [...(car?.gallery || [])];
   renderGalleryPreview();
   document.getElementById('car-turo').value = car?.turoUrl || '';
@@ -516,50 +605,112 @@ function fileToBase64(file) {
   });
 }
 
-document.getElementById('car-gallery-file').addEventListener('change', async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+async function handleMultipleUploads(files) {
   const status = document.getElementById('car-gallery-status');
-  status.textContent = 'Yükleniyor...';
-  status.className = 'text-xs text-[#94A3B8] mt-2';
+  if (!status) return;
+  status.className = 'text-xs text-[#94A3B8] mt-1';
   status.classList.remove('hidden');
-  try {
-    const base64Data = await fileToBase64(file);
-    const res = await fetch(`${API}/upload`, {
-      method: 'POST',
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        filename: file.name,
-        contentType: file.type,
-        base64Data: base64Data
-      })
-    });
-    if (res.status === 401) {
-      logout();
-      showToast('Oturum süresi doldu, lütfen tekrar giriş yapın');
-      return;
+  
+  let successCount = 0;
+  let failCount = 0;
+  const total = files.length;
+  
+  for (let i = 0; i < total; i++) {
+    const file = files[i];
+    status.textContent = `Görsel yükleniyor (${i + 1}/${total}): ${file.name}`;
+    try {
+      const base64Data = await fileToBase64(file);
+      const res = await fetch(`${API}/upload`, {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          filename: file.name,
+          contentType: file.type,
+          base64Data: base64Data
+        })
+      });
+      if (res.status === 401) {
+        logout();
+        showToast('Oturum süresi doldu, lütfen tekrar giriş yapın');
+        return;
+      }
+      const data = await res.json();
+      if (data.url) {
+        window._carGallery.push(data.url);
+        renderGalleryPreview();
+        successCount++;
+      } else {
+        failCount++;
+      }
+    } catch (err) {
+      console.error(err);
+      failCount++;
     }
-    const data = await res.json();
-    if (data.url) {
-      window._carGallery.push(data.url);
-      renderGalleryPreview();
-      status.textContent = 'Görsel eklendi!';
-      status.classList.add('text-green-500');
-      setTimeout(() => status.classList.add('hidden'), 2000);
-    } else {
-      status.textContent = 'Hata: ' + (data.error || 'Yükleme başarısız');
-      status.classList.add('text-red-500');
-    }
-  } catch (err) {
-    console.error(err);
-    status.textContent = 'Hata: Yükleme başarısız';
-    status.classList.add('text-red-500');
   }
-  e.target.value = '';
-});
+  
+  if (failCount === 0) {
+    status.textContent = `${successCount} görsel başarıyla yüklendi!`;
+    status.className = 'text-xs text-green-500 mt-1';
+  } else {
+    status.textContent = `${successCount} görsel yüklendi, ${failCount} görsel yüklenemedi.`;
+    status.className = 'text-xs text-[#F97316] mt-1';
+  }
+  setTimeout(() => status.classList.add('hidden'), 4000);
+}
+
+function initImageDropzone() {
+  const dropzone = document.getElementById('car-image-dropzone');
+  const fileInput = document.getElementById('car-gallery-file');
+  if (!dropzone || !fileInput) return;
+
+  // Prevent default events
+  ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+    dropzone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+    }, false);
+  });
+
+  // Highlight/unhighlight dropzone
+  ['dragenter', 'dragover'].forEach(eventName => {
+    dropzone.addEventListener(eventName, () => {
+      dropzone.classList.add('border-[#3B82F6]', 'bg-blue-50/20');
+    }, false);
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    dropzone.addEventListener(eventName, () => {
+      dropzone.classList.remove('border-[#3B82F6]', 'bg-blue-50/20');
+    }, false);
+  });
+
+  // Handle drop
+  dropzone.addEventListener('drop', async (e) => {
+    const dt = e.dataTransfer;
+    const files = dt.files;
+    if (files && files.length > 0) {
+      await handleMultipleUploads(files);
+    }
+  });
+
+  // Handle click to select files
+  dropzone.addEventListener('click', () => fileInput.click());
+
+  // Handle input change
+  fileInput.addEventListener('change', async (e) => {
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      await handleMultipleUploads(files);
+    }
+    e.target.value = '';
+  });
+}
+
+// Initialize the dropzone setup
+initImageDropzone();
 
 window.uploadContentImg = async function(input, path) {
   const file = input.files[0];
@@ -619,6 +770,19 @@ window.deleteCar = async (i) => {
 document.getElementById('car-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const idx = parseInt(document.getElementById('car-id').value);
+  
+  const gearVal = document.getElementById('car-gear').value;
+  const gasVal = document.getElementById('car-gas').value;
+
+  // Get checked features
+  const checkedBoxes = document.querySelectorAll('input[name="standard-feature"]:checked');
+  const checkedFeatures = Array.from(checkedBoxes).map(cb => cb.value);
+  // Get custom features
+  const customInput = document.getElementById('car-features-custom').value;
+  const customFeatures = customInput.split(',').map(f => f.trim()).filter(f => f);
+  // Merge lists
+  const allFeatures = [...checkedFeatures, ...customFeatures];
+
   const car = {
     id: document.getElementById('car-name').value.toLowerCase().replace(/[^a-z0-9]+/g, '-'),
     name: document.getElementById('car-name').value,
@@ -626,15 +790,15 @@ document.getElementById('car-form').addEventListener('submit', async (e) => {
     year: parseInt(document.getElementById('car-year').value),
     cat: { tr: document.getElementById('car-cat-tr').value, en: document.getElementById('car-cat-en').value },
     seats: parseInt(document.getElementById('car-seats').value),
-    gear: { tr: document.getElementById('car-gear-tr').value, en: document.getElementById('car-gear-en').value },
+    gear: GEAR_MAP[gearVal] || { tr: "Otomatik", en: "Auto" },
     hp: parseInt(document.getElementById('car-hp').value),
     img: (window._carGallery && window._carGallery.length > 0) ? window._carGallery[0] : '',
-    gas: document.getElementById('car-gas').value || 'Premium',
+    gas: GAS_MAP[gasVal] || { tr: "Benzin", en: "Gas" },
     mpg: document.getElementById('car-mpg').value || '',
-    features: document.getElementById('car-features').value.split(',').map(f => f.trim()).filter(f => f),
+    features: allFeatures,
     gallery: [...(window._carGallery || [])],
     imgLabel: document.getElementById('car-name').value.split(' ').pop().toUpperCase(),
-    turoUrl: document.getElementById('car-turo').value || 'https://turo.com/us/en/host/51476329'
+    turoUrl: document.getElementById('car-turo').value.trim()
   };
   if (idx >= 0) { carsData[idx] = car; } else { carsData.push(car); }
   await api('/cars', 'PUT', carsData);
