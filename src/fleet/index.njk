@@ -177,7 +177,7 @@ title: "Filo — NISSLAR"
 let FLEET = {{ cars | dump | safe }};
 const PER_PAGE = 12;
 let currentPage = 1;
-let LANG = 'tr';
+let LANG = localStorage.getItem('site_lang') || 'tr';
 
 const I18N = {
   tr: {
@@ -390,6 +390,7 @@ function switchLang(next) {
   document.body.classList.add('lang-swap');
   setTimeout(() => {
     LANG = next;
+    localStorage.setItem('site_lang', next);
     applyI18nContent();
     requestAnimationFrame(() => document.body.classList.remove('lang-swap'));
   }, 260);
@@ -464,13 +465,11 @@ async function loadLiveData() {
       FLEET = [...carsRes, ...localOnly];
     }
     if (contentRes) applySiteInfo(contentRes);
-    populateFilters();
-    renderFleet();
+    applyI18nContent();
   } catch {}
 }
 
-populateFilters();
-renderFleet();
+applyI18nContent();
 observeReveals();
 loadLiveData();
 </script>

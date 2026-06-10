@@ -199,7 +199,7 @@ permalink: /fleet/detail/index.html
 
 <script>
 let FLEET = {{ cars | dump | safe }};
-let LANG = 'tr';
+let LANG = localStorage.getItem('site_lang') || 'tr';
 
 const I18N = {
   tr: {
@@ -364,6 +364,7 @@ function switchLang(next) {
   document.body.classList.add('lang-swap');
   setTimeout(() => {
     LANG = next;
+    localStorage.setItem('site_lang', next);
     applyI18nContent();
     requestAnimationFrame(() => document.body.classList.remove('lang-swap'));
   }, 260);
@@ -441,6 +442,7 @@ async function loadLiveData() {
 }
 
 async function init() {
+  applyI18nContent();
   await loadLiveData();
   
   // Fetch live site info to update email/phone/socials dynamically
@@ -451,11 +453,11 @@ async function init() {
     console.error('Failed to load site content', err);
   }
 
+  applyI18nContent();
+
   const carId = new URLSearchParams(window.location.search).get('id');
   const car = FLEET.find(c => c.id === carId);
-  if (car) {
-    renderDetail(car);
-  } else {
+  if (!car) {
     document.getElementById('detail-loading').classList.add('hidden');
     document.getElementById('detail-404').classList.remove('hidden');
   }

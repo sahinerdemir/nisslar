@@ -320,7 +320,7 @@ const I18N = {
   }
 };
 
-let LANG = 'tr';
+let LANG = localStorage.getItem('site_lang') || 'tr';
 
 function renderMarquee() {
   const track = document.getElementById('marquee-track');
@@ -407,6 +407,7 @@ function switchLang(next) {
   document.body.classList.add('lang-swap');
   setTimeout(() => {
     LANG = next;
+    localStorage.setItem('site_lang', next);
     applyI18nContent();
     requestAnimationFrame(() => document.body.classList.remove('lang-swap'));
   }, 260);
@@ -554,9 +555,7 @@ async function loadLiveData() {
   } catch {}
 }
 
-renderFleet();
-renderMarquee();
-renderFAQ();
+applyI18nContent();
 observeReveals();
 loadLiveData();
 </script>
