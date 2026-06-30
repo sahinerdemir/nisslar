@@ -415,7 +415,7 @@ function deepMerge(defaults, data) {
 
 async function loadAll() {
   try {
-    carsData = await api('/cars');
+    carsData = (await api('/cars')).filter(c => !c.deleted);
     faqData = await api('/faq');
     const raw = await api(devMode ? '/siteContent' : '/content');
     contentData = deepMerge(DEFAULT_CONTENT, raw);

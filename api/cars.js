@@ -40,8 +40,7 @@ module.exports = async function handler(req, res) {
     });
     const blobIds = new Set(blob.map(c => c.id));
     merged.push(...local.filter(c => !blobIds.has(c.id)));
-    const activeMerged = merged.filter(c => !c.deleted);
-    return res.status(200).json(activeMerged);
+    return res.status(200).json(merged);
   }
 
   if (!verifyToken(req)) return res.status(401).json({ error: 'Unauthorized' });

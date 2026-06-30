@@ -436,7 +436,7 @@ async function loadLiveData() {
     if (carsRes && carsRes.length > 0) {
       const cmsIds = new Set(carsRes.map(c => c.id));
       const localOnly = FLEET.filter(c => !cmsIds.has(c.id));
-      FLEET = [...carsRes, ...localOnly];
+      FLEET = [...carsRes, ...localOnly].filter(c => !c.deleted);
     }
   } catch {}
 }
