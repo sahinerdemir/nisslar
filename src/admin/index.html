@@ -58,6 +58,7 @@
       <button class="tab py-4 text-sm font-medium tab-active" data-tab="cars">Araçlar</button>
       <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="content">İçerik</button>
       <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="faq">SSS</button>
+      <button class="tab py-4 text-sm font-medium tab-inactive" data-tab="settings">Ayarlar</button>
     </div>
   </nav>
 
@@ -103,6 +104,25 @@
         <button id="add-faq-btn" class="bg-[#3B82F6] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">+ Yeni Soru</button>
       </div>
       <div id="faq-list" class="space-y-3"></div>
+    </div>
+
+    <!-- SETTINGS TAB -->
+    <div id="tab-settings" class="tab-content hidden">
+      <h2 class="text-lg font-semibold mb-6">Sistem Ayarları</h2>
+      <div class="bg-[#F8FAFC] border border-[#E2E8F0] rounded-xl p-6 max-w-md">
+        <h3 class="text-sm font-semibold mb-4 text-[#1E293B]">Şifre Değiştir</h3>
+        <form id="change-password-form" class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Yeni Şifre</label>
+            <input type="password" id="new-password" placeholder="En az 6 karakter" required class="w-full text-sm px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#3B82F6]"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wider text-[#64748B] mb-2">Yeni Şifre (Tekrar)</label>
+            <input type="password" id="confirm-password" placeholder="Yeni şifreyi tekrar girin" required class="w-full text-sm px-4 py-2.5 bg-white border border-[#E2E8F0] rounded-lg focus:outline-none focus:ring-1 focus:ring-[#3B82F6]"/>
+          </div>
+          <button type="submit" class="w-full bg-[#3B82F6] text-white px-4 py-2.5 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">Şifreyi Güncelle</button>
+        </form>
+      </div>
     </div>
   </main>
 </div>
@@ -1106,6 +1126,34 @@ document.getElementById('save-content-btn').addEventListener('click', async () =
   }
   await api(devMode ? '/siteContent' : '/content', 'PUT', contentData);
   showToast('İçerik kaydedildi');
+});
+
+document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const newPw = document.getElementById('new-password').value;
+  const confirmPw = document.getElementById('confirm-password').value;
+
+  if (newPw.length < 6) {
+    showToast('Şifre en az 6 karakter olmalıdır');
+    return;
+  }
+
+  if (newPw !== confirmPw) {
+    showToast('Şifreler eşleşmiyor');
+    return;
+  }
+
+  try {
+    const res = await api('/change-password', 'POST', { newPassword: newPw });
+    if (res.success) {
+      showToast('Şifreniz başarıyla güncellendi');
+      document.getElementById('change-password-form').reset();
+    } else {
+      showToast(res.error || 'Şifre güncellenemedi');
+    }
+  } catch (err) {
+    showToast('Şifre güncellenemedi');
+  }
 });
 
 function isTokenExpired(t) {
