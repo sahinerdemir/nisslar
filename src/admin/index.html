@@ -66,9 +66,27 @@
     <div id="tab-cars" class="tab-content">
       <div class="flex items-center justify-between mb-6">
         <h2 class="text-lg font-semibold">Araç Yönetimi</h2>
-        <button id="add-car-btn" class="bg-[#3B82F6] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">+ Yeni Araç</button>
+        <div class="flex items-center gap-3">
+          <button id="delete-selected-top" onclick="deleteSelectedCars()" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition hidden">Seçilenleri Sil</button>
+          <button id="add-car-btn" class="bg-[#3B82F6] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#2563EB] transition">+ Yeni Araç</button>
+        </div>
       </div>
+
+      <!-- Select All Header -->
+      <div id="cars-list-header" class="flex items-center justify-between p-3 bg-[#EEF2F6] border border-[#E2E8F0] rounded-lg mb-3 text-xs text-[#64748B] font-medium hidden">
+        <label class="flex items-center gap-3 cursor-pointer">
+          <input type="checkbox" id="select-all-cars" onclick="toggleSelectAllCars(this)" class="rounded text-[#3B82F6] focus:ring-[#3B82F6] cursor-pointer"/>
+          <span>Tümünü Seç</span>
+        </label>
+        <span id="selected-count-text">0 araç seçildi</span>
+      </div>
+
       <div id="cars-list" class="space-y-3"></div>
+
+      <!-- Bottom Delete Row -->
+      <div class="flex justify-start mt-4">
+        <button id="delete-selected-bottom" onclick="deleteSelectedCars()" class="bg-red-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-red-600 transition hidden">Seçilenleri Sil</button>
+      </div>
     </div>
 
     <!-- CONTENT TAB -->
@@ -425,6 +443,7 @@ function renderCars() {
   list.innerHTML = carsData.map((c, i) => `
     <div class="flex items-center justify-between p-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-lg">
       <div class="flex items-center gap-4">
+        <input type="checkbox" name="select-car-chk" value="${c.id}" onchange="updateDeleteSelectedButtons()" class="rounded text-[#3B82F6] focus:ring-[#3B82F6] cursor-pointer"/>
         <span class="text-xs text-[#94A3B8] font-mono">N°${String(i+1).padStart(3,'0')}</span>
         <div>
           <div class="font-medium text-sm">${c.name} <span class="text-[#94A3B8]">(${c.year})</span></div>
@@ -433,10 +452,10 @@ function renderCars() {
       </div>
       <div class="flex items-center gap-2">
         <button onclick="editCar(${i})" class="text-xs text-[#F97316] hover:text-[#EA580C] transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Düzenle</button>
-        <button onclick="deleteCar(${i})" class="text-xs text-red-400 hover:text-red-300 transition px-3 py-1.5 border border-[#E2E8F0] rounded-lg">Sil</button>
       </div>
     </div>
   `).join('');
+  updateDeleteSelectedButtons();
 }
 
 const STANDARD_FEATURES = [
@@ -759,12 +778,64 @@ document.getElementById('car-modal-overlay').addEventListener('click', closeCarM
 document.getElementById('car-cancel').addEventListener('click', closeCarModal);
 
 window.editCar = (i) => openCarModal(carsData[i], i);
-window.deleteCar = async (i) => {
-  if (!confirm(`"${carsData[i].name}" silinecek. Emin misiniz?`)) return;
-  carsData.splice(i, 1);
+
+window.updateDeleteSelectedButtons = function() {
+  const chks = document.querySelectorAll('input[name="select-car-chk"]');
+  const checkedChks = document.querySelectorAll('input[name="select-car-chk"]:checked');
+  const count = checkedChks.length;
+  
+  const btnTop = document.getElementById('delete-selected-top');
+  const btnBottom = document.getElementById('delete-selected-bottom');
+  const masterChk = document.getElementById('select-all-cars');
+  const selectedCountText = document.getElementById('selected-count-text');
+  const listHeader = document.getElementById('cars-list-header');
+  
+  if (chks.length > 0) {
+    if (listHeader) listHeader.classList.remove('hidden');
+  } else {
+    if (listHeader) listHeader.classList.add('hidden');
+  }
+
+  if (masterChk) {
+    masterChk.checked = (chks.length > 0 && count === chks.length);
+  }
+
+  if (selectedCountText) {
+    selectedCountText.textContent = `${count} araç seçildi`;
+  }
+
+  if (count > 0) {
+    if (btnTop) btnTop.classList.remove('hidden');
+    if (btnBottom) btnBottom.classList.remove('hidden');
+  } else {
+    if (btnTop) btnTop.classList.add('hidden');
+    if (btnBottom) btnBottom.classList.add('hidden');
+  }
+};
+
+window.toggleSelectAllCars = function(master) {
+  const chks = document.querySelectorAll('input[name="select-car-chk"]');
+  chks.forEach(chk => {
+    chk.checked = master.checked;
+  });
+  updateDeleteSelectedButtons();
+};
+
+window.deleteSelectedCars = async function() {
+  const checkedChks = document.querySelectorAll('input[name="select-car-chk"]:checked');
+  const idsToDelete = new Set(Array.from(checkedChks).map(chk => chk.value));
+  
+  if (idsToDelete.size === 0) return;
+  if (!confirm(`${idsToDelete.size} araç silinecek. Emin misiniz?`)) return;
+
+  carsData = carsData.filter(c => !idsToDelete.has(c.id));
+  
   await api('/cars', 'PUT', carsData);
   renderCars();
-  showToast('Araç silindi');
+  
+  const masterChk = document.getElementById('select-all-cars');
+  if (masterChk) masterChk.checked = false;
+  showToast('Seçilen araçlar silindi');
 };
 
 document.getElementById('car-form').addEventListener('submit', async (e) => {
