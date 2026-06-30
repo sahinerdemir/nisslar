@@ -39,7 +39,8 @@ module.exports = async function handler(req, res) {
     });
     const blobIds = new Set(blob.map(c => c.id));
     merged.push(...local.filter(c => !blobIds.has(c.id)));
-    return res.status(200).json(merged);
+    const activeMerged = merged.filter(c => !c.deleted);
+    return res.status(200).json(activeMerged);
   }
 
   if (!verifyToken(req)) return res.status(401).json({ error: 'Unauthorized' });
@@ -47,7 +48,42 @@ module.exports = async function handler(req, res) {
   if (req.method === 'PUT') {
     const data = req.body;
     if (!Array.isArray(data)) return res.status(400).json({ error: 'Expected array' });
-    await put(BLOB_KEY, JSON.stringify(data), { access: 'public', contentType: 'application/json', addRandomSuffix: false });
+
+    const fs = require('fs'), path = require('path');
+    let local = [];
+    try { local = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'src', '_data', 'cars.json'), 'utf-8')); } catch {}
+    const blob = await readBlob();
+
+    let existingList = [];
+    if (blob && blob.length > 0) {
+      const localMap = {};
+      local.forEach(c => { localMap[c.id] = c; });
+      const merged = blob.map(c => {
+        const base = localMap[c.id];
+        if (!base) return c;
+        return { ...base, ...c };
+      });
+      const blobIds = new Set(blob.map(c => c.id));
+      merged.push(...local.filter(c => !blobIds.has(c.id)));
+      existingList = merged;
+    } else {
+      existingList = local;
+    }
+
+    const newIds = new Set(data.map(c => c.id));
+    const newlyDeleted = existingList
+      .filter(c => !newIds.has(c.id) && !c.deleted)
+      .map(c => ({ id: c.id, deleted: true }));
+
+    const previouslyDeleted = blob ? blob.filter(c => c.deleted) : [];
+    const allDeleted = [...previouslyDeleted, ...newlyDeleted];
+    const activeDeleted = allDeleted.filter(c => !newIds.has(c.id));
+
+    const uniqueDeletedMap = {};
+    activeDeleted.forEach(c => { uniqueDeletedMap[c.id] = c; });
+    const finalPayload = [...data, ...Object.values(uniqueDeletedMap)];
+
+    await put(BLOB_KEY, JSON.stringify(finalPayload), { access: 'public', contentType: 'application/json', addRandomSuffix: false });
     return res.status(200).json(data);
   }
 
