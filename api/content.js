@@ -13,7 +13,7 @@ function verifyToken(req) {
 async function readBlob() {
   try {
     const meta = await head(BLOB_KEY);
-    const res = await fetch(meta.url);
+    const res = await fetch(`${meta.url}?t=${Date.now()}`);
     return await res.json();
   } catch { return null; }
 }
